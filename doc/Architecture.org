@@ -1,0 +1,340 @@
+
+* Environment
+
+application will be split in two main parts: backend and frontend
+
+** Backend environment 
+
++ Tomcat
++ Jersey
++ Java
+
+
+*** Service layout
+
+services provide GET/POST/PUT/... mechanism to the system
+
+#+BEGIN_SRC java
+  package services;
+
+  import java.util.Collection;
+
+  import javax.annotation.PostConstruct;
+  import javax.servlet.ServletContext;
+  import javax.ws.rs.GET;
+  import javax.ws.rs.POST;
+  import javax.ws.rs.Path;
+  import javax.ws.rs.Produces;
+  import javax.ws.rs.core.Context;
+  import javax.ws.rs.core.MediaType;
+
+
+  // import models
+
+  // import database
+
+  @Path("/products") // specify pathnn of service (like: "/users", "/products" ...)
+  public class SampleService {
+      @Context
+	  ServletContext ctx;
+
+	  public SampleService() {
+	  }
+
+	  @PostConstruct
+	  public void init() {
+		  // initialize database if it is not initialized already
+		  if (ctx.getAttribute("db") == null) {
+		      String contextPath = ctx.getRealPath(""); // or semohow else get path
+			  ctx.setAttribute("db", new FileSystemStorage(contextPath));
+		  }
+	  }
+
+	  @GET
+	  @Path("/")
+	  @Produces(MediaType.APPLICATION_JSON)
+	  public Collection<Sample> getSamples() {
+		  //get database from ctx
+		  return db.findAll();
+	  }
+
+	  @POST
+	  @Path("/")
+	  @Produces(MediaType.APPLICATION_JSON)
+	  public Product createSample(Sample product) {
+	      // save sample to database 
+	  }
+
+	  @GET
+	  @Path("/{id}")
+	  @Produces(MediaType.APPLICATION_JSON)
+	  public Sample getSample(int id)
+	  {
+	      // get sample with specifies id from database from ctx
+	  }
+  }
+#+END_SRC
+
+
+
+** Frontend environment
+
+Vue.js is used
+
+* Model
+
+** Introduction
+
+
+every model has its unique identifier.
+
+
+
+** User
+
++ username
++ password
++ firstnamme
++ lastname
++ type (Buyer, Seller, Admin)
++ phone 
++ city -> City
++ email
++ registration date
+
+
+** Buyer 
+
++ user -> User
+
+
+** Admin
+
++ user -> User 
+
+
+** Seller 
+
++ user -> User
+
+
+** City
+
++ name
++ country
+
+
+** Item
+
++ name
++ description
++ image
++ seller -> Seller
++ price
++ likes
++ dislikes
++ due date
++ creation date
++ city -> City
++ active (TRUE / FALSE)
++ category -> Category
+
+
+** Category
+
++ name
++ description 
+
+** Order
+
++ buyer -> Buyer
++ item -> Item
++ status (SHIPPING, SHIPPED)
+
+
+** OrderReview 
+
++ title
++ body
++ image
++ type (NOT_GOT_DESCRIBED, NOT_GOT, BAD_COMMUNICATION)
++ buyer -> Buyer
++ order -> Order
+
+
+** BuyerFavoriteItem 
+
++ item -> Item
++ buyer -> Buyer
+
+
+
+** BuyerSellerLike
+
++ buyer -> Buyer
++ seller -> Seller
++ like (TRUE if like, FALSE if dislike)
+
+
+
+
+** Comment 
+
++ user -> User
++ body
++ item -> Item 
+
+
+** Message
+
++ item -> Item 
++ title
++ body
++ buyer -> Buyer
++ unread 
+
+
+** Conversation 
+
++ initial_message -> Message
++ from -> User
+
+
+** FromAdminMessage
+
++ admin -> Admin
++ title
++ body
++ to -> User
+
+
+** ToAdminMessage
+
++ from -> Seller
++ to -> Admin
++ title
++ body
+
+
+
+** ItemReport
+
++ item -> Item
++ title
++ body
++ buyer -> Buyer 
+
+
+** SellerReport 
+
++ seller -> Seller
++ buyer -> Buyer 
++ title
++ body 
+
+
+
+* Session management and login
+
+** Login
+
+session is used to store login information 
+
+#+BEGIN_SRC java
+  package services;
+
+  import javax.annotation.PostConstruct;
+  import javax.servlet.ServletContext;
+  import javax.servlet.http.HttpServletRequest;
+  import javax.ws.rs.Consumes;
+  import javax.ws.rs.GET;
+  import javax.ws.rs.POST;
+  import javax.ws.rs.Path;
+  import javax.ws.rs.Produces;
+  import javax.ws.rs.core.Context;
+  import javax.ws.rs.core.MediaType;
+  import javax.ws.rs.core.Response;
+
+  import beans.User;
+  import dao.UserDAO;
+
+  @Path("")
+  public class LoginService {
+	
+	  @Context
+	  ServletContext ctx;
+	
+	  public LoginService() {
+		
+	  }
+	
+	  @PostConstruct
+	  // ctx polje je null u konstruktoru, mora se pozvati nakon konstruktora (@PostConstruct anotacija)
+	  public void init() {
+		  // Ovaj objekat se instancira vi�e puta u toku rada aplikacije
+		  // Inicijalizacija treba da se obavi samo jednom
+		  if (ctx.getAttribute("userDAO") == null) {
+		  String contextPath = ctx.getRealPath("");
+			  ctx.setAttribute("userDAO", new UserDAO(contextPath));
+		  }
+	  }
+	
+	  @POST
+	  @Path("/login")
+	  @Consumes(MediaType.APPLICATION_JSON)
+	  @Produces(MediaType.APPLICATION_JSON)
+	  public Response login(User user, @Context HttpServletRequest request) {
+		  UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		  User loggedUser = userDao.find(user.getUsername(), user.getPassword());
+		  if (loggedUser != null) {
+			  return Response.status(400).entity("Invalid username and/or password").build();
+		  }
+		  request.getSession().setAttribute("user", loggedUser);
+		  return Response.status(200).build();
+	  }
+	
+	
+	  @POST
+	  @Path("/logout")
+	  @Consumes(MediaType.APPLICATION_JSON)
+	  @Produces(MediaType.APPLICATION_JSON)
+	  public void logout(@Context HttpServletRequest request) {
+		  request.getSession().invalidate();
+	  }
+	
+	  @GET
+	  @Path("/currentUser")
+	  @Consumes(MediaType.APPLICATION_JSON)
+	  @Produces(MediaType.APPLICATION_JSON)
+	  public User login(@Context HttpServletRequest request) {
+		  return (User) request.getSession().getAttribute("user");
+	  }
+  }
+
+#+END_SRC
+
+
+* Database and storage
+
+** Introduction 
+
+storage interface will be created 
+
+** Reuse from Instafram 
+
+it can be reused file system storage from InstaFram codebase 
+
+** JSON filesystem storage 
+
+filesystem storage can be implemented to use json instead of InstaFram format 
+
+
+* Security
+
+** XSS protection 
+
+** CLRF protection 
+
+** Hashing of passwords 
+
+** Session protection 
