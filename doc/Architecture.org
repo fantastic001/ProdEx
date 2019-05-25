@@ -81,6 +81,15 @@ services provide GET/POST/PUT/... mechanism to the system
 
 Vue.js is used
 
+
+
+** Development Environment 
+
+
+backend: https://needhamia.com/how-to/java-software-development/create-a-jersey-web-project-using-maven-tomcat-and-eclipse/
+
+Frontend: Visual Studio Code with Vue.js 
+
 * Model
 
 ** Introduction
