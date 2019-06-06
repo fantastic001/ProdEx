@@ -88,6 +88,19 @@ Vue.js is used
 
 backend: https://needhamia.com/how-to/java-software-development/create-a-jersey-web-project-using-maven-tomcat-and-eclipse/
 
+To build and deploy backend:
+
+
+run in project root:
+
+
+#+BEGIN_SRC shell
+  mvn clean install
+#+END_SRC
+
+then go to localhost:8080/manager and enter your credentials (e.g. manager and Sekrit) and use web tool to deploy your app
+
+
 Frontend: Visual Studio Code with Vue.js 
 
 * Model
@@ -105,7 +118,7 @@ every model has its unique identifier.
 + password
 + firstnamme
 + lastname
-+ type (Buyer, Seller, Admin)
++ tyjpe (Buyer, Seller, Admin)
 + phone 
 + city -> City
 + email
