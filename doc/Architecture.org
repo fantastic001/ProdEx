@@ -360,3 +360,7 @@ filesystem storage can be implemented to use json instead of InstaFram format
 ** Hashing of passwords 
 
 ** Session protection 
+
+* Reusability for frontend
+
+frontend will be made up like frontend for Liberator
