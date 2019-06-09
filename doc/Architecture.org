@@ -361,6 +361,138 @@ filesystem storage can be implemented to use json instead of InstaFram format
 
 ** Session protection 
 
-* Reusability for frontend
 
-frontend will be made up like frontend for Liberator
+
+* Frontend development
+
+** Structure of modules 
+
+every modules corresponds to one service in REST (for instance, User module corresponds to User service at "api/users/"). 
+
+every module corresponds to one widget which is enclosed in div element with class "widget-modulename-type". For example, widget for User profile would be "widget-user-single".
+
+
+Types are listed below:
+
+| Type        | corresponding string in class | HTTP REST method on given service |
+| single      | single                        | GET api/users/1                   |
+| multi       | multi                         | GET api/users/                    |
+| single-edit | single-edit                   | PUT api/users/1                   |
+| new         | new                           | POST api/users/                   |
+
+
+single and single-edit types have additional parameter: id 
+
+
+new and single-edit types also have submit method:
+
+#+BEGIN_SRC js
+  var app5 = new Vue({
+    el: '.widget-user-single-edit',
+    data: {
+      // ...
+    },
+    methods: {
+      submit: function () {
+	// call User service here
+      }
+    }
+  })
+#+END_SRC
+
+all information in method involving model is stored in "this" implicit object
+
+
+
+Every widget is Vue component with "id" as its property for single and single-edit component types:
+
+#+BEGIN_SRC js
+  Vue.component('todo-item', {
+    // The todo-item component now accepts a
+    // "prop", which is like a custom attribute.
+    // This prop is called todo.
+    props: ['todo'],
+    template: '<li>{{ todo.text }}</li>'
+  })
+#+END_SRC
+
+where multi type component is just calling single component in for loop
+
+#+BEGIN_SRC js
+  <div id="app-7">
+    <ol>
+      <!--
+	Now we provide each todo-item with the todo object
+	it's representing, so that its content can be dynamic.
+	We also need to provide each component with a "key",
+	which will be explained later.
+      -->
+      <todo-item
+	v-for="item in groceryList"
+	v-bind:todo="item"
+	v-bind:key="item.id"
+      ></todo-item>
+    </ol>
+  </div>
+#+END_SRC
+
+
+all single and single-edit widgets as well as multi widgets have to have "created" property asssigned to them such that thewy can load data from the service 
+
+#+BEGIN_SRC js
+  // component definition
+  created: function () {
+      // `this` points to the vm instance
+      this = User.get(id);
+    }
+  // end component definition
+#+END_SRC
+
+
+dynamic values which depend on subset of arameters from model are inserted into "computed" dict:
+
+#+BEGIN_SRC js
+  var vm = new Vue({
+    el: '#demo',
+    data: {
+      firstName: 'Foo',
+      lastName: 'Bar'
+    },
+    computed: {
+      fullName: function () {
+	return this.firstName + ' ' + this.lastName
+      }
+    }
+  })
+#+END_SRC
+
+widgets can have its own events which can be triggered with $emit("eventname")
+
+
+** Utilities 
+
+Special message styles can be shown as separate widget using slots"
+
+#+BEGIN_SRC js
+  Vue.component('alert-box', {
+    template: `
+      <div class="demo-alert-box">
+	<strong>Error!</strong>
+	<slot></slot>
+      </div>
+    `
+  })
+#+END_SRC
+
+
+** Routing
+
+#+BEGIN_SRC js
+  <component v-bind:is="currentTabComponent"></component>
+
+#+END_SRC
+
+
+** Single file components 
+
+https://vuejs.org/v2/guide/single-file-components.html
