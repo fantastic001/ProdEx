@@ -1,17 +1,17 @@
 <script>
-import OrderService from "./service";
+import AdminService from "./service";
 
 export default {
-    name: "WidgetOrderSingle",
+    name: "WidgetAdminSingle",
     props: ["id"],
     data: function () {
-        return OrderService.get(this.id);
+        return AdminService.get(this.id);
     },
 }
 </script>>
 
 <template>
-    <div class="widget-order-single"> 
+    <div class="widget-admin-single"> 
         
     </div>
 
