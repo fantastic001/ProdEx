@@ -3,7 +3,7 @@ import ItemService from "./service";
 
 export default {
     name: "WidgetItemSingle",
-    props: ["id"],
+    props: ["item"],
     data: function () {
         return ItemService.get(this.id);
     },

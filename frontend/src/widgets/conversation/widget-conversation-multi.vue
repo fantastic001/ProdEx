@@ -18,7 +18,7 @@ export default {
     <div class="widget-conversation-multi"> 
       <WidgetConversationSingle
       	v-for="item in items"
-      	v-bind:id="item"
+      	v-bind:conversation="item"
       	v-bind:key="item.id"/>
     </div>
 

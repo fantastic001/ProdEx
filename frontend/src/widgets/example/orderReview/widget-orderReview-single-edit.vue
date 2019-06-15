@@ -3,7 +3,7 @@ import OrderreviewService from "./service";
 
 export default {
     name: "WidgetOrderreviewSingleEdit",
-    props: ["id"],
+    props: ["orderReview"],
     data: function () {
         return OrderreviewService.get(this.id);
     },

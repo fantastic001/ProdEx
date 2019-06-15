@@ -3,7 +3,7 @@ import ItemreportService from "./service";
 
 export default {
     name: "WidgetItemreportSingle",
-    props: ["id"],
+    props: ["itemReport"],
     data: function () {
         return ItemreportService.get(this.id);
     },

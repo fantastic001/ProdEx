@@ -18,7 +18,7 @@ export default {
     <div class="widget-city-multi"> 
       <WidgetCitySingle
       	v-for="item in items"
-      	v-bind:id="item"
+      	v-bind:city="item"
       	v-bind:key="item.id"/>
     </div>
 

@@ -3,7 +3,7 @@ import {{ component | capitalize }}Service from "./service";
 
 export default {
     name: "Widget{{ component | capitalize}}SingleEdit",
-    props: ["id"],
+    props: ["{{component}}"],
     data: function () {
         return {{component | capitalize}}Service.get(this.id);
     },

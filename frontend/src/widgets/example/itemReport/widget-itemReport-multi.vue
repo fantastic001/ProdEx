@@ -18,7 +18,7 @@ export default {
     <div class="widget-itemReport-multi"> 
       <WidgetItemreportSingle
       	v-for="item in items"
-      	v-bind:id="item"
+      	v-bind:itemReport="item"
       	v-bind:key="item.id"/>
     </div>
 

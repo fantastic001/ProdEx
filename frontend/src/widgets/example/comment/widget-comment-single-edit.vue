@@ -3,7 +3,7 @@ import CommentService from "./service";
 
 export default {
     name: "WidgetCommentSingleEdit",
-    props: ["id"],
+    props: ["comment"],
     data: function () {
         return CommentService.get(this.id);
     },

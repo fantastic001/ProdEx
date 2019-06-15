@@ -2,11 +2,12 @@
 
 import WidgetUserMulti from "./src/widgets/user/widget-user-multi.vue";
 import WidgetOrderMulti from "./src/widgets/order/widget-order-multi.vue";
+import BuyerDetail from "./src/views/BuyerDetail.vue";
 export default {
   name: "App",
   components: {
     "WidgetUserMulti": WidgetUserMulti,
-    "WidgetOrderMulti": WidgetOrderMulti,
+    "BuyerDetail": BuyerDetail
   }
 }
 
@@ -17,8 +18,8 @@ export default {
   <div>
     <h1>Hello World!</h1>
     <WidgetUserMulti />
-    <h1>Orders</h1>
-    <WidgetOrderMulti />
+    <h1>Buyer:</h1>
+    <BuyerDetail id="0" />
   </div>
 
 </template>

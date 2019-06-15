@@ -3,7 +3,7 @@ import CityService from "./service";
 
 export default {
     name: "WidgetCitySingle",
-    props: ["id"],
+    props: ["city"],
     data: function () {
         return CityService.get(this.id);
     },

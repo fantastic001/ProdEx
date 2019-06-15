@@ -3,7 +3,7 @@ import BuyerService from "./service";
 
 export default {
     name: "WidgetBuyerSingleEdit",
-    props: ["id"],
+    props: ["buyer"],
     data: function () {
         return BuyerService.get(this.id);
     },

@@ -3,7 +3,7 @@ import AdminService from "./service";
 
 export default {
     name: "WidgetAdminSingle",
-    props: ["id"],
+    props: ["admin"],
     data: function () {
         return AdminService.get(this.id);
     },

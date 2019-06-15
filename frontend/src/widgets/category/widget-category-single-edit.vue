@@ -3,7 +3,7 @@ import CategoryService from "./service";
 
 export default {
     name: "WidgetCategorySingleEdit",
-    props: ["id"],
+    props: ["category"],
     data: function () {
         return CategoryService.get(this.id);
     },

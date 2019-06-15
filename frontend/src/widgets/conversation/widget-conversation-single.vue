@@ -3,7 +3,7 @@ import ConversationService from "./service";
 
 export default {
     name: "WidgetConversationSingle",
-    props: ["id"],
+    props: ["conversation"],
     data: function () {
         return ConversationService.get(this.id);
     },

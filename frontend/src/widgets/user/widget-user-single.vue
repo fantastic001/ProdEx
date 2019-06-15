@@ -3,7 +3,7 @@ import UserService from "./service";
 
 export default {
     name: "WidgetUserSingle",
-    props: ["id"],
+    props: ["user"],
     data: function () {
         return UserService.get(this.id);
     },

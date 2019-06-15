@@ -18,7 +18,7 @@ export default {
     <div class="widget-admin-multi"> 
       <WidgetAdminSingle
       	v-for="item in items"
-      	v-bind:id="item"
+      	v-bind:admin="item"
       	v-bind:key="item.id"/>
     </div>
 

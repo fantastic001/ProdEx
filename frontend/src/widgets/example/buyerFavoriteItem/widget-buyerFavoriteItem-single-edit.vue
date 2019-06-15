@@ -3,7 +3,7 @@ import BuyerfavoriteitemService from "./service";
 
 export default {
     name: "WidgetBuyerfavoriteitemSingleEdit",
-    props: ["id"],
+    props: ["buyerFavoriteItem"],
     data: function () {
         return BuyerfavoriteitemService.get(this.id);
     },

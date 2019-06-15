@@ -18,7 +18,7 @@ export default {
     <div class="widget-toAdminMessage-multi"> 
       <WidgetToadminmessageSingle
       	v-for="item in items"
-      	v-bind:id="item"
+      	v-bind:toAdminMessage="item"
       	v-bind:key="item.id"/>
     </div>
 

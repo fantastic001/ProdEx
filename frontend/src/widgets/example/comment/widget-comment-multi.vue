@@ -18,7 +18,7 @@ export default {
     <div class="widget-comment-multi"> 
       <WidgetCommentSingle
       	v-for="item in items"
-      	v-bind:id="item"
+      	v-bind:comment="item"
       	v-bind:key="item.id"/>
     </div>
 

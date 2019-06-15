@@ -3,7 +3,7 @@ import SellerService from "./service";
 
 export default {
     name: "WidgetSellerSingle",
-    props: ["id"],
+    props: ["seller"],
     data: function () {
         return SellerService.get(this.id);
     },

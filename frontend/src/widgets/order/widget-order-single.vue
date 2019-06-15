@@ -5,7 +5,7 @@ import WidgetItemSingle from "../item/widget-item-single.vue";
 
 export default {
     name: "WidgetOrderSingle",
-    props: ["id"],
+    props: ["order"],
     data: function () {
         return OrderService.get(this.id);
     },
@@ -18,7 +18,7 @@ export default {
 <template>
     <div class="widget-order-single"> 
         <p>Order</p>
-        <WidgetItemSingle v-bind:id="item"/>
+        <WidgetItemSingle v-bind:item="item"/>
     </div>
 
 </template>

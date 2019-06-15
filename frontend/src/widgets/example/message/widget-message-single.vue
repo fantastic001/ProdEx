@@ -3,7 +3,7 @@ import MessageService from "./service";
 
 export default {
     name: "WidgetMessageSingle",
-    props: ["id"],
+    props: ["message"],
     data: function () {
         return MessageService.get(this.id);
     },

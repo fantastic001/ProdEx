@@ -3,7 +3,7 @@ import FromadminmessageService from "./service";
 
 export default {
     name: "WidgetFromadminmessageSingleEdit",
-    props: ["id"],
+    props: ["fromAdminMessage"],
     data: function () {
         return FromadminmessageService.get(this.id);
     },

@@ -4,7 +4,7 @@ import WidgetOrderSingle from "../order/widget-order-single.vue";
 
 export default {
     name: "WidgetBuyerSingle",
-    props: ["id"],
+    props: ["buyer"],
     data: function () {
         return BuyerService.get(this.id);
     },
@@ -16,7 +16,7 @@ export default {
 
 <template>
     <div class="widget-buyer-single"> 
-        
+        Buyer: 
     </div>
 
 </template>

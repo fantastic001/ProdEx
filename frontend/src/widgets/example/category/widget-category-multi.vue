@@ -18,7 +18,7 @@ export default {
     <div class="widget-category-multi"> 
       <WidgetCategorySingle
       	v-for="item in items"
-      	v-bind:id="item"
+      	v-bind:category="item"
       	v-bind:key="item.id"/>
     </div>
 

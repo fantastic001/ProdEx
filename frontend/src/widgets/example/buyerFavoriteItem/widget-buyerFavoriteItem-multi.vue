@@ -18,7 +18,7 @@ export default {
     <div class="widget-buyerFavoriteItem-multi"> 
       <WidgetBuyerfavoriteitemSingle
       	v-for="item in items"
-      	v-bind:id="item"
+      	v-bind:buyerFavoriteItem="item"
       	v-bind:key="item.id"/>
     </div>
 

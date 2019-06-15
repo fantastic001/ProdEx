@@ -18,7 +18,7 @@ export default {
     <div class="widget-{{component}}-multi"> 
       <Widget{{component | capitalize }}Single
       	v-for="item in items"
-      	v-bind:id="item"
+      	v-bind:{{ component }}="item"
       	v-bind:key="item.id"/>
     </div>
 

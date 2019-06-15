@@ -18,7 +18,7 @@ export default {
     <div class="widget-message-multi"> 
       <WidgetMessageSingle
       	v-for="item in items"
-      	v-bind:id="item"
+      	v-bind:message="item"
       	v-bind:key="item.id"/>
     </div>
 

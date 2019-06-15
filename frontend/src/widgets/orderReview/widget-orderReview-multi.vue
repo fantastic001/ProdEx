@@ -18,7 +18,7 @@ export default {
     <div class="widget-orderReview-multi"> 
       <WidgetOrderreviewSingle
       	v-for="item in items"
-      	v-bind:id="item"
+      	v-bind:orderReview="item"
       	v-bind:key="item.id"/>
     </div>
 
