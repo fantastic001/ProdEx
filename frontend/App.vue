@@ -1,11 +1,11 @@
 <script>
 
-import WidgetUserSingle from "./src/user/widget-user-single.vue";
+import WidgetUserMulti from "./src/user/widget-user-multi.vue";
 
 export default {
   name: "App",
   components: {
-    "WidgetUserSingle": WidgetUserSingle
+    "WidgetUserMulti": WidgetUserMulti
   }
 }
 
@@ -15,6 +15,6 @@ export default {
 <template>
   <div>
     <h1>Hello World!</h1>
-    <WidgetUserSingle id="0" />
+    <WidgetUserMulti />
   </div>
 </template>
