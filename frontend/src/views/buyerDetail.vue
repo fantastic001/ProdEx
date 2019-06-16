@@ -40,7 +40,7 @@ export default {
         var buyer = BuyerService.get(this.id);
         return {
             
-            users: UserService.list().filter(user => user.id == buyer.user),
+            users: UserService.list().filter(user => user.buyer == buyer.id),
             
             orders: OrderService.list().filter(order => order.buyer == buyer.id),
             

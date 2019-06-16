@@ -1,5 +1,5 @@
 
-export default class BuyerService 
+export default class BuyersellerlikeService 
 {
     static list() 
     {
@@ -22,7 +22,7 @@ export default class BuyerService
         }; 
     }
 
-    static create(buyer)
+    static create(buyerSellerLike)
     {
         return {"status": "ok"};
     }

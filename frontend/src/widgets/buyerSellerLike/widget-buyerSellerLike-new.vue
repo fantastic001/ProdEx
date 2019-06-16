@@ -1,8 +1,8 @@
 <script>
-import FromadminmessageService from "./service";
+import BuyersellerlikeService from "./service";
 
 export default {
-    name: "WidgetFromadminmessageNew",
+    name: "WidgetBuyersellerlikeNew",
     data: function () {
         return {};
     },
@@ -10,7 +10,7 @@ export default {
 </script>>
 
 <template>
-    <div class="widget-fromAdminMessage-new"> 
+    <div class="widget-buyerSellerLike-new"> 
         
     </div>
 

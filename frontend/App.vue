@@ -2,7 +2,7 @@
 
 import WidgetUserMulti from "./src/widgets/user/widget-user-multi.vue";
 import WidgetOrderMulti from "./src/widgets/order/widget-order-multi.vue";
-import BuyerDetail from "./src/views/BuyerDetail.vue";
+import BuyerDetail from "./src/views/buyerDetail.vue";
 export default {
   name: "App",
   components: {
