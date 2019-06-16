@@ -1,0 +1,13 @@
+{
+	"name": "buyer",
+	"dependencies": [
+		"user", 
+		"order", 
+		"orderReview", 
+		"buyerFavoriteItem", 
+		"buyerSellerLike", 
+		"message",
+		"itemReport",
+		"sellerReport"
+	]
+}
