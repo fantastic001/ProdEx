@@ -10,15 +10,7 @@ export default class SellerService
     {
         return {
             "id": 0,
-            "username": "john",
-            "password": "fjlkdsajlfkjsdalkfjlksdaafjvjdklf",
-            "firstname": "John",
-            "lastname": "Doe",
-            "type": "SELLER",
-            "phone": "+381631022817",
-            "city":2,
-            "email": "john@example.com",
-            "registration_date": "2014-05-02 21:00:05"
+            "user": 0
         }; 
     }
 

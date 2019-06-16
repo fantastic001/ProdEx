@@ -31,7 +31,7 @@ export default {
         var seller = SellerService.get(this.id);
         return {
             
-            users: UserService.list().filter(user => user.seller == seller.id),
+            users: UserService.list().filter(user => user.id == seller.user),
             
             items: ItemService.list().filter(item => item.seller == seller.id),
             
