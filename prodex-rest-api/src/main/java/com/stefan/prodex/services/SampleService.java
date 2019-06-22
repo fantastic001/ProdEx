@@ -7,6 +7,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
@@ -52,5 +53,13 @@ public class SampleService {
 			));
 		return result.get(0);
 		//return Response.status(200).entity(result.get(0)).build();
+	}
+
+	@POST
+	@Consumes("application/json")
+	@Produces("application/json")
+	public User createUser(User user) 
+	{
+		return user;
 	}
 }
