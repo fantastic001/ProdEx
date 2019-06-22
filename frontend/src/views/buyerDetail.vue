@@ -113,7 +113,10 @@ export default {
         
         
         <WidgetSellerreportSingle v-for="(item, index) in sellerReports" :key="item.id" v-bind:id="item" />
-        
+       
+       <p>Shipped orders</p>
+        <WidgetOrderSingle v-for="(item, index) in orders" :key="item.id" v-bind:id="item" v-if="item.status == 'SHIPPED'"/>
+
         
     </div>
 

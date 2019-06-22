@@ -12,7 +12,7 @@ export default class OrderService
             "id": 0,
             "buyer": 0,
             "item": 0,
-            "status": "SHIPPING"
+            "status": "SHIPPED"
         }; 
     }
 
