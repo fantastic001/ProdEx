@@ -1,0 +1,13 @@
+{
+	"component": "User",
+	"fields": {
+		"username": "String",
+		"password": "String",
+		"firstname": "String",
+		"lastname": "String",
+		"phone": "String",
+		"city": "City",
+		"email": "String",
+		"registrationDate": "Date"
+	}
+}

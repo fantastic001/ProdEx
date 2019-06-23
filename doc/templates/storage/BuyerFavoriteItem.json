@@ -1,0 +1,7 @@
+{
+	"component": "BuyerFavoriteItem",
+	"fields": {
+		"buyer": "Buyer",
+		"item": "Item"
+	}
+}

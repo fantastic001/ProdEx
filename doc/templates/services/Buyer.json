@@ -1,0 +1,6 @@
+{
+	"component": "Buyer",
+	"fields": {
+		"user": "User"
+	}
+}

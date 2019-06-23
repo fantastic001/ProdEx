@@ -1,0 +1,7 @@
+{
+	"component": "Sample",
+	"fields": {
+		"userName": "String",
+		"passwordField": "int"
+	}
+}

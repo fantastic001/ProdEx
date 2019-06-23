@@ -1,0 +1,8 @@
+{
+	"component": "Comment",
+	"fields": {
+		"item": "Item",
+		"body": "String",
+		"user": "User"
+	}
+}

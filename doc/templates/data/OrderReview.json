@@ -1,0 +1,11 @@
+{
+	"component": "OrderReview",
+	"fields": {
+		"title": "String",
+		"body": "String",
+		"image": "String",
+		"type": "OrderReviewType",
+		"buyer": "Buyer",
+		"order": "Order"
+	}
+}

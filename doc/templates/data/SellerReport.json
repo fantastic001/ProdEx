@@ -1,0 +1,9 @@
+{
+	"component": "SellerReport",
+	"fields": {
+		"seller": "Seller",
+		"buyer": "Buyer",
+		"title": "String",
+		"body": "String"
+	}
+}

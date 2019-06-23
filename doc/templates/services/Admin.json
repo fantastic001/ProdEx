@@ -1,0 +1,6 @@
+{
+	"component": "Admin",
+	"fields": {
+		"user": "User"
+	}
+}

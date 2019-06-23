@@ -1,0 +1,7 @@
+{
+	"component": "City",
+	"fields": {
+		"name": "String",
+		"country": "String"
+	}
+}
