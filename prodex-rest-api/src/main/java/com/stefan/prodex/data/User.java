@@ -20,6 +20,9 @@ public class User {
 	private String phone; 
 	private City city;
 	private String email;
+	public User() 
+	{
+	}
 	public User(String userName, String password, String firstName, String lastName, UserType type,
 			Date registrationDate, String phone, City city, String email) {
 		super();
