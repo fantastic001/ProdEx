@@ -2,12 +2,30 @@ package com.stefan.prodex.data;
 
 import java.util.Date;
 
-public class Admin extends User {
-
-	public Admin(String userName, String password, String firstName, String lastName, UserType type,
-			Date registrationDate, String phone, City city, String email) {
-		super(userName, password, firstName, lastName, type, registrationDate, phone, city, email);
-		// TODO Auto-generated constructor stub
+public class Admin {
+	
+	
+	private User user; 
+	
+	public Admin() 
+	{
+	}
+	public Admin(User _user) {
+		super();
+		 
+		this.user = _user;
+		
+	}
+	
+	 
+	public User getUser() 
+	{
+		return this.user;
 	}
 
+	public void setUser(User newValue) 
+	{
+		this.user = newValue;
+	}
+	
 }

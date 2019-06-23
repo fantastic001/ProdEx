@@ -3,92 +3,127 @@ package com.stefan.prodex.data;
 import java.util.Date;
 
 public class User {
-	public enum UserType 
-	{
-		ADMIN,
-		SELLER,
-		BUYER
-	};
 	
 	
-	private String userName; 
+	private String username; 
+	
 	private String password; 
-	private String firstName;
-	private String lastName;
-	private UserType type; 
-	private Date registrationDate;
+	
+	private String firstname; 
+	
+	private String lastname; 
+	
 	private String phone; 
-	private City city;
-	private String email;
+	
+	private City city; 
+	
+	private String email; 
+	
+	private Date registrationDate; 
+	
 	public User() 
 	{
 	}
-	public User(String userName, String password, String firstName, String lastName, UserType type,
-			Date registrationDate, String phone, City city, String email) {
+	public User(String _username, String _password, String _firstname, String _lastname, String _phone, City _city, String _email, Date _registrationDate) {
 		super();
-		this.userName = userName;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.type = type;
-		this.registrationDate = registrationDate;
-		this.phone = phone;
-		this.city = city;
-		this.email = email;
+		 
+		this.username = _username;
+		 
+		this.password = _password;
+		 
+		this.firstname = _firstname;
+		 
+		this.lastname = _lastname;
+		 
+		this.phone = _phone;
+		 
+		this.city = _city;
+		 
+		this.email = _email;
+		 
+		this.registrationDate = _registrationDate;
+		
 	}
-	public String getUserName() {
-		return userName;
+	
+	 
+	public String getUsername() 
+	{
+		return this.username;
 	}
-	public String getPassword() {
-		return password;
+
+	public void setUsername(String newValue) 
+	{
+		this.username = newValue;
 	}
-	public String getFirstName() {
-		return firstName;
+	 
+	public String getPassword() 
+	{
+		return this.password;
 	}
-	public String getLastName() {
-		return lastName;
+
+	public void setPassword(String newValue) 
+	{
+		this.password = newValue;
 	}
-	public UserType getType() {
-		return type;
+	 
+	public String getFirstname() 
+	{
+		return this.firstname;
 	}
-	public Date getRegistrationDate() {
-		return registrationDate;
+
+	public void setFirstname(String newValue) 
+	{
+		this.firstname = newValue;
 	}
-	public String getPhone() {
-		return phone;
+	 
+	public String getLastname() 
+	{
+		return this.lastname;
 	}
-	public City getCity() {
-		return city;
+
+	public void setLastname(String newValue) 
+	{
+		this.lastname = newValue;
 	}
-	public String getEmail() {
-		return email;
+	 
+	public String getPhone() 
+	{
+		return this.phone;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setPhone(String newValue) 
+	{
+		this.phone = newValue;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	 
+	public City getCity() 
+	{
+		return this.city;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+
+	public void setCity(City newValue) 
+	{
+		this.city = newValue;
 	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	 
+	public String getEmail() 
+	{
+		return this.email;
 	}
-	public void setType(UserType type) {
-		this.type = type;
+
+	public void setEmail(String newValue) 
+	{
+		this.email = newValue;
 	}
-	public void setRegistrationDate(Date registrationDate) {
-		this.registrationDate = registrationDate;
+	 
+	public Date getRegistrationDate() 
+	{
+		return this.registrationDate;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public void setCity(City city) {
-		this.city = city;
-	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public void setRegistrationDate(Date newValue) 
+	{
+		this.registrationDate = newValue;
 	}
 	
 }

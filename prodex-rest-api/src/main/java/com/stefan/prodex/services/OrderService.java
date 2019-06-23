@@ -12,24 +12,23 @@ import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
  
-@Path("/sample")
-public class SampleService {
+@Path("/")
+public class OrderService {
  
 	@GET
 	@Produces("application/json")
-	public ArrayList<User> getSample() {
+	public ArrayList<Order> listtOrder() {
  
- 		ArrayList<User> result = new ArrayList<User>();
-		result.add(new User(
-				"stefan", 
+ 		ArrayList<Order> result = new ArrayList<Order>();
+		result.add(new Order(
+				/*"stefan", 
 				"djfk;ldsjfl;kdjaslk;fdajkl",
 				"Stefan",
 				"Nozinic", 
-				User.UserType.ADMIN,
 				null, 
 				"+381555333", 
 				null, 
-				"admin@prodex.com"
+				"admin@prodex.com"*/
 			));;
 		return result;
 		//return Response.status(200).entity("{}").build();
@@ -38,18 +37,17 @@ public class SampleService {
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
-	public User getSampleId(@PathParam("id") int id) {
- 		ArrayList<User> result = new ArrayList<User>();
-		result.add(new User(
-				"stefan", 
+	public Order getOrder(@PathParam("id") int id) {
+ 		ArrayList<Order> result = new ArrayList<Order>();
+		result.add(new Order(
+				/*"stefan", 
 				"djfk;ldsjfl;kdjaslk;fdajkl",
 				"Stefan",
 				"Nozinic", 
-				User.UserType.ADMIN,
 				null, 
 				"+381555333", 
 				null, 
-				"admin@prodex.com"
+				"admin@prodex.com"*/
 			));
 		return result.get(0);
 		//return Response.status(200).entity(result.get(0)).build();
@@ -58,15 +56,15 @@ public class SampleService {
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
-	public User createUser(User user) 
+	public Order createOrder(Order data) 
 	{
-		return user;
+		return data;
 	}
 
 	@Path("{id}")
 	@DELETE
 	@Produces("application/json")
-	public Response deleteUser(@PathParam("id") int id) 
+	public Response deleteOrder(@PathParam("id") int id) 
 	{
 		return Response.status(200).entity("{'status': 'deleted'}").build();
 	}
@@ -75,8 +73,8 @@ public class SampleService {
 	@POST
 	@Produces("application/json")
 	@Consumes("application/json")
-	public User updateUser(@PathParam("id") int id, User user) 
+	public Order updateOrder(@PathParam("id") int id, Order data) 
 	{
-		return user;
+		return data;
 	}
 }
