@@ -24,7 +24,8 @@ export default {
     <WidgetUserMulti />
     <h1>Buyer:</h1>
     <BuyerDetail id="0" />
-    <p>This is seller:</p>
+
+    <h1>This is seller</h1>
     <SellerDetail id="0" />
   </div>
 

@@ -16,6 +16,9 @@ import WidgetToadminmessageSingle from "../widgets/toAdminMessage/widget-toAdmin
 import SellerreportService from "../widgets/sellerReport/service"
 import WidgetSellerreportSingle from "../widgets/sellerReport/widget-sellerReport-single.vue"
 
+import OrderService from "../widgets/order/service"
+import WidgetOrderSingle from "../widgets/order/widget-order-single.vue"
+
 
 import SellerService from "../widgets/seller/service"
 import WidgetSellerSingle from "../widgets/seller/widget-seller-single.vue"
@@ -29,7 +32,7 @@ export default {
     props: ["id"],
     data: function () {
         var seller = SellerService.get(this.id);
-        return {
+        var data = {
             
             users: UserService.list().filter(user => user.id == seller.user),
             
@@ -43,6 +46,8 @@ export default {
             
             seller: seller
         }
+	data.orders = OrderService.list().filter(order => data.items.filter(item => item.id == order.item).length > 0)
+	return data;
     },
     components: {
         
@@ -55,6 +60,8 @@ export default {
         "WidgetToadminmessageSingle": WidgetToadminmessageSingle,
         
         "WidgetSellerreportSingle": WidgetSellerreportSingle,
+
+        "WidgetOrderSingle": WidgetOrderSingle,
         
         "WidgetSellerSingle": WidgetSellerSingle,
         "WidgetSellerNew": WidgetSellerNew,
@@ -69,20 +76,34 @@ export default {
     <div class="seller-detail"> 
         <WidgetSellerSingle v-bind:id="seller.id" />
 
+        <div class="user-list">
+        	<WidgetUserSingle v-for="(item, index) in users" :key="item.id" v-bind:id="item" />
+	</div>
         
-        <WidgetUserSingle v-for="(item, index) in users" :key="item.id" v-bind:id="item" />
         
-        
+        <div class="item-list">
         <WidgetItemSingle v-for="(item, index) in items" :key="item.id" v-bind:id="item" />
+	</div>
         
         
+        <div class="buyer-seller-like-list">
         <WidgetBuyersellerlikeSingle v-for="(item, index) in buyerSellerLikes" :key="item.id" v-bind:id="item" />
+	</div>
         
         
+        <div class="to-admin-message-list">
         <WidgetToadminmessageSingle v-for="(item, index) in toAdminMessages" :key="item.id" v-bind:id="item" />
+	</div>
         
         
+        <div class="seller-report-list">
         <WidgetSellerreportSingle v-for="(item, index) in sellerReports" :key="item.id" v-bind:id="item" />
+	</div>
+        
+        <div class="order-list">
+	<p>Shipped orders</p>
+	<WidgetOrderSingle v-for="(item, index) in orders" :key="item.id" v-bind:id="item" v-if="item.status == 'SHIPPED'"/>
+	</div>
         
         
     </div>
