@@ -54,11 +54,28 @@ public class SampleService {
 		return result.get(0);
 		//return Response.status(200).entity(result.get(0)).build();
 	}
-
+	
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
 	public User createUser(User user) 
+	{
+		return user;
+	}
+
+	@Path("{id}")
+	@DELETE
+	@Produces("application/json")
+	public Response deleteUser(@PathParam("id") int id) 
+	{
+		return Response.status(200).entity("{'status': 'deleted'}").build();
+	}
+	
+	@Path("{id}")
+	@POST
+	@Produces("application/json")
+	@Consumes("application/json")
+	public User updateUser(@PathParam("id") int id, User user) 
 	{
 		return user;
 	}
