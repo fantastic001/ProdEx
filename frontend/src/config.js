@@ -1,1 +1,1 @@
-export default API_URL = "fantastic001.cf/app/";
+export const API_URL = "fantastic001.cf/app/";

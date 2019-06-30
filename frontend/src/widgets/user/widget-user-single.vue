@@ -6,20 +6,20 @@ export default {
     props: ["user"],
     data: function () {
         return {
-            user: null
+            data: {}
         }
     },
     mounted: function () 
     {
-        UserService.get(this.user).then(response => this.user = response);
+        UserService.get(this.user).then(response => this.data = response);
     }
 }
 </script>>
 
 <template>
     <div class="widget-user-single"> 
-        <p>{{ firstname }} {{ lastname }}</p>
-        <p>{{ email}} </p>
+        <p>{{ data.firstname }} {{ data.lastname }}</p>
+        <p>{{ data.email}} </p>
     </div>
 
 </template>

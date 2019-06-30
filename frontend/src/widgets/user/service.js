@@ -1,4 +1,4 @@
-import API_URL from "../config.js";
+import API_URL from "../../config.js";
 
 export default class UserService 
 {
