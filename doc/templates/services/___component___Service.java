@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
  
-@Path("/{{ compoent }}")
+@Path("/{{ component }}")
 public class {{ component }}Service {
  
 	@GET

@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
  
-@Path("/")
+@Path("/OrderReview")
 public class OrderReviewService {
  
 	@GET
