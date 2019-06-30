@@ -5,9 +5,9 @@ import java.util.Date;
 public class SellerReport {
 	
 	
-	private Seller seller; 
+	private int seller; 
 	
-	private Buyer buyer; 
+	private int buyer; 
 	
 	private String title; 
 	
@@ -16,7 +16,7 @@ public class SellerReport {
 	public SellerReport() 
 	{
 	}
-	public SellerReport(Seller _seller, Buyer _buyer, String _title, String _body) {
+	public SellerReport(int _seller, int _buyer, String _title, String _body) {
 		super();
 		 
 		this.seller = _seller;
@@ -30,22 +30,22 @@ public class SellerReport {
 	}
 	
 	 
-	public Seller getSeller() 
+	public int getSeller() 
 	{
 		return this.seller;
 	}
 
-	public void setSeller(Seller newValue) 
+	public void setSeller(int newValue) 
 	{
 		this.seller = newValue;
 	}
 	 
-	public Buyer getBuyer() 
+	public int getBuyer() 
 	{
 		return this.buyer;
 	}
 
-	public void setBuyer(Buyer newValue) 
+	public void setBuyer(int newValue) 
 	{
 		this.buyer = newValue;
 	}

@@ -5,18 +5,18 @@ import java.util.Date;
 public class FromAdminMessage {
 	
 	
-	private Admin admin; 
+	private int admin; 
 	
 	private String title; 
 	
 	private String body; 
 	
-	private User user; 
+	private int user; 
 	
 	public FromAdminMessage() 
 	{
 	}
-	public FromAdminMessage(Admin _admin, String _title, String _body, User _user) {
+	public FromAdminMessage(int _admin, String _title, String _body, int _user) {
 		super();
 		 
 		this.admin = _admin;
@@ -30,12 +30,12 @@ public class FromAdminMessage {
 	}
 	
 	 
-	public Admin getAdmin() 
+	public int getAdmin() 
 	{
 		return this.admin;
 	}
 
-	public void setAdmin(Admin newValue) 
+	public void setAdmin(int newValue) 
 	{
 		this.admin = newValue;
 	}
@@ -60,12 +60,12 @@ public class FromAdminMessage {
 		this.body = newValue;
 	}
 	 
-	public User getUser() 
+	public int getUser() 
 	{
 		return this.user;
 	}
 
-	public void setUser(User newValue) 
+	public void setUser(int newValue) 
 	{
 		this.user = newValue;
 	}

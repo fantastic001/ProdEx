@@ -5,16 +5,16 @@ import java.util.Date;
 public class Comment {
 	
 	
-	private Item item; 
+	private int item; 
 	
 	private String body; 
 	
-	private User user; 
+	private int user; 
 	
 	public Comment() 
 	{
 	}
-	public Comment(Item _item, String _body, User _user) {
+	public Comment(int _item, String _body, int _user) {
 		super();
 		 
 		this.item = _item;
@@ -26,12 +26,12 @@ public class Comment {
 	}
 	
 	 
-	public Item getItem() 
+	public int getItem() 
 	{
 		return this.item;
 	}
 
-	public void setItem(Item newValue) 
+	public void setItem(int newValue) 
 	{
 		this.item = newValue;
 	}
@@ -46,12 +46,12 @@ public class Comment {
 		this.body = newValue;
 	}
 	 
-	public User getUser() 
+	public int getUser() 
 	{
 		return this.user;
 	}
 
-	public void setUser(User newValue) 
+	public void setUser(int newValue) 
 	{
 		this.user = newValue;
 	}

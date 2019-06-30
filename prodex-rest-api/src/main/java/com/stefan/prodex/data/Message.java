@@ -5,20 +5,20 @@ import java.util.Date;
 public class Message {
 	
 	
-	private Item item; 
+	private int item; 
 	
 	private String title; 
 	
 	private String body; 
 	
-	private Buyer buyer; 
+	private int buyer; 
 	
 	private boolean unread; 
 	
 	public Message() 
 	{
 	}
-	public Message(Item _item, String _title, String _body, Buyer _buyer, boolean _unread) {
+	public Message(int _item, String _title, String _body, int _buyer, boolean _unread) {
 		super();
 		 
 		this.item = _item;
@@ -34,12 +34,12 @@ public class Message {
 	}
 	
 	 
-	public Item getItem() 
+	public int getItem() 
 	{
 		return this.item;
 	}
 
-	public void setItem(Item newValue) 
+	public void setItem(int newValue) 
 	{
 		this.item = newValue;
 	}
@@ -64,12 +64,12 @@ public class Message {
 		this.body = newValue;
 	}
 	 
-	public Buyer getBuyer() 
+	public int getBuyer() 
 	{
 		return this.buyer;
 	}
 
-	public void setBuyer(Buyer newValue) 
+	public void setBuyer(int newValue) 
 	{
 		this.buyer = newValue;
 	}

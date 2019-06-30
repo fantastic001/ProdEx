@@ -5,16 +5,16 @@ import java.util.Date;
 public class BuyerSellerLike {
 	
 	
-	private Buyer buyer; 
+	private int buyer; 
 	
-	private Seller seller; 
+	private int seller; 
 	
 	private boolean like; 
 	
 	public BuyerSellerLike() 
 	{
 	}
-	public BuyerSellerLike(Buyer _buyer, Seller _seller, boolean _like) {
+	public BuyerSellerLike(int _buyer, int _seller, boolean _like) {
 		super();
 		 
 		this.buyer = _buyer;
@@ -26,22 +26,22 @@ public class BuyerSellerLike {
 	}
 	
 	 
-	public Buyer getBuyer() 
+	public int getBuyer() 
 	{
 		return this.buyer;
 	}
 
-	public void setBuyer(Buyer newValue) 
+	public void setBuyer(int newValue) 
 	{
 		this.buyer = newValue;
 	}
 	 
-	public Seller getSeller() 
+	public int getSeller() 
 	{
 		return this.seller;
 	}
 
-	public void setSeller(Seller newValue) 
+	public void setSeller(int newValue) 
 	{
 		this.seller = newValue;
 	}

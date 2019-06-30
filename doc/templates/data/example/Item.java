@@ -11,7 +11,7 @@ public class Item {
 	
 	private String image; 
 	
-	private Seller seller; 
+	private int seller; 
 	
 	private float price; 
 	
@@ -23,16 +23,16 @@ public class Item {
 	
 	private Date creationDate; 
 	
-	private City city; 
+	private int city; 
 	
 	private boolean active; 
 	
-	private Category category; 
+	private int category; 
 	
 	public Item() 
 	{
 	}
-	public Item(String _name, String _description, String _image, Seller _seller, float _price, int _likes, int _dislikes, Date _dueDate, Date _creationDate, City _city, boolean _active, Category _category) {
+	public Item(String _name, String _description, String _image, int _seller, float _price, int _likes, int _dislikes, Date _dueDate, Date _creationDate, int _city, boolean _active, int _category) {
 		super();
 		 
 		this.name = _name;
@@ -92,12 +92,12 @@ public class Item {
 		this.image = newValue;
 	}
 	 
-	public Seller getSeller() 
+	public int getSeller() 
 	{
 		return this.seller;
 	}
 
-	public void setSeller(Seller newValue) 
+	public void setSeller(int newValue) 
 	{
 		this.seller = newValue;
 	}
@@ -152,12 +152,12 @@ public class Item {
 		this.creationDate = newValue;
 	}
 	 
-	public City getCity() 
+	public int getCity() 
 	{
 		return this.city;
 	}
 
-	public void setCity(City newValue) 
+	public void setCity(int newValue) 
 	{
 		this.city = newValue;
 	}
@@ -172,12 +172,12 @@ public class Item {
 		this.active = newValue;
 	}
 	 
-	public Category getCategory() 
+	public int getCategory() 
 	{
 		return this.category;
 	}
 
-	public void setCategory(Category newValue) 
+	public void setCategory(int newValue) 
 	{
 		this.category = newValue;
 	}

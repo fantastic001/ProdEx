@@ -4,28 +4,23 @@ import java.util.Date;
 
 public class OrderReview {
 	
-	public enum OrderReviewType 
-	{
-		NOT_GOT_WHAT_WANTED,
-		NOT_GOT,
-		BAD_QUALITY
-	}
+	
 	private String title; 
 	
 	private String body; 
 	
 	private String image; 
 	
-	private OrderReviewType type; 
+	private int type; 
 	
-	private Buyer buyer; 
+	private int buyer; 
 	
-	private Order order; 
+	private int order; 
 	
 	public OrderReview() 
 	{
 	}
-	public OrderReview(String _title, String _body, String _image, OrderReviewType _type, Buyer _buyer, Order _order) {
+	public OrderReview(String _title, String _body, String _image, int _type, int _buyer, int _order) {
 		super();
 		 
 		this.title = _title;
@@ -73,32 +68,32 @@ public class OrderReview {
 		this.image = newValue;
 	}
 	 
-	public OrderReviewType getType() 
+	public int getType() 
 	{
 		return this.type;
 	}
 
-	public void setType(OrderReviewType newValue) 
+	public void setType(int newValue) 
 	{
 		this.type = newValue;
 	}
 	 
-	public Buyer getBuyer() 
+	public int getBuyer() 
 	{
 		return this.buyer;
 	}
 
-	public void setBuyer(Buyer newValue) 
+	public void setBuyer(int newValue) 
 	{
 		this.buyer = newValue;
 	}
 	 
-	public Order getOrder() 
+	public int getOrder() 
 	{
 		return this.order;
 	}
 
-	public void setOrder(Order newValue) 
+	public void setOrder(int newValue) 
 	{
 		this.order = newValue;
 	}

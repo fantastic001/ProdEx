@@ -15,7 +15,7 @@ public class User {
 	
 	private String phone; 
 	
-	private City city; 
+	private int city; 
 	
 	private String email; 
 	
@@ -24,7 +24,7 @@ public class User {
 	public User() 
 	{
 	}
-	public User(String _username, String _password, String _firstname, String _lastname, String _phone, City _city, String _email, Date _registrationDate) {
+	public User(String _username, String _password, String _firstname, String _lastname, String _phone, int _city, String _email, Date _registrationDate) {
 		super();
 		 
 		this.username = _username;
@@ -96,12 +96,12 @@ public class User {
 		this.phone = newValue;
 	}
 	 
-	public City getCity() 
+	public int getCity() 
 	{
 		return this.city;
 	}
 
-	public void setCity(City newValue) 
+	public void setCity(int newValue) 
 	{
 		this.city = newValue;
 	}

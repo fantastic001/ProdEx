@@ -5,14 +5,14 @@ import java.util.Date;
 public class Conversation {
 	
 	
-	private User user; 
+	private int user; 
 	
-	private Message initialMessage; 
+	private int initialMessage; 
 	
 	public Conversation() 
 	{
 	}
-	public Conversation(User _user, Message _initialMessage) {
+	public Conversation(int _user, int _initialMessage) {
 		super();
 		 
 		this.user = _user;
@@ -22,22 +22,22 @@ public class Conversation {
 	}
 	
 	 
-	public User getUser() 
+	public int getUser() 
 	{
 		return this.user;
 	}
 
-	public void setUser(User newValue) 
+	public void setUser(int newValue) 
 	{
 		this.user = newValue;
 	}
 	 
-	public Message getInitialMessage() 
+	public int getInitialMessage() 
 	{
 		return this.initialMessage;
 	}
 
-	public void setInitialMessage(Message newValue) 
+	public void setInitialMessage(int newValue) 
 	{
 		this.initialMessage = newValue;
 	}

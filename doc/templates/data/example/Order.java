@@ -5,16 +5,16 @@ import java.util.Date;
 public class Order {
 	
 	
-	private Buyer buyer; 
+	private int buyer; 
 	
-	private Item item; 
+	private int item; 
 	
 	private String status; 
 	
 	public Order() 
 	{
 	}
-	public Order(Buyer _buyer, Item _item, String _status) {
+	public Order(int _buyer, int _item, String _status) {
 		super();
 		 
 		this.buyer = _buyer;
@@ -26,22 +26,22 @@ public class Order {
 	}
 	
 	 
-	public Buyer getBuyer() 
+	public int getBuyer() 
 	{
 		return this.buyer;
 	}
 
-	public void setBuyer(Buyer newValue) 
+	public void setBuyer(int newValue) 
 	{
 		this.buyer = newValue;
 	}
 	 
-	public Item getItem() 
+	public int getItem() 
 	{
 		return this.item;
 	}
 
-	public void setItem(Item newValue) 
+	public void setItem(int newValue) 
 	{
 		this.item = newValue;
 	}

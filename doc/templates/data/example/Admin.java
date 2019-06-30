@@ -5,12 +5,12 @@ import java.util.Date;
 public class Admin {
 	
 	
-	private User user; 
+	private int user; 
 	
 	public Admin() 
 	{
 	}
-	public Admin(User _user) {
+	public Admin(int _user) {
 		super();
 		 
 		this.user = _user;
@@ -18,12 +18,12 @@ public class Admin {
 	}
 	
 	 
-	public User getUser() 
+	public int getUser() 
 	{
 		return this.user;
 	}
 
-	public void setUser(User newValue) 
+	public void setUser(int newValue) 
 	{
 		this.user = newValue;
 	}

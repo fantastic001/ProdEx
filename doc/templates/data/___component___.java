@@ -5,12 +5,12 @@ import java.util.Date;
 public class {{ component }} {
 	
 	{% for field, type in fields.items() %}
-	private {{ type }} {{ field}}; 
+	private {% if type not in ["int", "float", "double", "boolean", "String", "Date"]%}int{%else%}{{ type }}{%endif%} {{ field}}; 
 	{% endfor %}
 	public {{ component }}() 
 	{
 	}
-	public {{ component }}({% for field, type in fields.items() %}{{ type }} _{{ field }}{% if not loop.last %}, {% endif %}{% endfor %}) {
+	public {{ component }}({% for field, type in fields.items() %}{% if type not in ["int", "float", "double", "boolean", "String", "Date"]%}int{%else%}{{ type }}{%endif%} _{{ field }}{% if not loop.last %}, {% endif %}{% endfor %}) {
 		super();
 		{% for field, type in fields.items() %} 
 		this.{{ field }} = _{{ field }};
@@ -18,12 +18,12 @@ public class {{ component }} {
 	}
 	
 	{% for field, type in fields.items() %} 
-	public {{type}} get{{field[0].capitalize() + field[1:] }}() 
+	public {% if type not in ["int", "float", "double", "boolean", "String", "Date"]%}int{%else%}{{ type }}{%endif%} get{{field[0].capitalize() + field[1:] }}() 
 	{
 		return this.{{ field }};
 	}
 
-	public void set{{field[0].capitalize() + field[1:] }}({{ type }} newValue) 
+	public void set{{field[0].capitalize() + field[1:] }}({% if type not in ["int", "float", "double", "boolean", "String", "Date"]%}int{%else%}{{ type }}{%endif%} newValue) 
 	{
 		this.{{ field}} = newValue;
 	}

@@ -5,9 +5,9 @@ import java.util.Date;
 public class ToAdminMessage {
 	
 	
-	private Seller seller; 
+	private int seller; 
 	
-	private Admin admin; 
+	private int admin; 
 	
 	private String title; 
 	
@@ -16,7 +16,7 @@ public class ToAdminMessage {
 	public ToAdminMessage() 
 	{
 	}
-	public ToAdminMessage(Seller _seller, Admin _admin, String _title, String _body) {
+	public ToAdminMessage(int _seller, int _admin, String _title, String _body) {
 		super();
 		 
 		this.seller = _seller;
@@ -30,22 +30,22 @@ public class ToAdminMessage {
 	}
 	
 	 
-	public Seller getSeller() 
+	public int getSeller() 
 	{
 		return this.seller;
 	}
 
-	public void setSeller(Seller newValue) 
+	public void setSeller(int newValue) 
 	{
 		this.seller = newValue;
 	}
 	 
-	public Admin getAdmin() 
+	public int getAdmin() 
 	{
 		return this.admin;
 	}
 
-	public void setAdmin(Admin newValue) 
+	public void setAdmin(int newValue) 
 	{
 		this.admin = newValue;
 	}
