@@ -24,6 +24,7 @@ export default {
 
 <template>
   <div>
+    <p>User:</p>
     <WidgetUserSingle user="0" />
     <h1>Hello World!</h1>
     <WidgetUserMulti />

@@ -49,6 +49,9 @@ public class UserService {
 				null, 
 				"admin@prodex.com"*/
 			));
+		result.get(0).setFirstname("Stefan");
+		result.get(0).setLastname("Nozinic");
+		result.get(0).setEmail("stefan@lugons.org");
 		return result.get(0);
 		//return Response.status(200).entity(result.get(0)).build();
 	}

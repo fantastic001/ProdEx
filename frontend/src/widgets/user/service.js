@@ -1,4 +1,5 @@
-import API_URL from "../../config.js";
+import API_URL from "./../../config";
+import axios from "axios"
 
 export default class UserService 
 {
@@ -14,6 +15,7 @@ export default class UserService
 
     static get(id) 
     {
+        console.log(API_URL);
         return axios.get(API_URL + "/User/" + id);
     }
 
