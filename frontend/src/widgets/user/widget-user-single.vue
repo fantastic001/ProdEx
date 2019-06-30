@@ -5,8 +5,14 @@ export default {
     name: "WidgetUserSingle",
     props: ["user"],
     data: function () {
-        return UserService.get(this.id);
+        return {
+            user: null
+        }
     },
+    mounted: function () 
+    {
+        UserService.get(this.user).then(response => this.user = response);
+    }
 }
 </script>>
 

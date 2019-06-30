@@ -1,39 +1,34 @@
+import API_URL from "../config.js";
 
 export default class UserService 
 {
+    constructor(self) 
+    {
+        this.self = self;
+    }
+
     static list() 
     {
-        return [this.get(0)];
+        return axios.get(API_URL + "/User/");
     }
 
     static get(id) 
     {
-        return {
-            "id": 0,
-            "username": "john",
-            "password": "fjlkdsajlfkjsdalkfjlksdaafjvjdklf",
-            "firstname": "John",
-            "lastname": "Doe",
-            "type": "SELLER",
-            "phone": "+381631022817",
-            "city":2,
-            "email": "john@example.com",
-            "registration_date": "2014-05-02 21:00:05"
-        };
+        return axios.get(API_URL + "/User/" + id);
     }
 
     static create(user)
     {
-        return {"status": "ok"};
+        return axios.post(API_URL + "/User/", user);
     }
 
     static update(id, data) 
     {
-        return {"status": "ok"};
+        return axios.post(API_URL + "/User/" + id, data);
     }
 
     static delete(id) 
     {
-        return {"status": "ok"};
+        return axios.delete(API_URL + "/User/");
     }
 }
