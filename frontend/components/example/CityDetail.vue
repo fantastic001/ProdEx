@@ -20,12 +20,11 @@ export default {
             return {
 		data: {}
 	    };
-	}
-    },
+	},
     mounted: function () 
     {
-    	CityService.get(city).then(response => this.data = response.data)
-    }
+    	CityService.get(this.city).then(response => this.data = response.data)
+    },
     components: {
         
         "WidgetUserMulti": WidgetUserMulti,
@@ -42,13 +41,13 @@ export default {
 
 <template>
     <div class="City-detail"> 
-        <WidgetCitySingle :city="city" />
+        <WidgetCitySingle :city="this.city" />
 
         
-        <WidgetUserMulti :filter="x => x.city == city"/>
+        <WidgetUserMulti :filter="x => x.city == this.city"/>
         
         
-        <WidgetItemMulti :filter="x => x.city == city"/>
+        <WidgetItemMulti :filter="x => x.city == this.city"/>
         
         
     </div>

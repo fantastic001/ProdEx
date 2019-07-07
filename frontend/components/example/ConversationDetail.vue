@@ -16,12 +16,11 @@ export default {
             return {
 		data: {}
 	    };
-	}
-    },
+	},
     mounted: function () 
     {
-    	ConversationService.get(conversation).then(response => this.data = response.data)
-    }
+    	ConversationService.get(this.conversation).then(response => this.data = response.data)
+    },
     components: {
         
         "WidgetConversationSingle": WidgetConversationSingle,
@@ -34,7 +33,7 @@ export default {
 
 <template>
     <div class="Conversation-detail"> 
-        <WidgetConversationSingle :conversation="conversation" />
+        <WidgetConversationSingle :conversation="this.conversation" />
 
         
     </div>

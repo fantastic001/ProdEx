@@ -16,12 +16,11 @@ export default {
             return {
 		data: {}
 	    };
-	}
-    },
+	},
     mounted: function () 
     {
-    	BuyerSellerLikeService.get(buyersellerlike).then(response => this.data = response.data)
-    }
+    	BuyerSellerLikeService.get(this.buyersellerlike).then(response => this.data = response.data)
+    },
     components: {
         
         "WidgetBuyerSellerLikeSingle": WidgetBuyerSellerLikeSingle,
@@ -34,7 +33,7 @@ export default {
 
 <template>
     <div class="BuyerSellerLike-detail"> 
-        <WidgetBuyerSellerLikeSingle :buyersellerlike="buyersellerlike" />
+        <WidgetBuyerSellerLikeSingle :buyersellerlike="this.buyersellerlike" />
 
         
     </div>

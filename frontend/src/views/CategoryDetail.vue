@@ -18,12 +18,11 @@ export default {
             return {
 		data: {}
 	    };
-	}
-    },
+	},
     mounted: function () 
     {
-    	CategoryService.get(category).then(response => this.data = response.data)
-    }
+    	CategoryService.get(this.category).then(response => this.data = response.data)
+    },
     components: {
         
         "WidgetItemMulti": WidgetItemMulti,
@@ -38,10 +37,10 @@ export default {
 
 <template>
     <div class="Category-detail"> 
-        <WidgetCategorySingle :category="category" />
+        <WidgetCategorySingle :category="this.category" />
 
         
-        <WidgetItemMulti :filter="x => x.category == category"/>
+        <WidgetItemMulti :filter="x => x.category == this.category"/>
         
         
     </div>

@@ -18,12 +18,11 @@ export default {
             return {
 		data: {}
 	    };
-	}
-    },
+	},
     mounted: function () 
     {
-    	MessageService.get(message).then(response => this.data = response.data)
-    }
+    	MessageService.get(this.message).then(response => this.data = response.data)
+    },
     components: {
         
         "WidgetConversationMulti": WidgetConversationMulti,
@@ -38,10 +37,10 @@ export default {
 
 <template>
     <div class="Message-detail"> 
-        <WidgetMessageSingle :message="message" />
+        <WidgetMessageSingle :message="this.message" />
 
         
-        <WidgetConversationMulti :filter="x => x.message == message"/>
+        <WidgetConversationMulti :filter="x => x.message == this.message"/>
         
         
     </div>

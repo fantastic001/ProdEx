@@ -26,12 +26,11 @@ export default {
             return {
 		data: {}
 	    };
-	}
-    },
+	},
     mounted: function () 
     {
-    	ItemService.get(item).then(response => this.data = response.data)
-    }
+    	ItemService.get(this.item).then(response => this.data = response.data)
+    },
     components: {
         
         "WidgetSellerMulti": WidgetSellerMulti,
@@ -54,22 +53,22 @@ export default {
 
 <template>
     <div class="Item-detail"> 
-        <WidgetItemSingle :item="item" />
+        <WidgetItemSingle :item="this.item" />
 
         
-        <WidgetSellerMulti :filter="x => x.item == item"/>
+        <WidgetSellerMulti :filter="x => x.item == this.item"/>
         
         
-        <WidgetOrderMulti :filter="x => x.item == item"/>
+        <WidgetOrderMulti :filter="x => x.item == this.item"/>
         
         
-        <WidgetBuyerFavoriteItemMulti :filter="x => x.item == item"/>
+        <WidgetBuyerFavoriteItemMulti :filter="x => x.item == this.item"/>
         
         
-        <WidgetCommentMulti :filter="x => x.item == item"/>
+        <WidgetCommentMulti :filter="x => x.item == this.item"/>
         
         
-        <WidgetItemReportMulti :filter="x => x.item == item"/>
+        <WidgetItemReportMulti :filter="x => x.item == this.item"/>
         
         
     </div>

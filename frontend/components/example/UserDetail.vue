@@ -20,12 +20,11 @@ export default {
             return {
 		data: {}
 	    };
-	}
-    },
+	},
     mounted: function () 
     {
-    	UserService.get(user).then(response => this.data = response.data)
-    }
+    	UserService.get(this.user).then(response => this.data = response.data)
+    },
     components: {
         
         "WidgetConversationMulti": WidgetConversationMulti,
@@ -42,13 +41,13 @@ export default {
 
 <template>
     <div class="User-detail"> 
-        <WidgetUserSingle :user="user" />
+        <WidgetUserSingle :user="this.user" />
 
         
-        <WidgetConversationMulti :filter="x => x.user == user"/>
+        <WidgetConversationMulti :filter="x => x.user == this.user"/>
         
         
-        <WidgetFromAdminMessageMulti :filter="x => x.user == user"/>
+        <WidgetFromAdminMessageMulti :filter="x => x.user == this.user"/>
         
         
     </div>

@@ -16,12 +16,11 @@ export default {
             return {
 		data: {}
 	    };
-	}
-    },
+	},
     mounted: function () 
     {
-    	FromAdminMessageService.get(fromadminmessage).then(response => this.data = response.data)
-    }
+    	FromAdminMessageService.get(this.fromadminmessage).then(response => this.data = response.data)
+    },
     components: {
         
         "WidgetFromAdminMessageSingle": WidgetFromAdminMessageSingle,
@@ -34,7 +33,7 @@ export default {
 
 <template>
     <div class="FromAdminMessage-detail"> 
-        <WidgetFromAdminMessageSingle :fromadminmessage="fromadminmessage" />
+        <WidgetFromAdminMessageSingle :fromadminmessage="this.fromadminmessage" />
 
         
     </div>

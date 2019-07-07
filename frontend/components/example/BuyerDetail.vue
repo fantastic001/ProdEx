@@ -32,12 +32,11 @@ export default {
             return {
 		data: {}
 	    };
-	}
-    },
+	},
     mounted: function () 
     {
-    	BuyerService.get(buyer).then(response => this.data = response.data)
-    }
+    	BuyerService.get(this.buyer).then(response => this.data = response.data)
+    },
     components: {
         
         "WidgetUserMulti": WidgetUserMulti,
@@ -66,31 +65,31 @@ export default {
 
 <template>
     <div class="Buyer-detail"> 
-        <WidgetBuyerSingle :buyer="buyer" />
+        <WidgetBuyerSingle :buyer="this.buyer" />
 
         
-        <WidgetUserMulti :filter="x => x.buyer == buyer"/>
+        <WidgetUserMulti :filter="x => x.buyer == this.buyer"/>
         
         
-        <WidgetOrderMulti :filter="x => x.buyer == buyer"/>
+        <WidgetOrderMulti :filter="x => x.buyer == this.buyer"/>
         
         
-        <WidgetOrderReviewMulti :filter="x => x.buyer == buyer"/>
+        <WidgetOrderReviewMulti :filter="x => x.buyer == this.buyer"/>
         
         
-        <WidgetBuyerFavoriteItemMulti :filter="x => x.buyer == buyer"/>
+        <WidgetBuyerFavoriteItemMulti :filter="x => x.buyer == this.buyer"/>
         
         
-        <WidgetBuyerSellerLikeMulti :filter="x => x.buyer == buyer"/>
+        <WidgetBuyerSellerLikeMulti :filter="x => x.buyer == this.buyer"/>
         
         
-        <WidgetMessageMulti :filter="x => x.buyer == buyer"/>
+        <WidgetMessageMulti :filter="x => x.buyer == this.buyer"/>
         
         
-        <WidgetItemReportMulti :filter="x => x.buyer == buyer"/>
+        <WidgetItemReportMulti :filter="x => x.buyer == this.buyer"/>
         
         
-        <WidgetSellerReportMulti :filter="x => x.buyer == buyer"/>
+        <WidgetSellerReportMulti :filter="x => x.buyer == this.buyer"/>
         
         
     </div>

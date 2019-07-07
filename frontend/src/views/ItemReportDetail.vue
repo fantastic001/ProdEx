@@ -16,12 +16,11 @@ export default {
             return {
 		data: {}
 	    };
-	}
-    },
+	},
     mounted: function () 
     {
-    	ItemReportService.get(itemreport).then(response => this.data = response.data)
-    }
+    	ItemReportService.get(this.itemreport).then(response => this.data = response.data)
+    },
     components: {
         
         "WidgetItemReportSingle": WidgetItemReportSingle,
@@ -34,7 +33,7 @@ export default {
 
 <template>
     <div class="ItemReport-detail"> 
-        <WidgetItemReportSingle :itemreport="itemreport" />
+        <WidgetItemReportSingle :itemreport="this.itemreport" />
 
         
     </div>

@@ -16,12 +16,11 @@ export default {
             return {
 		data: {}
 	    };
-	}
-    },
+	},
     mounted: function () 
     {
-    	OrderReviewService.get(orderreview).then(response => this.data = response.data)
-    }
+    	OrderReviewService.get(this.orderreview).then(response => this.data = response.data)
+    },
     components: {
         
         "WidgetOrderReviewSingle": WidgetOrderReviewSingle,
@@ -34,7 +33,7 @@ export default {
 
 <template>
     <div class="OrderReview-detail"> 
-        <WidgetOrderReviewSingle :orderreview="orderreview" />
+        <WidgetOrderReviewSingle :orderreview="this.orderreview" />
 
         
     </div>

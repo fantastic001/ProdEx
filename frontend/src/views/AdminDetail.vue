@@ -22,12 +22,11 @@ export default {
             return {
 		data: {}
 	    };
-	}
-    },
+	},
     mounted: function () 
     {
-    	AdminService.get(admin).then(response => this.data = response.data)
-    }
+    	AdminService.get(this.admin).then(response => this.data = response.data)
+    },
     components: {
         
         "WidgetUserMulti": WidgetUserMulti,
@@ -46,16 +45,16 @@ export default {
 
 <template>
     <div class="Admin-detail"> 
-        <WidgetAdminSingle :admin="admin" />
+        <WidgetAdminSingle :admin="this.admin" />
 
         
-        <WidgetUserMulti :filter="x => x.id == data.user"/>
+        <WidgetUserMulti :filter="x => x.id == this.data.id"/>
         
         
-        <WidgetFromAdminMessageMulti :filter="x => x.admin == admin"/>
+        <WidgetFromAdminMessageMulti :filter="x => x.admin == this.admin"/>
         
         
-        <WidgetToAdminMessageMulti :filter="x => x.admin == admin"/>
+        <WidgetToAdminMessageMulti :filter="x => x.admin == this.admin"/>
         
         
     </div>

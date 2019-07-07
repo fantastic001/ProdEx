@@ -16,12 +16,11 @@ export default {
             return {
 		data: {}
 	    };
-	}
-    },
+	},
     mounted: function () 
     {
-    	CommentService.get(comment).then(response => this.data = response.data)
-    }
+    	CommentService.get(this.comment).then(response => this.data = response.data)
+    },
     components: {
         
         "WidgetCommentSingle": WidgetCommentSingle,
@@ -34,7 +33,7 @@ export default {
 
 <template>
     <div class="Comment-detail"> 
-        <WidgetCommentSingle :comment="comment" />
+        <WidgetCommentSingle :comment="this.comment" />
 
         
     </div>

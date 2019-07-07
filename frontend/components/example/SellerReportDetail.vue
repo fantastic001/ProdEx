@@ -16,12 +16,11 @@ export default {
             return {
 		data: {}
 	    };
-	}
-    },
+	},
     mounted: function () 
     {
-    	SellerReportService.get(sellerreport).then(response => this.data = response.data)
-    }
+    	SellerReportService.get(this.sellerreport).then(response => this.data = response.data)
+    },
     components: {
         
         "WidgetSellerReportSingle": WidgetSellerReportSingle,
@@ -34,7 +33,7 @@ export default {
 
 <template>
     <div class="SellerReport-detail"> 
-        <WidgetSellerReportSingle :sellerreport="sellerreport" />
+        <WidgetSellerReportSingle :sellerreport="this.sellerreport" />
 
         
     </div>

@@ -18,12 +18,11 @@ export default {
             return {
 		data: {}
 	    };
-	}
-    },
+	},
     mounted: function () 
     {
-    	OrderService.get(order).then(response => this.data = response.data)
-    }
+    	OrderService.get(this.order).then(response => this.data = response.data)
+    },
     components: {
         
         "WidgetOrderReviewMulti": WidgetOrderReviewMulti,
@@ -38,10 +37,10 @@ export default {
 
 <template>
     <div class="Order-detail"> 
-        <WidgetOrderSingle :order="order" />
+        <WidgetOrderSingle :order="this.order" />
 
         
-        <WidgetOrderReviewMulti :filter="x => x.order == order"/>
+        <WidgetOrderReviewMulti :filter="x => x.order == this.order"/>
         
         
     </div>

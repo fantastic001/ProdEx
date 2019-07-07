@@ -26,12 +26,11 @@ export default {
             return {
 		data: {}
 	    };
-	}
-    },
+	},
     mounted: function () 
     {
-    	SellerService.get(seller).then(response => this.data = response.data)
-    }
+    	SellerService.get(this.seller).then(response => this.data = response.data)
+    },
     components: {
         
         "WidgetUserMulti": WidgetUserMulti,
@@ -54,22 +53,22 @@ export default {
 
 <template>
     <div class="Seller-detail"> 
-        <WidgetSellerSingle :seller="seller" />
+        <WidgetSellerSingle :seller="this.seller" />
 
         
-        <WidgetUserMulti :filter="x => x.seller == seller"/>
+        <WidgetUserMulti :filter="x => x.seller == this.seller"/>
         
         
-        <WidgetItemMulti :filter="x => x.seller == seller"/>
+        <WidgetItemMulti :filter="x => x.seller == this.seller"/>
         
         
-        <WidgetBuyerSellerLikeMulti :filter="x => x.seller == seller"/>
+        <WidgetBuyerSellerLikeMulti :filter="x => x.seller == this.seller"/>
         
         
-        <WidgetToAdminMessageMulti :filter="x => x.seller == seller"/>
+        <WidgetToAdminMessageMulti :filter="x => x.seller == this.seller"/>
         
         
-        <WidgetSellerReportMulti :filter="x => x.seller == seller"/>
+        <WidgetSellerReportMulti :filter="x => x.seller == this.seller"/>
         
         
     </div>

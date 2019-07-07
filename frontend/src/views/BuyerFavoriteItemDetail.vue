@@ -16,12 +16,11 @@ export default {
             return {
 		data: {}
 	    };
-	}
-    },
+	},
     mounted: function () 
     {
-    	BuyerFavoriteItemService.get(buyerfavoriteitem).then(response => this.data = response.data)
-    }
+    	BuyerFavoriteItemService.get(this.buyerfavoriteitem).then(response => this.data = response.data)
+    },
     components: {
         
         "WidgetBuyerFavoriteItemSingle": WidgetBuyerFavoriteItemSingle,
@@ -34,7 +33,7 @@ export default {
 
 <template>
     <div class="BuyerFavoriteItem-detail"> 
-        <WidgetBuyerFavoriteItemSingle :buyerfavoriteitem="buyerfavoriteitem" />
+        <WidgetBuyerFavoriteItemSingle :buyerfavoriteitem="this.buyerfavoriteitem" />
 
         
     </div>
