@@ -1,4 +1,0 @@
-{
-	"name": "seller",
-	"dependencies": ["user", "item", "buyerSellerLike", "toAdminMessage", "sellerReport"]
-}

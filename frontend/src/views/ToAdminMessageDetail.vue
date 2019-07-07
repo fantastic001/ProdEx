@@ -1,0 +1,48 @@
+<script>
+
+
+
+import ToAdminMessageService from "../widgets/ToAdminMessage/service"
+import WidgetToAdminMessageSingle from "../widgets/ToAdminMessage/WidgetToAdminMessageSingle.vue"
+import WidgetToAdminMessageSingleEdit from "../widgets/ToAdminMessage/WidgetToAdminMessageSingleEdit.vue"
+import WidgetToAdminMessageMulti from "../widgets/ToAdminMessage/WidgetToAdminMessageMulti.vue"
+import WidgetToAdminMessageNew from "../widgets/ToAdminMessage/WidgetToAdminMessageNew.vue"
+
+
+export default {
+    name: "ToAdminMessageDetail",
+    props: ["toadminmessage"],
+    data: function () {
+            return {
+		data: {}
+	    };
+	}
+    },
+    mounted: function () 
+    {
+    	ToAdminMessageService.get(toadminmessage).then(response => this.data = response.data)
+    }
+    components: {
+        
+        "WidgetToAdminMessageSingle": WidgetToAdminMessageSingle,
+        "WidgetToAdminMessageNew": WidgetToAdminMessageNew,
+        "WidgetToAdminMessageSingleEdit": WidgetToAdminMessageSingleEdit,
+        "WidgetToAdminMessageMulti": WidgetToAdminMessageMulti
+    }
+}
+</script>>
+
+<template>
+    <div class="ToAdminMessage-detail"> 
+        <WidgetToAdminMessageSingle :toadminmessage="toadminmessage" />
+
+        
+    </div>
+
+</template>
+
+<style scoped> 
+
+
+
+</style>

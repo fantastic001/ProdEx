@@ -1,48 +1,47 @@
 <script>
 
 {% for dependency in dependencies %}
-import {{dependency | capitalize}}Service from "../widgets/{{ dependency }}/service"
-import Widget{{ dependency | capitalize }}Single from "../widgets/{{  dependency }}/widget-{{ dependency }}-single.vue"
+import Widget{{ dependency[0].upper() + dependency[1:] }}Multi from "../widgets/{{  dependency[0].upper() + dependency[1:] }}/Widget{{ dependency[0].upper() + dependency[1:] }}Multi.vue"
 {% endfor %}
 
-import {{name | capitalize}}Service from "../widgets/{{ name }}/service"
-import Widget{{ name | capitalize }}Single from "../widgets/{{  name }}/widget-{{ name }}-single.vue"
-import Widget{{ name | capitalize }}New from "../widgets/{{  name }}/widget-{{ name }}-new.vue"
-import Widget{{ name | capitalize }}SingleEdit from "../widgets/{{  name }}/widget-{{ name }}-single-edit.vue"
-import Widget{{ name | capitalize }}Multi from "../widgets/{{  name }}/widget-{{ name }}-multi.vue"
+import {{name }}Service from "../widgets/{{ name }}/service"
+import Widget{{ name }}Single from "../widgets/{{  name }}/Widget{{ name }}Single.vue"
+import Widget{{ name }}SingleEdit from "../widgets/{{  name }}/Widget{{ name }}SingleEdit.vue"
+import Widget{{ name }}Multi from "../widgets/{{  name }}/Widget{{ name }}Multi.vue"
+import Widget{{ name }}New from "../widgets/{{  name }}/Widget{{ name }}New.vue"
 
 
 export default {
-    name: "{{ name | capitalize }}Detail",
-    props: ["id"],
+    name: "{{ name }}Detail",
+    props: ["{{ name | lower}}"],
     data: function () {
-        var {{ name }} = {{ name | capitalize}}Service.get(this.id);
-        return {
-            {% for dependency in dependencies %}
-            {{ dependency }}s: {{ dependency | capitalize }}Service.list().filter({{ dependency}} => {{ dependency }}.{{ name }} == {{ name}}.id),
-            {% endfor %}
-            {{ name }}: {{ name }}
-        }
+            return {
+		data: {}
+	    };
+	}
     },
+    mounted: function () 
+    {
+    	{{name}}Service.get({{ name | lower}}).then(response => this.data = response.data)
+    }
     components: {
         {% for dependency in dependencies%}
-        "Widget{{ dependency | capitalize }}Single": Widget{{ dependency | capitalize}}Single,
+        "Widget{{ dependency[0].upper() + dependency[1:] }}Multi": Widget{{ dependency[0].upper() + dependency[1:] }}Multi,
         {% endfor %}
-        "Widget{{ name | capitalize }}Single": Widget{{ name | capitalize}}Single,
-        "Widget{{ name | capitalize }}New": Widget{{ name | capitalize}}New,
-        "Widget{{ name | capitalize }}SingleEdit": Widget{{ name | capitalize}}SingleEdit,
-        "Widget{{ name | capitalize }}Multi": Widget{{ name | capitalize}}Multi
-       
+        "Widget{{ name }}Single": Widget{{ name }}Single,
+        "Widget{{ name }}New": Widget{{ name }}New,
+        "Widget{{ name }}SingleEdit": Widget{{ name }}SingleEdit,
+        "Widget{{ name }}Multi": Widget{{ name }}Multi
     }
 }
 </script>>
 
 <template>
     <div class="{{ name }}-detail"> 
-        <Widget{{ name | capitalize }}Single v-bind:id="{{ name }}.id" />
+        <Widget{{ name }}Single :{{ name | lower}}="{{ name | lower}}" />
 
         {% for dependency in dependencies%}
-        <Widget{{ dependency | capitalize}}Single v-for="(item, index) in {{dependency}}s" :key="item.id" v-bind:id="item" />
+        <Widget{{ dependency[0].upper() + dependency[1:] }}Multi :filter="x => x.{{ name[0].lower() + name[1:] }} == {{ name | lower}}"/>
         
         {% endfor %}
     </div>
