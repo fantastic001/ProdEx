@@ -4,7 +4,9 @@ import UserService from "./service";
 export default {
     name: "WidgetUserNew",
     data: function () {
-        return {};
+        return {
+            data: {}
+        };
     },
 }
 </script>>

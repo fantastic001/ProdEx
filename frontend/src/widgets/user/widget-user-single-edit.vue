@@ -3,10 +3,16 @@ import UserService from "./service";
 
 export default {
     name: "WidgetUserSingleEdit",
-    props: ["id"],
+    props: ["user"],
     data: function () {
-        return UserService.get(this.id);
+        return {
+            data: {}
+        }
     },
+    mounted: function () 
+    {
+        UserService.get(this.user).then(response => this.data = response);
+    }
 }
 </script>>
 
