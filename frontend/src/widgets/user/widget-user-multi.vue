@@ -18,7 +18,7 @@ export default {
     },
     mounted: function () 
     {
-        UserService.list().then(response => this.data = response);
+        UserService.list().then(response => this.items = response.data);
     },
     components: {
     	"WidgetUserSingle": WidgetUserSingle
@@ -29,10 +29,11 @@ export default {
 <template>
     <div class="widget-user-multi"> 
       <WidgetUserSingle
-        v-if="filter(item)"
-      	v-for="item in items"
-      	v-bind:id="item"
-      	v-bind:key="item.id"/>
+      	v-for="item in items.filter(filter)"
+      	:id="item.id"
+      	:key="item.id"
+        :user="item.id"
+          />
     </div>
 
 </template>

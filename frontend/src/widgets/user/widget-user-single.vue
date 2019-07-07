@@ -11,10 +11,10 @@ export default {
     },
     mounted: function () 
     {
-        UserService.get(this.user).then(response => this.data = response);
+        UserService.get(this.user).then(response => this.data = response.data);
     }
 }
-</script>>
+</script>
 
 <template>
     <div class="widget-user-single"> 

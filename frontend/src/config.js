@@ -1,1 +1,1 @@
-export const API_URL = "/prodex-rest-api/";
+export const API_URL = "http://localhost:8080/prodex-rest-api";
