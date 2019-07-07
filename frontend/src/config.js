@@ -1,1 +1,1 @@
-export const API_URL = "http://fantastic001.cf/app/";
+export const API_URL = "/prodex-rest-api/";
