@@ -1,8 +1,6 @@
 <script>
 
-
-import UserService from "../widgets/user/service"
-import WidgetUserSingle from "../widgets/user/widget-user-single.vue"
+import WidgetUserMulti from "../widgets/user/widget-user-multi.vue"
 
 import OrderService from "../widgets/order/service"
 import WidgetOrderSingle from "../widgets/order/widget-order-single.vue"
@@ -39,9 +37,7 @@ export default {
     data: function () {
         var buyer = BuyerService.get(this.id);
         return {
-            
-            users: UserService.list().filter(user => user.buyer == buyer.id),
-            
+                        
             orders: OrderService.list().filter(order => order.buyer == buyer.id),
             
             orderReviews: OrderreviewService.list().filter(orderReview => orderReview.buyer == buyer.id),
@@ -61,7 +57,7 @@ export default {
     },
     components: {
         
-        "WidgetUserSingle": WidgetUserSingle,
+        "WidgetUserMulti": WidgetUserMulti,
         
         "WidgetOrderSingle": WidgetOrderSingle,
         
@@ -91,7 +87,7 @@ export default {
         <WidgetBuyerSingle v-bind:id="buyer.id" />
 
         
-        <WidgetUserSingle v-for="(item, index) in users" :key="item.id" v-bind:id="item" />
+        <WidgetUserMulti :filter="user => user.id == this.id" />
         
         
         <WidgetOrderSingle v-for="(item, index) in orders" :key="item.id" v-bind:id="item" />
