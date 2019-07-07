@@ -21,6 +21,18 @@ export default {
     {
     	BuyerFavoriteItemService.get(this.buyerfavoriteitem).then(response => this.data = response.data)
     },
+    methods: {
+        itemDelete: function (event) 
+        {
+            BuyerFavoriteItemService.delete(this.buyerfavoriteitem).then(response => 
+            {
+                if (response.status < 400) 
+                {
+                    alert("BuyerFavoriteItem item is deleted");
+                }
+            })
+        }
+    },
     components: {
         
         "WidgetBuyerFavoriteItemSingle": WidgetBuyerFavoriteItemSingle,
@@ -33,6 +45,7 @@ export default {
 
 <template>
     <div class="BuyerFavoriteItem-detail"> 
+        <button v-on:click="itemDelete">Delete</button>
         <WidgetBuyerFavoriteItemSingle :buyerfavoriteitem="this.buyerfavoriteitem" />
 
         

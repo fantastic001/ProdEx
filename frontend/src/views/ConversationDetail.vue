@@ -21,6 +21,18 @@ export default {
     {
     	ConversationService.get(this.conversation).then(response => this.data = response.data)
     },
+    methods: {
+        itemDelete: function (event) 
+        {
+            ConversationService.delete(this.conversation).then(response => 
+            {
+                if (response.status < 400) 
+                {
+                    alert("Conversation item is deleted");
+                }
+            })
+        }
+    },
     components: {
         
         "WidgetConversationSingle": WidgetConversationSingle,
@@ -33,6 +45,7 @@ export default {
 
 <template>
     <div class="Conversation-detail"> 
+        <button v-on:click="itemDelete">Delete</button>
         <WidgetConversationSingle :conversation="this.conversation" />
 
         

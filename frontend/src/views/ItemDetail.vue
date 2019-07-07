@@ -31,6 +31,18 @@ export default {
     {
     	ItemService.get(this.item).then(response => this.data = response.data)
     },
+    methods: {
+        itemDelete: function (event) 
+        {
+            ItemService.delete(this.item).then(response => 
+            {
+                if (response.status < 400) 
+                {
+                    alert("Item item is deleted");
+                }
+            })
+        }
+    },
     components: {
         
         "WidgetSellerMulti": WidgetSellerMulti,
@@ -53,6 +65,7 @@ export default {
 
 <template>
     <div class="Item-detail"> 
+        <button v-on:click="itemDelete">Delete</button>
         <WidgetItemSingle :item="this.item" />
 
         

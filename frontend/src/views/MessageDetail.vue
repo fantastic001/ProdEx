@@ -23,6 +23,18 @@ export default {
     {
     	MessageService.get(this.message).then(response => this.data = response.data)
     },
+    methods: {
+        itemDelete: function (event) 
+        {
+            MessageService.delete(this.message).then(response => 
+            {
+                if (response.status < 400) 
+                {
+                    alert("Message item is deleted");
+                }
+            })
+        }
+    },
     components: {
         
         "WidgetConversationMulti": WidgetConversationMulti,
@@ -37,6 +49,7 @@ export default {
 
 <template>
     <div class="Message-detail"> 
+        <button v-on:click="itemDelete">Delete</button>
         <WidgetMessageSingle :message="this.message" />
 
         

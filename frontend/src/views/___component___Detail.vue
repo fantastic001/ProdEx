@@ -23,6 +23,18 @@ export default {
     {
     	{{name}}Service.get(this.{{ name | lower}}).then(response => this.data = response.data)
     },
+    methods: {
+        itemDelete: function (event) 
+        {
+            {{name}}Service.delete(this.{{ name | lower}}).then(response => 
+            {
+                if (response.status < 400) 
+                {
+                    alert("{{name}} item is deleted");
+                }
+            })
+        }
+    },
     components: {
         {% for dependency in dependencies%}
         "Widget{{ dependency[0].upper() + dependency[1:] }}Multi": Widget{{ dependency[0].upper() + dependency[1:] }}Multi,
@@ -37,6 +49,7 @@ export default {
 
 <template>
     <div class="{{ name }}-detail"> 
+        <button v-on:click="itemDelete">Delete</button>
         <Widget{{ name }}Single :{{ name | lower}}="this.{{ name | lower}}" />
 
         {% for dependency in dependencies%}

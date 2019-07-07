@@ -21,6 +21,18 @@ export default {
     {
     	OrderReviewService.get(this.orderreview).then(response => this.data = response.data)
     },
+    methods: {
+        itemDelete: function (event) 
+        {
+            OrderReviewService.delete(this.orderreview).then(response => 
+            {
+                if (response.status < 400) 
+                {
+                    alert("OrderReview item is deleted");
+                }
+            })
+        }
+    },
     components: {
         
         "WidgetOrderReviewSingle": WidgetOrderReviewSingle,
@@ -33,6 +45,7 @@ export default {
 
 <template>
     <div class="OrderReview-detail"> 
+        <button v-on:click="itemDelete">Delete</button>
         <WidgetOrderReviewSingle :orderreview="this.orderreview" />
 
         

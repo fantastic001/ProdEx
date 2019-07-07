@@ -25,6 +25,18 @@ export default {
     {
     	CityService.get(this.city).then(response => this.data = response.data)
     },
+    methods: {
+        itemDelete: function (event) 
+        {
+            CityService.delete(this.city).then(response => 
+            {
+                if (response.status < 400) 
+                {
+                    alert("City item is deleted");
+                }
+            })
+        }
+    },
     components: {
         
         "WidgetUserMulti": WidgetUserMulti,
@@ -41,6 +53,7 @@ export default {
 
 <template>
     <div class="City-detail"> 
+        <button v-on:click="itemDelete">Delete</button>
         <WidgetCitySingle :city="this.city" />
 
         

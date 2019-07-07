@@ -21,6 +21,18 @@ export default {
     {
     	FromAdminMessageService.get(this.fromadminmessage).then(response => this.data = response.data)
     },
+    methods: {
+        itemDelete: function (event) 
+        {
+            FromAdminMessageService.delete(this.fromadminmessage).then(response => 
+            {
+                if (response.status < 400) 
+                {
+                    alert("FromAdminMessage item is deleted");
+                }
+            })
+        }
+    },
     components: {
         
         "WidgetFromAdminMessageSingle": WidgetFromAdminMessageSingle,
@@ -33,6 +45,7 @@ export default {
 
 <template>
     <div class="FromAdminMessage-detail"> 
+        <button v-on:click="itemDelete">Delete</button>
         <WidgetFromAdminMessageSingle :fromadminmessage="this.fromadminmessage" />
 
         

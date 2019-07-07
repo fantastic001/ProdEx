@@ -23,6 +23,18 @@ export default {
     {
     	CategoryService.get(this.category).then(response => this.data = response.data)
     },
+    methods: {
+        itemDelete: function (event) 
+        {
+            CategoryService.delete(this.category).then(response => 
+            {
+                if (response.status < 400) 
+                {
+                    alert("Category item is deleted");
+                }
+            })
+        }
+    },
     components: {
         
         "WidgetItemMulti": WidgetItemMulti,
@@ -37,6 +49,7 @@ export default {
 
 <template>
     <div class="Category-detail"> 
+        <button v-on:click="itemDelete">Delete</button>
         <WidgetCategorySingle :category="this.category" />
 
         

@@ -27,6 +27,18 @@ export default {
     {
     	AdminService.get(this.admin).then(response => this.data = response.data)
     },
+    methods: {
+        itemDelete: function (event) 
+        {
+            AdminService.delete(this.admin).then(response => 
+            {
+                if (response.status < 400) 
+                {
+                    alert("Admin item is deleted");
+                }
+            })
+        }
+    },
     components: {
         
         "WidgetUserMulti": WidgetUserMulti,
@@ -45,6 +57,7 @@ export default {
 
 <template>
     <div class="Admin-detail"> 
+        <button v-on:click="itemDelete">Delete</button>
         <WidgetAdminSingle :admin="this.admin" />
 
         

@@ -25,6 +25,18 @@ export default {
     {
     	UserService.get(this.user).then(response => this.data = response.data)
     },
+    methods: {
+        itemDelete: function (event) 
+        {
+            UserService.delete(this.user).then(response => 
+            {
+                if (response.status < 400) 
+                {
+                    alert("User item is deleted");
+                }
+            })
+        }
+    },
     components: {
         
         "WidgetConversationMulti": WidgetConversationMulti,
@@ -41,6 +53,7 @@ export default {
 
 <template>
     <div class="User-detail"> 
+        <button v-on:click="itemDelete">Delete</button>
         <WidgetUserSingle :user="this.user" />
 
         

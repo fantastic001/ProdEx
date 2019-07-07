@@ -21,6 +21,18 @@ export default {
     {
     	BuyerSellerLikeService.get(this.buyersellerlike).then(response => this.data = response.data)
     },
+    methods: {
+        itemDelete: function (event) 
+        {
+            BuyerSellerLikeService.delete(this.buyersellerlike).then(response => 
+            {
+                if (response.status < 400) 
+                {
+                    alert("BuyerSellerLike item is deleted");
+                }
+            })
+        }
+    },
     components: {
         
         "WidgetBuyerSellerLikeSingle": WidgetBuyerSellerLikeSingle,
@@ -33,6 +45,7 @@ export default {
 
 <template>
     <div class="BuyerSellerLike-detail"> 
+        <button v-on:click="itemDelete">Delete</button>
         <WidgetBuyerSellerLikeSingle :buyersellerlike="this.buyersellerlike" />
 
         

@@ -21,6 +21,18 @@ export default {
     {
     	ItemReportService.get(this.itemreport).then(response => this.data = response.data)
     },
+    methods: {
+        itemDelete: function (event) 
+        {
+            ItemReportService.delete(this.itemreport).then(response => 
+            {
+                if (response.status < 400) 
+                {
+                    alert("ItemReport item is deleted");
+                }
+            })
+        }
+    },
     components: {
         
         "WidgetItemReportSingle": WidgetItemReportSingle,
@@ -33,6 +45,7 @@ export default {
 
 <template>
     <div class="ItemReport-detail"> 
+        <button v-on:click="itemDelete">Delete</button>
         <WidgetItemReportSingle :itemreport="this.itemreport" />
 
         

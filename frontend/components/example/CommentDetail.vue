@@ -21,6 +21,18 @@ export default {
     {
     	CommentService.get(this.comment).then(response => this.data = response.data)
     },
+    methods: {
+        itemDelete: function (event) 
+        {
+            CommentService.delete(this.comment).then(response => 
+            {
+                if (response.status < 400) 
+                {
+                    alert("Comment item is deleted");
+                }
+            })
+        }
+    },
     components: {
         
         "WidgetCommentSingle": WidgetCommentSingle,
@@ -33,6 +45,7 @@ export default {
 
 <template>
     <div class="Comment-detail"> 
+        <button v-on:click="itemDelete">Delete</button>
         <WidgetCommentSingle :comment="this.comment" />
 
         
