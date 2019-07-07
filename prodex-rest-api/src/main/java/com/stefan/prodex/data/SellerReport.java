@@ -3,7 +3,7 @@ package com.stefan.prodex.data;
 import java.util.Date;
 
 public class SellerReport {
-	
+	private int id;
 	
 	private int seller; 
 	
@@ -16,8 +16,9 @@ public class SellerReport {
 	public SellerReport() 
 	{
 	}
-	public SellerReport(int _seller, int _buyer, String _title, String _body) {
+	public SellerReport(int id, int _seller, int _buyer, String _title, String _body) {
 		super();
+		this.id = id;
 		 
 		this.seller = _seller;
 		 
@@ -28,7 +29,14 @@ public class SellerReport {
 		this.body = _body;
 		
 	}
-	
+	public void setId(int id) 
+	{
+		this.id = id;
+	}
+	public int getId() 
+	{
+		return this.id;
+	}
 	 
 	public int getSeller() 
 	{

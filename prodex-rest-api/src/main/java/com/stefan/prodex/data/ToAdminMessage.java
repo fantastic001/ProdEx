@@ -3,7 +3,7 @@ package com.stefan.prodex.data;
 import java.util.Date;
 
 public class ToAdminMessage {
-	
+	private int id;
 	
 	private int seller; 
 	
@@ -16,8 +16,9 @@ public class ToAdminMessage {
 	public ToAdminMessage() 
 	{
 	}
-	public ToAdminMessage(int _seller, int _admin, String _title, String _body) {
+	public ToAdminMessage(int id, int _seller, int _admin, String _title, String _body) {
 		super();
+		this.id = id;
 		 
 		this.seller = _seller;
 		 
@@ -28,7 +29,14 @@ public class ToAdminMessage {
 		this.body = _body;
 		
 	}
-	
+	public void setId(int id) 
+	{
+		this.id = id;
+	}
+	public int getId() 
+	{
+		return this.id;
+	}
 	 
 	public int getSeller() 
 	{

@@ -7,12 +7,18 @@ public class UserStorage
 {
 	public User get(int id) 
 	{
-		return new User();
+		User usr = new User();
+		usr.setId(id);
+		usr.setEmail("pusokurac@kurcinela.com");
+		return usr; 
 	}
 
 	public ArrayList<User> list() 
 	{
-		return new ArrayList<User>();
+		ArrayList<User> list = new ArrayList<User>();
+		for (int i = 0; i<10; i++)
+			list.add(this.get(i));
+		return list;
 	}
 
 	public boolean create(User data) 

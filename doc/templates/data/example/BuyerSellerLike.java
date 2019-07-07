@@ -3,7 +3,7 @@ package com.stefan.prodex.data;
 import java.util.Date;
 
 public class BuyerSellerLike {
-	
+	private int id;
 	
 	private int buyer; 
 	
@@ -14,8 +14,9 @@ public class BuyerSellerLike {
 	public BuyerSellerLike() 
 	{
 	}
-	public BuyerSellerLike(int _buyer, int _seller, boolean _like) {
+	public BuyerSellerLike(int id, int _buyer, int _seller, boolean _like) {
 		super();
+		this.id = id;
 		 
 		this.buyer = _buyer;
 		 
@@ -24,7 +25,14 @@ public class BuyerSellerLike {
 		this.like = _like;
 		
 	}
-	
+	public void setId(int id) 
+	{
+		this.id = id;
+	}
+	public int getId() 
+	{
+		return this.id;
+	}
 	 
 	public int getBuyer() 
 	{

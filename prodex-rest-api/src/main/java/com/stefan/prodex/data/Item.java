@@ -3,7 +3,7 @@ package com.stefan.prodex.data;
 import java.util.Date;
 
 public class Item {
-	
+	private int id;
 	
 	private String name; 
 	
@@ -32,8 +32,9 @@ public class Item {
 	public Item() 
 	{
 	}
-	public Item(String _name, String _description, String _image, int _seller, float _price, int _likes, int _dislikes, Date _dueDate, Date _creationDate, int _city, boolean _active, int _category) {
+	public Item(int id, String _name, String _description, String _image, int _seller, float _price, int _likes, int _dislikes, Date _dueDate, Date _creationDate, int _city, boolean _active, int _category) {
 		super();
+		this.id = id;
 		 
 		this.name = _name;
 		 
@@ -60,7 +61,14 @@ public class Item {
 		this.category = _category;
 		
 	}
-	
+	public void setId(int id) 
+	{
+		this.id = id;
+	}
+	public int getId() 
+	{
+		return this.id;
+	}
 	 
 	public String getName() 
 	{

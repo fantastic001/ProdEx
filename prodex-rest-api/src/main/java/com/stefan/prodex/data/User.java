@@ -3,7 +3,7 @@ package com.stefan.prodex.data;
 import java.util.Date;
 
 public class User {
-	
+	private int id;
 	
 	private String username; 
 	
@@ -24,8 +24,9 @@ public class User {
 	public User() 
 	{
 	}
-	public User(String _username, String _password, String _firstname, String _lastname, String _phone, int _city, String _email, Date _registrationDate) {
+	public User(int id, String _username, String _password, String _firstname, String _lastname, String _phone, int _city, String _email, Date _registrationDate) {
 		super();
+		this.id = id;
 		 
 		this.username = _username;
 		 
@@ -44,7 +45,14 @@ public class User {
 		this.registrationDate = _registrationDate;
 		
 	}
-	
+	public void setId(int id) 
+	{
+		this.id = id;
+	}
+	public int getId() 
+	{
+		return this.id;
+	}
 	 
 	public String getUsername() 
 	{

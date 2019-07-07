@@ -3,7 +3,7 @@ package com.stefan.prodex.data;
 import java.util.Date;
 
 public class Comment {
-	
+	private int id;
 	
 	private int item; 
 	
@@ -14,8 +14,9 @@ public class Comment {
 	public Comment() 
 	{
 	}
-	public Comment(int _item, String _body, int _user) {
+	public Comment(int id, int _item, String _body, int _user) {
 		super();
+		this.id = id;
 		 
 		this.item = _item;
 		 
@@ -24,7 +25,14 @@ public class Comment {
 		this.user = _user;
 		
 	}
-	
+	public void setId(int id) 
+	{
+		this.id = id;
+	}
+	public int getId() 
+	{
+		return this.id;
+	}
 	 
 	public int getItem() 
 	{

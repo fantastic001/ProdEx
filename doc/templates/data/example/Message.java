@@ -3,7 +3,7 @@ package com.stefan.prodex.data;
 import java.util.Date;
 
 public class Message {
-	
+	private int id;
 	
 	private int item; 
 	
@@ -18,8 +18,9 @@ public class Message {
 	public Message() 
 	{
 	}
-	public Message(int _item, String _title, String _body, int _buyer, boolean _unread) {
+	public Message(int id, int _item, String _title, String _body, int _buyer, boolean _unread) {
 		super();
+		this.id = id;
 		 
 		this.item = _item;
 		 
@@ -32,7 +33,14 @@ public class Message {
 		this.unread = _unread;
 		
 	}
-	
+	public void setId(int id) 
+	{
+		this.id = id;
+	}
+	public int getId() 
+	{
+		return this.id;
+	}
 	 
 	public int getItem() 
 	{

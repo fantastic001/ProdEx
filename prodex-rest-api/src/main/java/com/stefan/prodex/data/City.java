@@ -3,7 +3,7 @@ package com.stefan.prodex.data;
 import java.util.Date;
 
 public class City {
-	
+	private int id;
 	
 	private String name; 
 	
@@ -12,15 +12,23 @@ public class City {
 	public City() 
 	{
 	}
-	public City(String _name, String _country) {
+	public City(int id, String _name, String _country) {
 		super();
+		this.id = id;
 		 
 		this.name = _name;
 		 
 		this.country = _country;
 		
 	}
-	
+	public void setId(int id) 
+	{
+		this.id = id;
+	}
+	public int getId() 
+	{
+		return this.id;
+	}
 	 
 	public String getName() 
 	{

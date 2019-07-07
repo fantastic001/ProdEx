@@ -11,7 +11,9 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
- 
+
+import com.stefan.prodex.storage.*;
+
 @Path("/User")
 public class UserService {
  
@@ -19,41 +21,14 @@ public class UserService {
 	@Produces("application/json")
 	public ArrayList<User> listtUser() {
  
- 		ArrayList<User> result = new ArrayList<User>();
-		result.add(new User(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));;
-		return result;
-		//return Response.status(200).entity("{}").build();
+ 		return new UserStorage().list();
 	}
  
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
 	public User getUser(@PathParam("id") int id) {
- 		ArrayList<User> result = new ArrayList<User>();
-		result.add(new User(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));
-		result.get(0).setFirstname("Stefan");
-		result.get(0).setLastname("Nozinic");
-		result.get(0).setEmail("stefan@lugons.org");
-		return result.get(0);
-		//return Response.status(200).entity(result.get(0)).build();
+ 		return new UserStorage().get(id);
 	}
 	
 	@POST

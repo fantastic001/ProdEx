@@ -3,7 +3,7 @@ package com.stefan.prodex.data;
 import java.util.Date;
 
 public class OrderReview {
-	
+	private int id;
 	
 	private String title; 
 	
@@ -20,8 +20,9 @@ public class OrderReview {
 	public OrderReview() 
 	{
 	}
-	public OrderReview(String _title, String _body, String _image, int _type, int _buyer, int _order) {
+	public OrderReview(int id, String _title, String _body, String _image, int _type, int _buyer, int _order) {
 		super();
+		this.id = id;
 		 
 		this.title = _title;
 		 
@@ -36,7 +37,14 @@ public class OrderReview {
 		this.order = _order;
 		
 	}
-	
+	public void setId(int id) 
+	{
+		this.id = id;
+	}
+	public int getId() 
+	{
+		return this.id;
+	}
 	 
 	public String getTitle() 
 	{

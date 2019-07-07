@@ -3,7 +3,7 @@ package com.stefan.prodex.data;
 import java.util.Date;
 
 public class BuyerFavoriteItem {
-	
+	private int id;
 	
 	private int buyer; 
 	
@@ -12,15 +12,23 @@ public class BuyerFavoriteItem {
 	public BuyerFavoriteItem() 
 	{
 	}
-	public BuyerFavoriteItem(int _buyer, int _item) {
+	public BuyerFavoriteItem(int id, int _buyer, int _item) {
 		super();
+		this.id = id;
 		 
 		this.buyer = _buyer;
 		 
 		this.item = _item;
 		
 	}
-	
+	public void setId(int id) 
+	{
+		this.id = id;
+	}
+	public int getId() 
+	{
+		return this.id;
+	}
 	 
 	public int getBuyer() 
 	{

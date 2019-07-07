@@ -3,7 +3,7 @@ package com.stefan.prodex.data;
 import java.util.Date;
 
 public class Conversation {
-	
+	private int id;
 	
 	private int user; 
 	
@@ -12,15 +12,23 @@ public class Conversation {
 	public Conversation() 
 	{
 	}
-	public Conversation(int _user, int _initialMessage) {
+	public Conversation(int id, int _user, int _initialMessage) {
 		super();
+		this.id = id;
 		 
 		this.user = _user;
 		 
 		this.initialMessage = _initialMessage;
 		
 	}
-	
+	public void setId(int id) 
+	{
+		this.id = id;
+	}
+	public int getId() 
+	{
+		return this.id;
+	}
 	 
 	public int getUser() 
 	{
