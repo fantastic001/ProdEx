@@ -20,16 +20,10 @@ public class AdminService {
 	public ArrayList<Admin> listtAdmin() {
  
  		ArrayList<Admin> result = new ArrayList<Admin>();
-		result.add(new Admin(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));;
+		result.add(this.getAdmin(0));
+		result.add(this.getAdmin(1));
+		result.add(this.getAdmin(2));
+		result.add(this.getAdmin(3));
 		return result;
 		//return Response.status(200).entity("{}").build();
 	}
@@ -38,19 +32,11 @@ public class AdminService {
 	@GET
 	@Produces("application/json")
 	public Admin getAdmin(@PathParam("id") int id) {
- 		ArrayList<Admin> result = new ArrayList<Admin>();
-		result.add(new Admin(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));
-		return result.get(0);
-		//return Response.status(200).entity(result.get(0)).build();
+		Admin item = new Admin();
+		item.setId(id);
+		item.setUser(0);
+		
+		return item;
 	}
 	
 	@POST

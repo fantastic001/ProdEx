@@ -20,16 +20,10 @@ public class BuyerFavoriteItemService {
 	public ArrayList<BuyerFavoriteItem> listtBuyerFavoriteItem() {
  
  		ArrayList<BuyerFavoriteItem> result = new ArrayList<BuyerFavoriteItem>();
-		result.add(new BuyerFavoriteItem(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));;
+		result.add(this.getBuyerFavoriteItem(0));
+		result.add(this.getBuyerFavoriteItem(1));
+		result.add(this.getBuyerFavoriteItem(2));
+		result.add(this.getBuyerFavoriteItem(3));
 		return result;
 		//return Response.status(200).entity("{}").build();
 	}
@@ -38,19 +32,12 @@ public class BuyerFavoriteItemService {
 	@GET
 	@Produces("application/json")
 	public BuyerFavoriteItem getBuyerFavoriteItem(@PathParam("id") int id) {
- 		ArrayList<BuyerFavoriteItem> result = new ArrayList<BuyerFavoriteItem>();
-		result.add(new BuyerFavoriteItem(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));
-		return result.get(0);
-		//return Response.status(200).entity(result.get(0)).build();
+		BuyerFavoriteItem item = new BuyerFavoriteItem();
+		item.setId(id);
+		item.setBuyer(0);
+		item.setItem(0);
+		
+		return item;
 	}
 	
 	@POST

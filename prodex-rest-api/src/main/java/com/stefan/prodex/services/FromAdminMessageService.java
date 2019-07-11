@@ -20,16 +20,10 @@ public class FromAdminMessageService {
 	public ArrayList<FromAdminMessage> listtFromAdminMessage() {
  
  		ArrayList<FromAdminMessage> result = new ArrayList<FromAdminMessage>();
-		result.add(new FromAdminMessage(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));;
+		result.add(this.getFromAdminMessage(0));
+		result.add(this.getFromAdminMessage(1));
+		result.add(this.getFromAdminMessage(2));
+		result.add(this.getFromAdminMessage(3));
 		return result;
 		//return Response.status(200).entity("{}").build();
 	}
@@ -38,19 +32,12 @@ public class FromAdminMessageService {
 	@GET
 	@Produces("application/json")
 	public FromAdminMessage getFromAdminMessage(@PathParam("id") int id) {
- 		ArrayList<FromAdminMessage> result = new ArrayList<FromAdminMessage>();
-		result.add(new FromAdminMessage(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));
-		return result.get(0);
-		//return Response.status(200).entity(result.get(0)).build();
+		FromAdminMessage item = new FromAdminMessage();
+		item.setId(id);
+		item.setAdmin(0);
+		item.setUser(0);
+		
+		return item;
 	}
 	
 	@POST

@@ -11,9 +11,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
-
-import com.stefan.prodex.storage.*;
-
+ 
 @Path("/User")
 public class UserService {
  
@@ -21,14 +19,26 @@ public class UserService {
 	@Produces("application/json")
 	public ArrayList<User> listtUser() {
  
- 		return new UserStorage().list();
+ 		ArrayList<User> result = new ArrayList<User>();
+		result.add(this.getUser(0));
+		result.add(this.getUser(1));
+		result.add(this.getUser(2));
+		result.add(this.getUser(3));
+		return result;
+		//return Response.status(200).entity("{}").build();
 	}
  
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
 	public User getUser(@PathParam("id") int id) {
- 		return new UserStorage().get(id);
+		User item = new User();
+		item.setId(id);
+		item.setCity(0);
+		item.setFirstname("User");
+		item.setEmail("someuser@example.com");
+		
+		return item;
 	}
 	
 	@POST

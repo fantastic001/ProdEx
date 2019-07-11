@@ -20,16 +20,10 @@ public class {{ component }}Service {
 	public ArrayList<{{ component }}> listt{{ component }}() {
  
  		ArrayList<{{ component }}> result = new ArrayList<{{ component }}>();
-		result.add(new {{ component }}(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));;
+		result.add(this.get{{ component}}(0));
+		result.add(this.get{{ component}}(1));
+		result.add(this.get{{ component}}(2));
+		result.add(this.get{{ component}}(3));
 		return result;
 		//return Response.status(200).entity("{}").build();
 	}
@@ -38,19 +32,11 @@ public class {{ component }}Service {
 	@GET
 	@Produces("application/json")
 	public {{ component }} get{{ component }}(@PathParam("id") int id) {
- 		ArrayList<{{ component }}> result = new ArrayList<{{ component }}>();
-		result.add(new {{ component }}(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));
-		return result.get(0);
-		//return Response.status(200).entity(result.get(0)).build();
+		{{ component }} item = new {{ component }}();
+		item.setId(id);
+		{% for field, type in fields.items() %}{% if type  not in ["String", "int", "boolean", "char", "float", "Date", "double"]%}item.set{{field[0].upper() + field[1:]}}(0);
+		{% endif %}{% endfor %}
+		return item;
 	}
 	
 	@POST

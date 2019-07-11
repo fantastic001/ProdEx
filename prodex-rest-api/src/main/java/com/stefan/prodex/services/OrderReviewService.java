@@ -20,16 +20,10 @@ public class OrderReviewService {
 	public ArrayList<OrderReview> listtOrderReview() {
  
  		ArrayList<OrderReview> result = new ArrayList<OrderReview>();
-		result.add(new OrderReview(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));;
+		result.add(this.getOrderReview(0));
+		result.add(this.getOrderReview(1));
+		result.add(this.getOrderReview(2));
+		result.add(this.getOrderReview(3));
 		return result;
 		//return Response.status(200).entity("{}").build();
 	}
@@ -38,19 +32,13 @@ public class OrderReviewService {
 	@GET
 	@Produces("application/json")
 	public OrderReview getOrderReview(@PathParam("id") int id) {
- 		ArrayList<OrderReview> result = new ArrayList<OrderReview>();
-		result.add(new OrderReview(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));
-		return result.get(0);
-		//return Response.status(200).entity(result.get(0)).build();
+		OrderReview item = new OrderReview();
+		item.setId(id);
+		item.setType(0);
+		item.setBuyer(0);
+		item.setOrder(0);
+		
+		return item;
 	}
 	
 	@POST

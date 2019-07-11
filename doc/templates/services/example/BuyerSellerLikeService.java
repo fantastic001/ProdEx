@@ -20,16 +20,10 @@ public class BuyerSellerLikeService {
 	public ArrayList<BuyerSellerLike> listtBuyerSellerLike() {
  
  		ArrayList<BuyerSellerLike> result = new ArrayList<BuyerSellerLike>();
-		result.add(new BuyerSellerLike(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));;
+		result.add(this.getBuyerSellerLike(0));
+		result.add(this.getBuyerSellerLike(1));
+		result.add(this.getBuyerSellerLike(2));
+		result.add(this.getBuyerSellerLike(3));
 		return result;
 		//return Response.status(200).entity("{}").build();
 	}
@@ -38,19 +32,12 @@ public class BuyerSellerLikeService {
 	@GET
 	@Produces("application/json")
 	public BuyerSellerLike getBuyerSellerLike(@PathParam("id") int id) {
- 		ArrayList<BuyerSellerLike> result = new ArrayList<BuyerSellerLike>();
-		result.add(new BuyerSellerLike(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));
-		return result.get(0);
-		//return Response.status(200).entity(result.get(0)).build();
+		BuyerSellerLike item = new BuyerSellerLike();
+		item.setId(id);
+		item.setBuyer(0);
+		item.setSeller(0);
+		
+		return item;
 	}
 	
 	@POST

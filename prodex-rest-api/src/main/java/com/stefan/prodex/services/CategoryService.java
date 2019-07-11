@@ -20,16 +20,10 @@ public class CategoryService {
 	public ArrayList<Category> listtCategory() {
  
  		ArrayList<Category> result = new ArrayList<Category>();
-		result.add(new Category(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));;
+		result.add(this.getCategory(0));
+		result.add(this.getCategory(1));
+		result.add(this.getCategory(2));
+		result.add(this.getCategory(3));
 		return result;
 		//return Response.status(200).entity("{}").build();
 	}
@@ -38,19 +32,10 @@ public class CategoryService {
 	@GET
 	@Produces("application/json")
 	public Category getCategory(@PathParam("id") int id) {
- 		ArrayList<Category> result = new ArrayList<Category>();
-		result.add(new Category(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));
-		return result.get(0);
-		//return Response.status(200).entity(result.get(0)).build();
+		Category item = new Category();
+		item.setId(id);
+		
+		return item;
 	}
 	
 	@POST

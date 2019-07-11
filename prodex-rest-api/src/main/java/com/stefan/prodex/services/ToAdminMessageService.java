@@ -20,16 +20,10 @@ public class ToAdminMessageService {
 	public ArrayList<ToAdminMessage> listtToAdminMessage() {
  
  		ArrayList<ToAdminMessage> result = new ArrayList<ToAdminMessage>();
-		result.add(new ToAdminMessage(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));;
+		result.add(this.getToAdminMessage(0));
+		result.add(this.getToAdminMessage(1));
+		result.add(this.getToAdminMessage(2));
+		result.add(this.getToAdminMessage(3));
 		return result;
 		//return Response.status(200).entity("{}").build();
 	}
@@ -38,19 +32,12 @@ public class ToAdminMessageService {
 	@GET
 	@Produces("application/json")
 	public ToAdminMessage getToAdminMessage(@PathParam("id") int id) {
- 		ArrayList<ToAdminMessage> result = new ArrayList<ToAdminMessage>();
-		result.add(new ToAdminMessage(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));
-		return result.get(0);
-		//return Response.status(200).entity(result.get(0)).build();
+		ToAdminMessage item = new ToAdminMessage();
+		item.setId(id);
+		item.setSeller(0);
+		item.setAdmin(0);
+		
+		return item;
 	}
 	
 	@POST

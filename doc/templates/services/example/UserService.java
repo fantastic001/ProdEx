@@ -20,16 +20,10 @@ public class UserService {
 	public ArrayList<User> listtUser() {
  
  		ArrayList<User> result = new ArrayList<User>();
-		result.add(new User(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));;
+		result.add(this.getUser(0));
+		result.add(this.getUser(1));
+		result.add(this.getUser(2));
+		result.add(this.getUser(3));
 		return result;
 		//return Response.status(200).entity("{}").build();
 	}
@@ -38,19 +32,11 @@ public class UserService {
 	@GET
 	@Produces("application/json")
 	public User getUser(@PathParam("id") int id) {
- 		ArrayList<User> result = new ArrayList<User>();
-		result.add(new User(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));
-		return result.get(0);
-		//return Response.status(200).entity(result.get(0)).build();
+		User item = new User();
+		item.setId(id);
+		item.setCity(0);
+		
+		return item;
 	}
 	
 	@POST

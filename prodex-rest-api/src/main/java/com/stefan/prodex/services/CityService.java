@@ -20,16 +20,10 @@ public class CityService {
 	public ArrayList<City> listtCity() {
  
  		ArrayList<City> result = new ArrayList<City>();
-		result.add(new City(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));;
+		result.add(this.getCity(0));
+		result.add(this.getCity(1));
+		result.add(this.getCity(2));
+		result.add(this.getCity(3));
 		return result;
 		//return Response.status(200).entity("{}").build();
 	}
@@ -38,19 +32,10 @@ public class CityService {
 	@GET
 	@Produces("application/json")
 	public City getCity(@PathParam("id") int id) {
- 		ArrayList<City> result = new ArrayList<City>();
-		result.add(new City(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));
-		return result.get(0);
-		//return Response.status(200).entity(result.get(0)).build();
+		City item = new City();
+		item.setId(id);
+		
+		return item;
 	}
 	
 	@POST

@@ -20,16 +20,10 @@ public class OrderService {
 	public ArrayList<Order> listtOrder() {
  
  		ArrayList<Order> result = new ArrayList<Order>();
-		result.add(new Order(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));;
+		result.add(this.getOrder(0));
+		result.add(this.getOrder(1));
+		result.add(this.getOrder(2));
+		result.add(this.getOrder(3));
 		return result;
 		//return Response.status(200).entity("{}").build();
 	}
@@ -38,19 +32,12 @@ public class OrderService {
 	@GET
 	@Produces("application/json")
 	public Order getOrder(@PathParam("id") int id) {
- 		ArrayList<Order> result = new ArrayList<Order>();
-		result.add(new Order(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));
-		return result.get(0);
-		//return Response.status(200).entity(result.get(0)).build();
+		Order item = new Order();
+		item.setId(id);
+		item.setBuyer(0);
+		item.setItem(0);
+		
+		return item;
 	}
 	
 	@POST

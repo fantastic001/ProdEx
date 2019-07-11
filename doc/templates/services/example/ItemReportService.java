@@ -20,16 +20,10 @@ public class ItemReportService {
 	public ArrayList<ItemReport> listtItemReport() {
  
  		ArrayList<ItemReport> result = new ArrayList<ItemReport>();
-		result.add(new ItemReport(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));;
+		result.add(this.getItemReport(0));
+		result.add(this.getItemReport(1));
+		result.add(this.getItemReport(2));
+		result.add(this.getItemReport(3));
 		return result;
 		//return Response.status(200).entity("{}").build();
 	}
@@ -38,19 +32,12 @@ public class ItemReportService {
 	@GET
 	@Produces("application/json")
 	public ItemReport getItemReport(@PathParam("id") int id) {
- 		ArrayList<ItemReport> result = new ArrayList<ItemReport>();
-		result.add(new ItemReport(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));
-		return result.get(0);
-		//return Response.status(200).entity(result.get(0)).build();
+		ItemReport item = new ItemReport();
+		item.setId(id);
+		item.setItem(0);
+		item.setBuyer(0);
+		
+		return item;
 	}
 	
 	@POST

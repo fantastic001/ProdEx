@@ -20,16 +20,10 @@ public class MessageService {
 	public ArrayList<Message> listtMessage() {
  
  		ArrayList<Message> result = new ArrayList<Message>();
-		result.add(new Message(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));;
+		result.add(this.getMessage(0));
+		result.add(this.getMessage(1));
+		result.add(this.getMessage(2));
+		result.add(this.getMessage(3));
 		return result;
 		//return Response.status(200).entity("{}").build();
 	}
@@ -38,19 +32,12 @@ public class MessageService {
 	@GET
 	@Produces("application/json")
 	public Message getMessage(@PathParam("id") int id) {
- 		ArrayList<Message> result = new ArrayList<Message>();
-		result.add(new Message(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));
-		return result.get(0);
-		//return Response.status(200).entity(result.get(0)).build();
+		Message item = new Message();
+		item.setId(id);
+		item.setItem(0);
+		item.setBuyer(0);
+		
+		return item;
 	}
 	
 	@POST

@@ -20,16 +20,10 @@ public class ConversationService {
 	public ArrayList<Conversation> listtConversation() {
  
  		ArrayList<Conversation> result = new ArrayList<Conversation>();
-		result.add(new Conversation(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));;
+		result.add(this.getConversation(0));
+		result.add(this.getConversation(1));
+		result.add(this.getConversation(2));
+		result.add(this.getConversation(3));
 		return result;
 		//return Response.status(200).entity("{}").build();
 	}
@@ -38,19 +32,12 @@ public class ConversationService {
 	@GET
 	@Produces("application/json")
 	public Conversation getConversation(@PathParam("id") int id) {
- 		ArrayList<Conversation> result = new ArrayList<Conversation>();
-		result.add(new Conversation(
-				/*"stefan", 
-				"djfk;ldsjfl;kdjaslk;fdajkl",
-				"Stefan",
-				"Nozinic", 
-				null, 
-				"+381555333", 
-				null, 
-				"admin@prodex.com"*/
-			));
-		return result.get(0);
-		//return Response.status(200).entity(result.get(0)).build();
+		Conversation item = new Conversation();
+		item.setId(id);
+		item.setUser(0);
+		item.setInitialMessage(0);
+		
+		return item;
 	}
 	
 	@POST
