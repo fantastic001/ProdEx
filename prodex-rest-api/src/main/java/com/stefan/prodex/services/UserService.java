@@ -1,4 +1,5 @@
 package com.stefan.prodex.services;
+import com.stefan.prodex.storage.*;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -54,6 +55,11 @@ public class UserService {
 	{
 		data.setPassword(this.getSHA(data.getPassword()));
 		data.setRegistrationDate(new Date());
+		UserStorage userStorage = new UserStorage();
+		userStorage.create(data);
+		Buyer buyer = new Buyer(0, data.getId());
+		BuyerStorage buyerStorage = new BuyerStorage();
+		buyerStorage.create(buyer);
 		return data;
 	}
 
