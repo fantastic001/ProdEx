@@ -71,8 +71,12 @@ export default {
         
         <WidgetUserMulti :filter="x => x.seller == this.seller"/>
         
+        <p>non-shipped</p>
+        <WidgetItemMulti :filter="x => x.seller == this.seller && !x.shipped"/>
         
-        <WidgetItemMulti :filter="x => x.seller == this.seller"/>
+
+	<p>Shipped</p>
+	<WidgetItemMulti :filter="x => x.seller == this.seller && x.shipped"/>
         
         
         <WidgetBuyerSellerLikeMulti :filter="x => x.seller == this.seller"/>
