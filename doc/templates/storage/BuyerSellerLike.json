@@ -1,8 +1,0 @@
-{
-	"component": "BuyerSellerLike",
-	"fields": {
-		"buyer": "Buyer",
-		"seller": "Seller",
-		"like": "boolean"
-	}
-}

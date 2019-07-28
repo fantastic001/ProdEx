@@ -1,9 +1,0 @@
-{
-	"component": "ToAdminMessage",
-	"fields": {
-		"seller": "Seller",
-		"admin": "Admin",
-		"title": "String",
-		"body": "String"
-	}
-}

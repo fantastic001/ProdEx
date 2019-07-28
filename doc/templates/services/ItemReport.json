@@ -1,9 +1,0 @@
-{
-	"component": "ItemReport",
-	"fields": {
-		"item": "Item",
-		"title": "String",
-		"body": "String",
-		"buyer": "Buyer"
-	}
-}

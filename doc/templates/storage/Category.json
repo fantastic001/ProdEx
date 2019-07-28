@@ -1,7 +1,0 @@
-{
-	"component": "Category",
-	"fields": {
-		"name": "String",
-		"description": "String"
-	}
-}

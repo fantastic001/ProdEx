@@ -1,7 +1,0 @@
-{
-	"component": "Conversation",
-	"fields": {
-		"user": "User",
-		"initialMessage": "Message"
-	}
-}

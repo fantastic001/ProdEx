@@ -27,12 +27,14 @@ public class Item {
 	
 	private boolean active; 
 	
+	private boolean shipped; 
+	
 	private int category; 
 	
 	public Item() 
 	{
 	}
-	public Item(int id, String _name, String _description, String _image, int _seller, float _price, int _likes, int _dislikes, Date _dueDate, Date _creationDate, int _city, boolean _active, int _category) {
+	public Item(int id, String _name, String _description, String _image, int _seller, float _price, int _likes, int _dislikes, Date _dueDate, Date _creationDate, int _city, boolean _active, boolean _shipped, int _category) {
 		super();
 		this.id = id;
 		 
@@ -57,6 +59,8 @@ public class Item {
 		this.city = _city;
 		 
 		this.active = _active;
+		 
+		this.shipped = _shipped;
 		 
 		this.category = _category;
 		
@@ -178,6 +182,16 @@ public class Item {
 	public void setActive(boolean newValue) 
 	{
 		this.active = newValue;
+	}
+	 
+	public boolean getShipped() 
+	{
+		return this.shipped;
+	}
+
+	public void setShipped(boolean newValue) 
+	{
+		this.shipped = newValue;
 	}
 	 
 	public int getCategory() 

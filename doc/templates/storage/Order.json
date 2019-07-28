@@ -1,8 +1,0 @@
-{
-	"component": "Order",
-	"fields": {
-		"buyer": "Buyer",
-		"item": "Item",
-		"status": "String"
-	}
-}

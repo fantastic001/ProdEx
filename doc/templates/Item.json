@@ -12,6 +12,7 @@
 	"creationDate": "Date",
 	"city": "City",
 	"active": "boolean",
+	"shipped": "boolean",
 	"category": "Category"
 	}
 }
