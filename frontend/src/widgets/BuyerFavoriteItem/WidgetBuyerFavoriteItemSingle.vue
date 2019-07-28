@@ -18,6 +18,7 @@ export default {
 
 <template>
     <div class="widget-buyerfavoriteitem-single"> 
+    	+1
     </div>
 
 </template>
