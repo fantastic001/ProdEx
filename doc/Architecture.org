@@ -552,3 +552,9 @@ https://vuejs.org/v2/guide/single-file-components.html
     </section>
   </div>
 #+END_SRC
+
+
+
+** Authentication and authorization 
+
+https://www.techiediaries.com/vue-vuex-axios-auth/
