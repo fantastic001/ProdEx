@@ -1,6 +1,7 @@
 <script>
 
 import WidgetUserMulti from "./src/widgets/User/WidgetUserMulti.vue";
+import WidgetItemMulti from "./src/widgets/Item/WidgetItemMulti.vue";
 import WidgetUserNew from "./src/widgets/User/WidgetUserNew.vue";
 import WidgetLoginNew from "./src/widgets/Auth/WidgetLoginNew.vue";
 import AdminDetail from "./src/views/AdminDetail.vue";
@@ -15,6 +16,7 @@ export default {
     "BuyerDetail": BuyerDetail,
     "SellerDetail": SellerDetail,
     "WidgetLoginNew": WidgetLoginNew,
+    "WidgetItemMulti": WidgetItemMulti,
   }
 }
 
@@ -30,6 +32,8 @@ export default {
     <WidgetUserNew />
 
     <WidgetLoginNew />
+    <p>Items</p>
+    <WidgetItemMulti />
  </div>
 
 </template>

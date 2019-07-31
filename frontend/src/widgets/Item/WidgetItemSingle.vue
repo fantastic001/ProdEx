@@ -18,6 +18,10 @@ export default {
 
 <template>
     <div class="widget-item-single"> 
+    Item (id={{ data.id }}):
+
+    <h2>{{data.name }}</h2>
+
     </div>
 
 </template>
