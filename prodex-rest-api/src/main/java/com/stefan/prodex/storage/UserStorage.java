@@ -1,7 +1,9 @@
 package com.stefan.prodex.storage;
 
+
 import java.util.ArrayList;
 import com.stefan.prodex.data.User;
+import com.stefan.prodex.services.Hasher;
 
 public class UserStorage 
 {
@@ -10,6 +12,8 @@ public class UserStorage
 		User usr = new User();
 		usr.setId(id);
 		usr.setEmail("pusokurac@kurcinela.com");
+		usr.setUsername("stefan");
+		usr.setPassword(Hasher.getSHA("Sekrit"));
 		return usr; 
 	}
 
