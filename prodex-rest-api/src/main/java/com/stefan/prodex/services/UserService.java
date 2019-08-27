@@ -12,12 +12,15 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
+import javax.servlet.http.*;
+import javax.ws.rs.core.*;
 
 import java.util.Date;
 
 @Path("/User")
 public class UserService {
- 
+	@Context private HttpServletRequest request;
+
 	@GET
 	@Produces("application/json")
 	public ArrayList<User> listtUser() {
@@ -74,6 +77,13 @@ public class UserService {
 	public User updateUser(@PathParam("id") int id, User data) 
 	{
 		return data;
+	}
+
+	@Path("me")
+	@GET
+	@Produces("application/json")
+	public User getProfile() {
+		return (User) request.getSession().getAttribute("user");
 	}
 
 }

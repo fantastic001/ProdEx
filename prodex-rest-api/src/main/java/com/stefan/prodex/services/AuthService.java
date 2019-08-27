@@ -12,6 +12,8 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
+import javax.servlet.http.*;
+import javax.ws.rs.core.*;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -21,7 +23,7 @@ import java.util.Date;
 
 @Path("/Auth")
 public class AuthService {
-	
+	@Context private HttpServletRequest request;
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
@@ -36,6 +38,9 @@ public class AuthService {
 			{
 				if (usr.getPassword().equals(hash)) 
 				{
+					HttpSession session = request.getSession(true);
+					session.setAttribute("user", usr);
+
 					// login successful
 					return new APIStatus(0, "OK");
 				}

@@ -558,3 +558,10 @@ https://vuejs.org/v2/guide/single-file-components.html
 ** Authentication and authorization 
 
 https://www.techiediaries.com/vue-vuex-axios-auth/
+
+** Handling session cookies in axios
+
+#+BEGIN_SRC js
+  axios.defaults.withCredentials = true  // enable axios post cookie, default false
+
+#+END_SRC
