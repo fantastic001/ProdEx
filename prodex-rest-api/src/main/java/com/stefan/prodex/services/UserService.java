@@ -38,13 +38,8 @@ public class UserService {
 	@GET
 	@Produces("application/json")
 	public User getUser(@PathParam("id") int id) {
-		User item = new User();
-		item.setId(id);
-		item.setCity(0);
-		item.setFirstname("User");
-		item.setEmail("someuser@example.com");
-		
-		return item;
+		UserStorage storage = new UserStorage();
+		return storage.get(id);
 	}
 	
 	@POST
@@ -55,11 +50,16 @@ public class UserService {
 		data.setPassword(Hasher.getSHA(data.getPassword()));
 		data.setRegistrationDate(new Date());
 		UserStorage userStorage = new UserStorage();
-		userStorage.create(data);
-		Buyer buyer = new Buyer(0, data.getId());
-		BuyerStorage buyerStorage = new BuyerStorage();
-		buyerStorage.create(buyer);
-		return data;
+		if (userStorage.create(data)) {
+			Buyer buyer = new Buyer(0, data.getId());
+			BuyerStorage buyerStorage = new BuyerStorage();
+			buyerStorage.create(buyer);
+			return data;
+		}
+		else 
+		{
+			return null;
+		}
 	}
 
 	@Path("{id}")
