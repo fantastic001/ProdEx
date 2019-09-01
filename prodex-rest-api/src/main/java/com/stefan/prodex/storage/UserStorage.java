@@ -1,7 +1,9 @@
 package com.stefan.prodex.storage;
 
 
-import com.google.gson.Gson;
+import com.google.gson.*;
+import com.google.gson.reflect.*;
+import java.lang.reflect.Type;
 
 
 import java.util.ArrayList;
@@ -14,32 +16,26 @@ import java.io.Reader;
 
 public class UserStorage 
 {
-	public User get(int id) 
+	private ArrayList<User> load() 
 	{
 		Gson gson = new Gson();
 		try 
 		{
-			Reader reader = new FileReader("/home/stefan/user.json");
-			return gson.fromJson(reader, User.class);
+			Reader reader = new FileReader("/tmp/user.json");
+			Type listOfMyClassObject = new TypeToken<ArrayList<User>>() {}.getType();
+			return gson.fromJson(reader, listOfMyClassObject);
 		}  catch (IOException e) {
             		e.printStackTrace();
         	}
-		return null;
+		return new ArrayList<User>();
 	}
 
-	public ArrayList<User> list() 
-	{
-		ArrayList<User> list = new ArrayList<User>();
-		for (int i = 0; i<10; i++)
-			list.add(this.get(i));
-		return list;
-	}
-
-	public boolean create(User data) 
+	private boolean save(ArrayList<User> data) 
 	{
 		Gson gson = new Gson();
 		try {
-		    FileWriter writer = new FileWriter("/home/stefan/user.json");
+		    FileWriter writer = new FileWriter("/tmp/user.json");
+		    
 		    gson.toJson(data, writer);
 		    writer.close();
                } catch (IOException e) {
@@ -47,15 +43,44 @@ public class UserStorage
 		    return false; 
                }
 	       return true;
+	}
+	public User get(int id) 
+	{
+		User result = null;
+		ArrayList<User> users = this.load();
+		for (User user : users) 
+		{
+			if (user.getId() == id) result = user;
+		}
+		return result;
+	}
 
+	public ArrayList<User> list() 
+	{
+		return this.load();
+	}
+
+	public boolean create(User data) 
+	{
+		ArrayList<User> users = this.load();
+		data.setId(users.size());
+		users.add(data);
+		return this.save(users);
 	}
 
 	public boolean delete(int id) 
 	{
-		return true; 
+		ArrayList<User> users = this.load();
+		ArrayList<User> result = new ArrayList<>();
+		for (User user : users) 
+		{
+			if (user.getId() != id) result.add(user);
+		}
+		return this.save(result);
 	}
 	public boolean update(int id,  User data) 
 	{
-		return true; 
+		this.delete(id);
+		return this.create(data);
 	}
 }
