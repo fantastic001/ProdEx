@@ -21,7 +21,7 @@ public class UserStorage
 		Gson gson = new Gson();
 		try 
 		{
-			Reader reader = new FileReader("/tmp/user.json");
+			Reader reader = new FileReader("/tmp/prodex_User.json");
 			Type listOfMyClassObject = new TypeToken<ArrayList<User>>() {}.getType();
 			return gson.fromJson(reader, listOfMyClassObject);
 		}  catch (IOException e) {
@@ -34,7 +34,7 @@ public class UserStorage
 	{
 		Gson gson = new Gson();
 		try {
-		    FileWriter writer = new FileWriter("/tmp/user.json");
+		    FileWriter writer = new FileWriter("/tmp/prodex_User.json");
 		    
 		    gson.toJson(data, writer);
 		    writer.close();
@@ -47,10 +47,10 @@ public class UserStorage
 	public User get(int id) 
 	{
 		User result = null;
-		ArrayList<User> users = this.load();
-		for (User user : users) 
+		ArrayList<User> items = this.load();
+		for (User item : items) 
 		{
-			if (user.getId() == id) result = user;
+			if (item.getId() == id) result = item;
 		}
 		return result;
 	}
@@ -62,19 +62,19 @@ public class UserStorage
 
 	public boolean create(User data) 
 	{
-		ArrayList<User> users = this.load();
-		data.setId(users.size());
-		users.add(data);
-		return this.save(users);
+		ArrayList<User> items = this.load();
+		data.setId(items.size());
+		items.add(data);
+		return this.save(items);
 	}
 
 	public boolean delete(int id) 
 	{
-		ArrayList<User> users = this.load();
+		ArrayList<User> items = this.load();
 		ArrayList<User> result = new ArrayList<>();
-		for (User user : users) 
+		for (User item : items) 
 		{
-			if (user.getId() != id) result.add(user);
+			if (item.getId() != id) result.add(item);
 		}
 		return this.save(result);
 	}
