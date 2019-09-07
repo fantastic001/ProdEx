@@ -18,8 +18,9 @@ export default {
 
 <template>
     <div class="widget-user-single"> 
-        {{ data.email }}
-
+    <p>Username: {{ username }}</p>
+    <p>Name: {{ firstname }} {{ lastname }}</p>
+    <p>E-Mail: {{ email }}</p>
     </div>
 
 </template>
