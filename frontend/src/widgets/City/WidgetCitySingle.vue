@@ -18,6 +18,7 @@ export default {
 
 <template>
     <div class="widget-city-single"> 
+    	{{ data.name }}, {{ data.country}}
     </div>
 
 </template>

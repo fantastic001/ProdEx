@@ -18,6 +18,9 @@ export default {
 
 <template>
     <div class="widget-category-single"> 
+    	<h1>{{ data.name }}</h1>
+
+	<p> {{ data.description }} </p>
     </div>
 
 </template>
