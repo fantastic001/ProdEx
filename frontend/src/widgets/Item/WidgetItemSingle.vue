@@ -21,7 +21,13 @@ export default {
     Item (id={{ data.id }}):
 
     <h2>{{data.name }}</h2>
-
+    <div class="item-description">{{ data.description }}</div>
+    <div class="item-image"><img :src="data.image"></div>
+    <div class="details">
+        <p>Price: {{ data.price}}</p>
+        <p>Due date: {{ data.dueDate}}</p>
+        <p>Creation date: {{ data.creationDate}}</p>
+    </div>
     </div>
 
 </template>
