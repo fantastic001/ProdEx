@@ -171,7 +171,7 @@ every model has its unique identifier.
 
 + buyer -> Buyer
 + item -> Item
-+ status (SHIPPING, SHIPPED)
++ status (PENDING, SHIPPING, SHIPPED)
 
 
 ** OrderReview 
@@ -565,3 +565,28 @@ https://www.techiediaries.com/vue-vuex-axios-auth/
   axios.defaults.withCredentials = true  // enable axios post cookie, default false
 
 #+END_SRC
+
+
+* Additional endpoints for services 
+
+** Item -> status 
+
++ Path: =/Item/{id}/status=
++ Returns APIStatus 
+
+description of APIStatus
+
+| code | message  |
+|    0 | PENDING  |
+|    1 | SHIPPING |
+|    2 | SHIPPED  |
+
+
+this endpoint can be used to check if item can be deleted (only in PENDING state)
+
+status if PENDING if there is no order with different status 
+
+status is SHIPPING if there is noo order with SHIPPED status but there is with SHIPPING
+
+sttatus is SHIPPED if aall orders are in state SHIPPED
+
