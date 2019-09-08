@@ -1,5 +1,6 @@
 package com.stefan.prodex.services;
 
+import com.stefan.prodex.storage.OrderStorage;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -11,10 +12,13 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
+import javax.servlet.http.*;
+import javax.ws.rs.core.*;
  
 @Path("/Order")
 public class OrderService {
  
+	@Context private HttpServletRequest request;
 	@GET
 	@Produces("application/json")
 	public ArrayList<Order> listOrder() {
@@ -46,6 +50,28 @@ public class OrderService {
 	@Produces("application/json")
 	public Order createOrder(Order data) 
 	{
+		HttpSession session = request.getSession(true);
+		if (session.getAttribute("user") == null) 
+		{
+			return null; // user not logged in
+		}
+		User current = (User) session.getAttribute("user");
+
+		// find buyer with idd of current user
+		int buyerId = -1; 
+		BuyerService buyerService = new BuyerService();
+		for (Buyer buyer : buyerService.listBuyer()) 
+		{
+			if (buyer.getUser() == current.getId()) 
+			{
+				buyerId = buyer.getId();
+			}
+		}
+		if (buyerId == -1) return null; // the current user is not registered as buyer
+		data.setBuyer(buyerId); 
+		data.setStatus("PENDING");
+		OrderStorage storage = new OrderStorage();
+		storage.create(data);
 		return data;
 	}
 

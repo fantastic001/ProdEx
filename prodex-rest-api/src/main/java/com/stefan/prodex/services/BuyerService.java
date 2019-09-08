@@ -17,7 +17,7 @@ public class BuyerService {
  
 	@GET
 	@Produces("application/json")
-	public ArrayList<Buyer> listtBuyer() {
+	public ArrayList<Buyer> listBuyer() {
  
  		ArrayList<Buyer> result = new ArrayList<Buyer>();
 		result.add(this.getBuyer(0));
