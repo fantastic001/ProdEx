@@ -1,5 +1,6 @@
 <script>
 import ItemService from "./service";
+import OrderService from "../Order/service";
 
 export default {
     name: "WidgetItemSingle",
@@ -7,7 +8,8 @@ export default {
     data: function () {
         return {
             data: {},
-	    status: 1
+	    status: 1,
+	    ordered: false
         }
     },
     mounted: function () 
@@ -20,6 +22,14 @@ export default {
     	deleteItem: function() 
 	{
 		ItemService.delete(this.item).then(response => this.data = {});
+	},
+	orderItem: function() 
+	{
+		OrderService.create({
+			item: this.item,
+			buyer: null,
+			status: null
+		}).then(response => this.ordered = (response.data != null));
 	}
     }
 }
@@ -38,6 +48,7 @@ export default {
         <p>Creation date: {{ data.creationDate}}</p>
     </div>
     <button @click="deleteItem" v-if="this.status == 0">Delete</button>
+    <button @click="orderItem" v-if="!this.ordered">Order</button>
     </div>
 
 </template>
