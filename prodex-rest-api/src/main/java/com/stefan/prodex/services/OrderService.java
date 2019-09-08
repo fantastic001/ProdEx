@@ -36,6 +36,7 @@ public class OrderService {
 		item.setId(id);
 		item.setBuyer(0);
 		item.setItem(0);
+		item.setStatus("SHIPPING");
 		
 		return item;
 	}

@@ -6,12 +6,21 @@ export default {
     props: ["item"],
     data: function () {
         return {
-            data: {}
+            data: {},
+	    status: 1
         }
     },
     mounted: function () 
     {
         ItemService.get(this.item).then(response => this.data = response.data);
+        ItemService.getStatus(this.item).then(response => this.status = response.data.code);
+    },
+    methods: 
+    {
+    	deleteItem: function() 
+	{
+		ItemService.delete(this.item).then(response => this.data = {});
+	}
     }
 }
 </script>
@@ -28,6 +37,7 @@ export default {
         <p>Due date: {{ data.dueDate}}</p>
         <p>Creation date: {{ data.creationDate}}</p>
     </div>
+    <button @click="deleteItem" v-if="this.status == 0">Delete</button>
     </div>
 
 </template>
