@@ -11,6 +11,8 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
+
+import com.stefan.prodex.storage.ItemStorage;
  
 @Path("/Item")
 public class ItemService {
@@ -54,6 +56,10 @@ public class ItemService {
 	@Produces("application/json")
 	public Response deleteItem(@PathParam("id") int id) 
 	{
+		if (this.getItemStatus(id).getCode() > 0) 
+			return Response.status(403).entity("{'status': 'error'}").build();
+		ItemStorage storage = new ItemStorage();
+		storage.delete(id);
 		return Response.status(200).entity("{'status': 'deleted'}").build();
 	}
 	
@@ -64,5 +70,27 @@ public class ItemService {
 	public Item updateItem(@PathParam("id") int id, Item data) 
 	{
 		return data;
+	}
+	
+	@Path("{id}/status")
+	@GET
+	@Produces("application/json")
+	public APIStatus getItemStatus(@PathParam("id") int id) 
+	{
+		OrderService orderService = new OrderService();
+		ArrayList<Order> orders = orderService.listOrder();
+		int pending = 0, shipping = 0, shipped = 0; 
+		for (Order o : orders) 
+		{
+			if (o.getItem() == id) 
+			{
+				if (o.getStatus().equals("SHIPPING")) shipping++;
+				if (o.getStatus().equals("SHIPPED")) shipped++;
+				else pending++;
+			}
+		}
+		if (shipping == 0 && shipped == 0) return new APIStatus(0, "PENDING");
+		else if (shipped == 0) return new APIStatus(1, "SHIPPING");
+		else return new APIStatus(2, "SHIPPED");
 	}
 }

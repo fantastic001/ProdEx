@@ -17,7 +17,7 @@ public class OrderService {
  
 	@GET
 	@Produces("application/json")
-	public ArrayList<Order> listtOrder() {
+	public ArrayList<Order> listOrder() {
  
  		ArrayList<Order> result = new ArrayList<Order>();
 		result.add(this.getOrder(0));
