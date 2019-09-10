@@ -28,5 +28,14 @@ export default {
 <style scoped> 
 
 
+.widget-user-single {
+	padding: 10px; 
+	background-color: #cceeee; 
+	margin: 10px;
+	color: blue;
+	border: solid;
+	border-width: 4px;
+	border-color: blue;
+}
 
 </style>

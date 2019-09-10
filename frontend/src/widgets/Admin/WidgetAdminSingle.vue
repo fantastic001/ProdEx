@@ -29,8 +29,15 @@ export default {
 
 </template>
 
+
+
 <style scoped> 
 
 
+.widget-admin-single {
+	padding: 10px; 
+	background-color: #ffcccc; 
+	margin: 10px;
+}
 
 </style>
