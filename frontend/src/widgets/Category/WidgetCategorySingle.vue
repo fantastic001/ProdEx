@@ -18,9 +18,13 @@ export default {
 
 <template>
     <div class="widget-category-single"> 
-    	<h1>{{ data.name }}</h1>
-
-	<p> {{ data.description }} </p>
+    	<div class="card" style="width: 18rem;">
+           <div class="card-body">
+               <h5 class="card-title">{{ data.name }}</h5>
+               <p class="card-text">{{ data.description }}</p>
+               <a href="#" class="card-link">See all items in category</a>
+           </div>
+        </div>
     </div>
 
 </template>

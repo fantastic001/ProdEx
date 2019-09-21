@@ -7,6 +7,7 @@ import WidgetLoginNew from "./src/widgets/Auth/WidgetLoginNew.vue";
 import AdminDetail from "./src/views/AdminDetail.vue";
 import BuyerDetail from "./src/views/BuyerDetail.vue";
 import SellerDetail from "./src/views/SellerDetail.vue";
+import WidgetCategoryMulti from "./src/widgets/Category/WidgetCategoryMulti.vue";
 export default {
   name: "App",
   components: {
@@ -17,6 +18,7 @@ export default {
     "SellerDetail": SellerDetail,
     "WidgetLoginNew": WidgetLoginNew,
     "WidgetItemMulti": WidgetItemMulti,
+    "WidgetCategoryMulti": WidgetCategoryMulti,
   }
 }
 
@@ -25,6 +27,7 @@ export default {
 
 <template>
   <div>
+    <WidgetCategoryMulti />
     <AdminDetail admin="0" />
     <BuyerDetail buyer="0" />
     <SellerDetail seller="0" />

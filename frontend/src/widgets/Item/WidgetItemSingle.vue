@@ -37,18 +37,28 @@ export default {
 
 <template>
     <div class="widget-item-single"> 
-    Item (id={{ data.id }}):
+    <span class="badge badge-pill badge-info">Item: {{data.id}} </span>
 
-    <h2>{{data.name }}</h2>
-    <div class="item-description">{{ data.description }}</div>
-    <div class="item-image"><img :src="data.image"></div>
-    <div class="details">
-        <p>Price: {{ data.price}}</p>
-        <p>Due date: {{ data.dueDate}}</p>
-        <p>Creation date: {{ data.creationDate}}</p>
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" alt="Item image" :src="data.image" />
+      <div class="card-body">
+        <h5 class="card-title">{{data.name }}</h5>
+        <p class="card-text item-description">{{ data.description }}</p>
+      </div>
+
+    
+     <ul class="list-group list-group-flush">
+        <li class="list-group-item">Price: {{ data.price}}</li>
+        <li class="list-group-item">Due date: {{ data.dueDate}}</li>
+        <li class="list-group-item">Created: {{ data.creationDate}}</li>
+     </ul>
+
+
+    <div class="card-body">
+      <button class="btn btn-danger" @click="deleteItem" v-if="this.status == 0">Delete</button>
+      <button class="btn btn-primary" @click="orderItem" v-if="!this.ordered">Order</button>
     </div>
-    <button @click="deleteItem" v-if="this.status == 0">Delete</button>
-    <button @click="orderItem" v-if="!this.ordered">Order</button>
+    </div>
     </div>
 
 </template>

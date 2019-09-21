@@ -18,9 +18,18 @@ export default {
 
 <template>
     <div class="widget-user-single"> 
-    <p>Username: {{ username }}</p>
-    <p>Name: {{ firstname }} {{ lastname }}</p>
-    <p>E-Mail: {{ email }}</p>
+
+
+<div class="card" style="width: 18rem;">
+  <div class="card-header">
+    {{ data.username }}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ data.firstname }} {{ data.lastname }}</h5>
+    <p class="card-text">{{ data.email}}</p>
+  </div>
+</div>
+
     </div>
 
 </template>
@@ -28,14 +37,5 @@ export default {
 <style scoped> 
 
 
-.widget-user-single {
-	padding: 10px; 
-	background-color: #cceeee; 
-	margin: 10px;
-	color: blue;
-	border: solid;
-	border-width: 4px;
-	border-color: blue;
-}
 
 </style>

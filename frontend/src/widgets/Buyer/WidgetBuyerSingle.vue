@@ -21,13 +21,15 @@ export default {
 
 <template>
     <div class="widget-buyer-single"> 
-    {{ data.firstname }} {{ data.lastname }} 
-    <div class="details"> 
-    	<ul>
-		<li>{{ data.phone }}</li>
-		<li>{{ data.email }}</li>
-		<li>Joined on {{ data.registrationDate }}</li>
-	</ul>
+    <span class="badge badge-pill badge-warning">Buyer</span>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ data.firstname }} {{ data.lastname }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ data.email }}</h6>
+            <p class="card-text">{{ data.phone }} - joined on {{data.registrationDate }}</p>
+            <a href="#" class="card-link">See orders</a>
+            <a href="#" class="card-link">More</a>
+        </div>
     </div>
     </div>
 

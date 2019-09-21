@@ -21,17 +21,21 @@ export default {
 </script>
 
 <template>
-    <div class="widget-comment-single"> 
-    <div class="comment-author">{{ author.firstname }} {{ author.lastname }}</div>
-    <div class="comment-body"> 
-	<p>{{ data.body }}</p>
-    </div>
-    </div>
+<div class="widget-comment-single"> 
+
+<div class="card">
+
+  <div class="card-body">
+    <h5 class="card-title">{{ author.firstname }} {{author.lastname }}</h5>
+    <p class="card-text">{{ data.body }}</p>
+  </div>
+</div> 
+
+
+</div>
 
 </template>
 
 <style scoped> 
-
-
 
 </style>

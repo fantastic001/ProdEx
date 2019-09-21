@@ -24,10 +24,19 @@ export default {
 
 <template>
     <div class="widget-fromadminmessage-single"> 
+        <span class="badge badge-danger">Administrattor message</span>
 	<div class="message-sender"><WidgetAdminSingle admin="this.admin" /></div> 
 	<div class="message-to"><WidgetUserSingle user="this.user" /></div> 
-	<div class="message-title">{{ data.title }}</div>
-	<div class="message-body">{{ data.body }}</div>
+	
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{ data.title }}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">From Administrator</h6>
+    <p class="card-text">{{ data.body }}</p>
+    <a href="#" class="card-link">Reply</a>
+    <a href="#" class="card-link">Not for me</a>
+  </div>
+</div>
 
     </div>
 
