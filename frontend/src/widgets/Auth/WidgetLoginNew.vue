@@ -8,16 +8,17 @@ export default {
             data: {
 	    	userName: null,
 		password: null,
+	    	success: false
 	    },
-	    success: false
+
         };
     },
     methods: {
     	submit: function() 
 	{
 		LoginService.login(this.data).then(response => {
-			if (response.data.code == 0) this.success = true;
-			else success = false;
+			if (response.data.code == 0) this.data.success = true;
+			else this.data.success = false;
 
 		});
 	}

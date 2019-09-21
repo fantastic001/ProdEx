@@ -12,10 +12,15 @@ import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
 
+import javax.servlet.http.*;
+import javax.ws.rs.core.*;
+
 import com.stefan.prodex.storage.ItemStorage;
  
 @Path("/Item")
 public class ItemService {
+	
+	@Context private HttpServletRequest request;
  
 	@GET
 	@Produces("application/json")
@@ -80,17 +85,64 @@ public class ItemService {
 		OrderService orderService = new OrderService();
 		ArrayList<Order> orders = orderService.listOrder();
 		int pending = 0, shipping = 0, shipped = 0; 
+		boolean ordered = false; 
 		for (Order o : orders) 
 		{
 			if (o.getItem() == id) 
 			{
+				ordered = true;
 				if (o.getStatus().equals("SHIPPING")) shipping++;
 				if (o.getStatus().equals("SHIPPED")) shipped++;
 				else pending++;
 			}
 		}
+		if (!ordered) return new APIStatus(-1, "Not ordered")
 		if (shipping == 0 && shipped == 0) return new APIStatus(0, "PENDING");
 		else if (shipped == 0) return new APIStatus(1, "SHIPPING");
 		else return new APIStatus(2, "SHIPPED");
+	}
+	
+	@Path("{id}/status")
+	@POST
+	@Produces("application/json")
+	public APIStatus updateItemStatus(@PathParam("id") int id) 
+	{
+		Item curr = this.getItem(id);
+		// check if current user is seller of this item
+		SellerService sellerService = new SellerService();
+		Seller seller = sellerService.getSeller(curr.getSeller());
+		UserService userService = new UserService();
+		User logged =  (User) request.getSession().getAttribute("user");
+		if (logged == null) return new APIStatus(-5, "Not logged in");
+		if (! userService.getUser(seller.getUser()).getUsername().equals( logged.getUsername() )) return new APIStatus(-4, "Not allowed");
+		OrderService orderService = new OrderService();
+		ArrayList<Order> orders = orderService.listOrder();
+		Order order = null;
+		int pending = 0, shipping = 0, shipped = 0; 
+		for (Order o : orders) 
+		{
+			if (o.getItem() == id) 
+			{
+				order = o;
+				if (o.getStatus().equals("SHIPPING")) shipping++;
+				if (o.getStatus().equals("SHIPPED")) shipped++;
+				else pending++;
+				break;
+			}
+		}
+		if (order == null) return new APIStatus(-1, "No orders");
+		if (shipping == 0 && shipped == 0) order.setStatus("SHIPPING");
+		else if (shipped == 0) order.setStatus("SHIPPED");
+		if (curr != null) 
+		{
+			curr.setShipped(order.getStatus().equals("SHIPPED"));
+			this.updateItem(id, curr);
+			return new APIStatus(1, "OK");
+		}
+		else
+		{
+			return new APIStatus(-2, "No such item");
+		}
+
 	}
 }

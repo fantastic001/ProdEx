@@ -29,7 +29,17 @@ export default {
 			item: this.item,
 			buyer: null,
 			status: null
-		}).then(response => this.ordered = (response.data != null));
+		}).then(response => {
+			this.ordered = (response.data != null)
+        		ItemService.getStatus(this.item).then(response => this.status = response.data.code);
+		});
+	},
+	updateStatus: function() 
+	{
+		ItemService.updateStatus(this.item).then(response => {
+        		ItemService.getStatus(this.item).then(response => this.status = response.data.code);
+		});
+
 	}
     }
 }
@@ -55,8 +65,10 @@ export default {
 
 
     <div class="card-body">
-      <button class="btn btn-danger" @click="deleteItem" v-if="this.status == 0">Delete</button>
-      <button class="btn btn-primary" @click="orderItem" v-if="!this.ordered">Order</button>
+      <button class="btn btn-danger" @click="deleteItem" v-if="this.status == 0 || this.status == -1">Delete</button>
+      <button class="btn btn-primary" @click="orderItem" v-if="this.status == -1">Order</button>
+      <button class="btn btn-primary" @click="updateStatus" v-if="this.status == 0">Ship</button>
+      <button class="btn btn-primary" @click="updateStatus" v-if="this.status == 1">Confirm shipped</button>
     </div>
     </div>
     </div>

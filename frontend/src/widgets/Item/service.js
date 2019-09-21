@@ -22,6 +22,10 @@ export default class ItemService
     {
         return axios.get(API_URL + "/Item/" + id + "/status");
     }
+    static updateStatus(id) 
+    {
+        return axios.post(API_URL + "/Item/" + id + "/status");
+    }
 
     static create(x)
     {
