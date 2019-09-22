@@ -21,7 +21,7 @@ public class UserStorage
 		Gson gson = new Gson();
 		try 
 		{
-			Reader reader = new FileReader(System.getProperty("java.io.tmpdir") + "/prodex_User.json");
+			Reader reader = new FileReader(StorageManager.getInstance().getJSONPath("User"));
 			Type listOfMyClassObject = new TypeToken<ArrayList<User>>() {}.getType();
 			return gson.fromJson(reader, listOfMyClassObject);
 		}  catch (IOException e) {
@@ -34,7 +34,7 @@ public class UserStorage
 	{
 		Gson gson = new Gson();
 		try {
-		    FileWriter writer = new FileWriter(System.getProperty("java.io.tmpdir") + "/prodex_User.json");
+		    FileWriter writer = new FileWriter(StorageManager.getInstance().getJSONPath("User"));
 		    
 		    gson.toJson(data, writer);
 		    writer.close();
