@@ -24,13 +24,8 @@ public class UserService {
 	@GET
 	@Produces("application/json")
 	public ArrayList<User> listtUser() {
- 
-		ArrayList<User> result = new ArrayList<User>();
-		result.add(this.getUser(0));
-		result.add(this.getUser(1));
-		result.add(this.getUser(2));
-		result.add(this.getUser(3));
-		return result;
+		UserStorage storage = new UserStorage();
+		return storage.list();
 		//return Response.status(200).entity("{}").build();
 	}
  

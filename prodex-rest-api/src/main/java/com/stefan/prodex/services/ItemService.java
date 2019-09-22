@@ -96,7 +96,7 @@ public class ItemService {
 				else pending++;
 			}
 		}
-		if (!ordered) return new APIStatus(-1, "Not ordered")
+		if (!ordered) return new APIStatus(-1, "Not ordered");
 		if (shipping == 0 && shipped == 0) return new APIStatus(0, "PENDING");
 		else if (shipped == 0) return new APIStatus(1, "SHIPPING");
 		else return new APIStatus(2, "SHIPPED");
