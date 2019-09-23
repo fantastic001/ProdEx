@@ -21,7 +21,7 @@ public class ToAdminMessageStorage
 		Gson gson = new Gson();
 		try 
 		{
-			Reader reader = new FileReader("/tmp/prodex_ToAdminMessage.json");
+			Reader reader = new FileReader(StorageManager.getInstance().getJSONPath("ToAdminMessage"));
 			Type listOfMyClassObject = new TypeToken<ArrayList<ToAdminMessage>>() {}.getType();
 			return gson.fromJson(reader, listOfMyClassObject);
 		}  catch (IOException e) {
@@ -34,7 +34,7 @@ public class ToAdminMessageStorage
 	{
 		Gson gson = new Gson();
 		try {
-		    FileWriter writer = new FileWriter("/tmp/prodex_ToAdminMessage.json");
+		    FileWriter writer = new FileWriter(StorageManager.getInstance().getJSONPath("ToAdminMessage"));
 		    
 		    gson.toJson(data, writer);
 		    writer.close();

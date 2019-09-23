@@ -21,7 +21,7 @@ public class BuyerSellerLikeStorage
 		Gson gson = new Gson();
 		try 
 		{
-			Reader reader = new FileReader("/tmp/prodex_BuyerSellerLike.json");
+			Reader reader = new FileReader(StorageManager.getInstance().getJSONPath("BuyerSellerLike"));
 			Type listOfMyClassObject = new TypeToken<ArrayList<BuyerSellerLike>>() {}.getType();
 			return gson.fromJson(reader, listOfMyClassObject);
 		}  catch (IOException e) {
@@ -34,7 +34,7 @@ public class BuyerSellerLikeStorage
 	{
 		Gson gson = new Gson();
 		try {
-		    FileWriter writer = new FileWriter("/tmp/prodex_BuyerSellerLike.json");
+		    FileWriter writer = new FileWriter(StorageManager.getInstance().getJSONPath("BuyerSellerLike"));
 		    
 		    gson.toJson(data, writer);
 		    writer.close();

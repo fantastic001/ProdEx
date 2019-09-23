@@ -21,7 +21,7 @@ public class AdminStorage
 		Gson gson = new Gson();
 		try 
 		{
-			Reader reader = new FileReader("/tmp/prodex_Admin.json");
+			Reader reader = new FileReader(StorageManager.getInstance().getJSONPath("Admin"));
 			Type listOfMyClassObject = new TypeToken<ArrayList<Admin>>() {}.getType();
 			return gson.fromJson(reader, listOfMyClassObject);
 		}  catch (IOException e) {
@@ -34,7 +34,7 @@ public class AdminStorage
 	{
 		Gson gson = new Gson();
 		try {
-		    FileWriter writer = new FileWriter("/tmp/prodex_Admin.json");
+		    FileWriter writer = new FileWriter(StorageManager.getInstance().getJSONPath("Admin"));
 		    
 		    gson.toJson(data, writer);
 		    writer.close();
