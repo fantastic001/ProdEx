@@ -17,7 +17,7 @@ public class SellerService {
  
 	@GET
 	@Produces("application/json")
-	public ArrayList<Seller> listtSeller() {
+	public ArrayList<Seller> listSeller() {
  
  		ArrayList<Seller> result = new ArrayList<Seller>();
 		result.add(this.getSeller(0));
@@ -62,5 +62,28 @@ public class SellerService {
 	public Seller updateSeller(@PathParam("id") int id, Seller data) 
 	{
 		return data;
+	}
+	@Path("{id}/items")
+	@GET
+	@Produces("application/json")
+	public ArrayList<Item> listSellerItems(@PathParam("id") int id) 
+	{
+		ItemService itemService = new ItemService();
+		ArrayList<Item> items = itemService.listItem();
+		ArrayList<Item> result = new ArrayList<>();
+		for (Item item : items) 
+		{
+			if (item.getSeller() == id) 
+			{
+				result.add(item);
+			}
+		}
+		return result; 
+	}
+
+	public Seller findSellerByUserId(int userId) 
+	{
+		for (Seller seller : this.listSeller()) if (seller.getUser() == userId) return seller;
+		return null;
 	}
 }

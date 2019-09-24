@@ -8,6 +8,8 @@ public class Conversation {
 	private int user; 
 	
 	private int initialMessage; 
+
+	private String body;
 	
 	public Conversation() 
 	{

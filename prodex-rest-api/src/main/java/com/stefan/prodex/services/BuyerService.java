@@ -63,4 +63,10 @@ public class BuyerService {
 	{
 		return data;
 	}
+
+	public Buyer findBuyerByUserId(int id) 
+	{
+		for (Buyer buyer : this.listBuyer()) if (buyer.getUser() == id) return buyer; 
+		return null;
+	}
 }

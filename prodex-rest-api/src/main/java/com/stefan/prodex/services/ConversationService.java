@@ -1,4 +1,5 @@
 package com.stefan.prodex.services;
+import com.stefan.prodex.storage.*;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -17,15 +18,8 @@ public class ConversationService {
  
 	@GET
 	@Produces("application/json")
-	public ArrayList<Conversation> listtConversation() {
- 
- 		ArrayList<Conversation> result = new ArrayList<Conversation>();
-		result.add(this.getConversation(0));
-		result.add(this.getConversation(1));
-		result.add(this.getConversation(2));
-		result.add(this.getConversation(3));
-		return result;
-		//return Response.status(200).entity("{}").build();
+	public ArrayList<Conversation> listConversation() {
+		return (new ConversationStorage()).list();
 	}
  
 	@Path("{id}")

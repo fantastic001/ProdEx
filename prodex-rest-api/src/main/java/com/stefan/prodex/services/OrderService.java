@@ -57,7 +57,7 @@ public class OrderService {
 		}
 		User current = (User) session.getAttribute("user");
 
-		// find buyer with idd of current user
+		// find buyer with id of current user
 		int buyerId = -1; 
 		BuyerService buyerService = new BuyerService();
 		for (Buyer buyer : buyerService.listBuyer()) 

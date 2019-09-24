@@ -220,6 +220,7 @@ every model has its unique identifier.
 
 + initial_message -> Message
 + from -> User
++ body -> string
 
 
 ** FromAdminMessage
@@ -590,3 +591,53 @@ status is SHIPPING if there is noo order with SHIPPED status but there is with S
 
 sttatus is SHIPPED if aall orders are in state SHIPPED
 
+
+** Seller -> items
+
+Path: =/Seller/{id}/items=
+
+Returns list of all items belonging to given seller 
+
+* Message support 
+
+** Getting messages to current user
+
+Path: =/Message/=
+
+Method: GET
+
+if user is seller: This endpoint lists all messages TO current user 
+
+if user is buyer: lists messages FROM current user
+
+** Getting reply to the message
+
+Path: =/Message/{id}/reply=
+
+METHOD: GET 
+
+This nedpoint gets reply for specified message or returns null if there is no any.
+
+** Sending message
+
+Path: =/Message/=
+
+Method: POST
+
+send message to specific user FROM current user 
+
+
+
+** Sending for specific item
+
+Path: =/Item/{id}/message=
+
+Method: POST
+
+Send message to seller of given item 
+
+** Get replies for specific message 
+
+Path: =/Message/{id}/reply=
+
+Method: GET

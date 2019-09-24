@@ -24,7 +24,7 @@ public class ItemService {
  
 	@GET
 	@Produces("application/json")
-	public ArrayList<Item> listtItem() {
+	public ArrayList<Item> listItem() {
  
  		ArrayList<Item> result = new ArrayList<Item>();
 		result.add(this.getItem(0));
@@ -144,5 +144,14 @@ public class ItemService {
 			return new APIStatus(-2, "No such item");
 		}
 
+	}
+	
+	@Path("{id}/message")
+	@POST
+	@Produces("application/json")
+	public Message sendMessage(@PathParam("id") int id, Message message) 
+	{
+		message.setItem(id);
+		return (new MessageService()).createMessage(message);
 	}
 }
