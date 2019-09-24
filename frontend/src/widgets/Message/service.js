@@ -32,4 +32,13 @@ export default class MessageService
     {
         return axios.delete(API_URL + "/Message/" + id);
     }
+    static getReplies(id) 
+    {
+        return axios.get(API_URL + "/Message/" + id + "/reply");
+    }
+    
+    static sendReply(id, conversation) 
+    {
+        return axios.post(API_URL + "/Message/" + id + "/reply");
+    }
 }
