@@ -80,6 +80,33 @@ public class SellerService {
 		}
 		return result; 
 	}
+	private APIStatus createSellerLike(int id, boolean liked) 
+	{
+		Buyer current = (new BuyerService()).getCurrentBuyer();
+		if (current == null) return new APIStatus(-1, "not logged as buyer");
+		BuyerSellerLikeService buyerSellerLikeService = new BuyerSellerLikeService();
+		boolean found = false; 
+		for (BuyerSellerLike like : buyerSellerLikeService.listBuyerSellerLike()) 
+		{
+			if (like.getSeller() == id && like.getBuyer() == current.getId()) return new APIStatus(-2, "Already likes/disliked");
+		}
+		buyerSellerLikeService.createBuyerSellerLike(new BuyerSellerLike(0, current.getId(), id, liked));
+		return new APIStatus(0, "Submitted");
+	}
+	@Path("{id}/likes")
+	@POST
+	@Produces("application/json")
+	public APIStatus likeSeller(@PathParam("id") int id) 
+	{
+		return this.createSellerLike(id, true);
+	}
+	@Path("{id}/dislikes")
+	@POST
+	@Produces("application/json")
+	public APIStatus dislikeSeller(@PathParam("id") int id) 
+	{
+		return this.createSellerLike(id, false);
+	}
 
 	public Seller findSellerByUserId(int userId) 
 	{
