@@ -8,6 +8,7 @@ import WidgetOrderMulti from "../widgets/Order/WidgetOrderMulti.vue"
 import WidgetBuyerFavoriteItemMulti from "../widgets/BuyerFavoriteItem/WidgetBuyerFavoriteItemMulti.vue"
 
 import WidgetCommentMulti from "../widgets/Comment/WidgetCommentMulti.vue"
+import WidgetCommentNew from "../widgets/Comment/WidgetCommentNew.vue"
 
 import WidgetItemReportMulti from "../widgets/ItemReport/WidgetItemReportMulti.vue"
 
@@ -52,6 +53,7 @@ export default {
         "WidgetBuyerFavoriteItemMulti": WidgetBuyerFavoriteItemMulti,
         
         "WidgetCommentMulti": WidgetCommentMulti,
+        "WidgetCommentNew": WidgetCommentNew,
         
         "WidgetItemReportMulti": WidgetItemReportMulti,
         
@@ -79,6 +81,7 @@ export default {
         
         
         <WidgetCommentMulti :filter="x => x.item == this.item"/>
+	<WidgetCommentNew :item="this.item" />
         
         
         <WidgetItemReportMulti :filter="x => x.item == this.item"/>

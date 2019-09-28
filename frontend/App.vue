@@ -6,6 +6,7 @@ import WidgetUserNew from "./src/widgets/User/WidgetUserNew.vue";
 import WidgetLoginNew from "./src/widgets/Auth/WidgetLoginNew.vue";
 import AdminDetail from "./src/views/AdminDetail.vue";
 import BuyerDetail from "./src/views/BuyerDetail.vue";
+import ItemDetail from "./src/views/ItemDetail.vue";
 import SellerDetail from "./src/views/SellerDetail.vue";
 import WidgetCategoryMulti from "./src/widgets/Category/WidgetCategoryMulti.vue";
 export default {
@@ -15,6 +16,7 @@ export default {
     "WidgetUserNew": WidgetUserNew,
     "AdminDetail": AdminDetail,
     "BuyerDetail": BuyerDetail,
+    "ItemDetail": ItemDetail,
     "SellerDetail": SellerDetail,
     "WidgetLoginNew": WidgetLoginNew,
     "WidgetItemMulti": WidgetItemMulti,
@@ -27,6 +29,7 @@ export default {
 
 <template>
   <div>
+    <ItemDetail item="0" />
     <WidgetCategoryMulti />
     <AdminDetail admin="0" />
     <BuyerDetail buyer="0" />
