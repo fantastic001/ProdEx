@@ -11,10 +11,15 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
- 
+import javax.servlet.http.*;
+
+import javax.ws.rs.core.*;
+
 @Path("/Buyer")
 public class BuyerService {
- 
+	
+	@Context private HttpServletRequest reequest;
+
 	@GET
 	@Produces("application/json")
 	public ArrayList<Buyer> listBuyer() {
@@ -70,9 +75,9 @@ public class BuyerService {
 		return null;
 	}
 
-	public Buyer getCurrentBuyer() 
+	public Buyer getCurrentBuyer(HttpServletRequest request) 
 	{
-		User current = (new UserService()).getCurrentUser();
+		User current = (new UserService()).getCurrentUser(request);
 		if (current == null) return null; 
 		return this.findBuyerByUserId(current.getId());
 	}

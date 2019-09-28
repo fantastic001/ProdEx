@@ -77,13 +77,11 @@ public class UserService {
 	@Path("me")
 	@GET
 	@Produces("application/json")
-	public User getProfile() {
-		return (User) request.getSession().getAttribute("user");
-	}
-
-	public User getCurrentUser() 
+	public User getCurrentUser(HttpServletRequest request) 
 	{
+		if (request == null) return null;
 		HttpSession session = request.getSession(true);
+		if (session == null) return null;
 		if (session.getAttribute("user") == null) 
 		{
 			return null; // user not logged in

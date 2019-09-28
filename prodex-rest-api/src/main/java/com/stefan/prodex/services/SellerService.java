@@ -11,10 +11,15 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
+
+import javax.servlet.http.*;
+import javax.ws.rs.core.*;
  
 @Path("/Seller")
 public class SellerService {
- 
+	
+	@Context private HttpServletRequest request; 
+
 	@GET
 	@Produces("application/json")
 	public ArrayList<Seller> listSeller() {
@@ -82,7 +87,7 @@ public class SellerService {
 	}
 	private APIStatus createSellerLike(int id, boolean liked) 
 	{
-		Buyer current = (new BuyerService()).getCurrentBuyer();
+		Buyer current = (new BuyerService()).getCurrentBuyer(request);
 		if (current == null) return new APIStatus(-1, "not logged as buyer");
 		BuyerSellerLikeService buyerSellerLikeService = new BuyerSellerLikeService();
 		boolean found = false; 
@@ -139,9 +144,9 @@ public class SellerService {
 		for (Seller seller : this.listSeller()) if (seller.getUser() == userId) return seller;
 		return null;
 	}
-	public Seller getCurrentSeller() 
+	public Seller getCurrentSeller(HttpServletRequest request) 
 	{
-		User current = (new UserService()).getCurrentUser();
+		User current = (new UserService()).getCurrentUser(request);
 		if (current == null) return null; 
 		return this.findSellerByUserId(current.getId());
 	}
