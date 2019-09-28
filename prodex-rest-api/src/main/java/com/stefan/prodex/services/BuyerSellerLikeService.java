@@ -1,4 +1,5 @@
 package com.stefan.prodex.services;
+import com.stefan.prodex.storage.*;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -14,30 +15,20 @@ import java.util.ArrayList;
  
 @Path("/BuyerSellerLike")
 public class BuyerSellerLikeService {
+
+	private final BuyerSellerLikeStorage storage = new BuyerSellerLikeStorage();
  
 	@GET
 	@Produces("application/json")
 	public ArrayList<BuyerSellerLike> listBuyerSellerLike() {
- 
- 		ArrayList<BuyerSellerLike> result = new ArrayList<BuyerSellerLike>();
-		result.add(this.getBuyerSellerLike(0));
-		result.add(this.getBuyerSellerLike(1));
-		result.add(this.getBuyerSellerLike(2));
-		result.add(this.getBuyerSellerLike(3));
-		return result;
-		//return Response.status(200).entity("{}").build();
+		return storage.list(); 
 	}
  
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
 	public BuyerSellerLike getBuyerSellerLike(@PathParam("id") int id) {
-		BuyerSellerLike item = new BuyerSellerLike();
-		item.setId(id);
-		item.setBuyer(0);
-		item.setSeller(0);
-		
-		return item;
+		return storage.get(id);
 	}
 	
 	@POST
@@ -45,7 +36,8 @@ public class BuyerSellerLikeService {
 	@Produces("application/json")
 	public BuyerSellerLike createBuyerSellerLike(BuyerSellerLike data) 
 	{
-		return data;
+		if (storage.create(data)) return data; 
+		return null;
 	}
 
 	@Path("{id}")
@@ -53,7 +45,7 @@ public class BuyerSellerLikeService {
 	@Produces("application/json")
 	public Response deleteBuyerSellerLike(@PathParam("id") int id) 
 	{
-		return Response.status(200).entity("{'status': 'deleted'}").build();
+		return Response.status(200).entity("{'status': 'not allowed'}").build();
 	}
 	
 	@Path("{id}")
@@ -62,6 +54,7 @@ public class BuyerSellerLikeService {
 	@Consumes("application/json")
 	public BuyerSellerLike updateBuyerSellerLike(@PathParam("id") int id, BuyerSellerLike data) 
 	{
+		storage.update(id, data);
 		return data;
 	}
 }
