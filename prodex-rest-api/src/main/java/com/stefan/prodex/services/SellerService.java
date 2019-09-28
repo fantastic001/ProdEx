@@ -107,6 +107,32 @@ public class SellerService {
 	{
 		return this.createSellerLike(id, false);
 	}
+	@Path("{id}/likes")
+	@GET
+	@Produces("application/json")
+	public Integer getLikeCount(@PathParam("id") int id) 
+	{
+		BuyerSellerLikeService service = new BuyerSellerLikeService(); 
+		int count = 0;
+		for (BuyerSellerLike like : service.listBuyerSellerLike()) 
+		{
+			if (like.getSeller() == id && like.getLike()) count++;
+		}
+		return new Integer(count);
+	}
+	@Path("{id}/dislikes")
+	@GET
+	@Produces("application/json")
+	public Integer getDislikeCount(@PathParam("id") int id) 
+	{
+		BuyerSellerLikeService service = new BuyerSellerLikeService(); 
+		int count = 0;
+		for (BuyerSellerLike like : service.listBuyerSellerLike()) 
+		{
+			if (like.getSeller() == id && !like.getLike()) count++;
+		}
+		return new Integer(count);
+	}
 
 	public Seller findSellerByUserId(int userId) 
 	{
