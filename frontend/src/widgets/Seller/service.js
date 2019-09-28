@@ -32,4 +32,21 @@ export default class SellerService
     {
         return axios.delete(API_URL + "/Seller/" + id);
     }
+    
+    static like(id)
+    {
+        return axios.post(API_URL + "/Seller/" + id + "/likes");
+    }
+    static dislike(id)
+    {
+        return axios.post(API_URL + "/Seller/" + id + "/dislikes");
+    }
+    static getLikeCount(id)
+    {
+        return axios.get(API_URL + "/Seller/" + id + "/likes");
+    }
+    static getDislikeCount(id)
+    {
+        return axios.get(API_URL + "/Seller/" + id + "/dislikes");
+    }
 }
