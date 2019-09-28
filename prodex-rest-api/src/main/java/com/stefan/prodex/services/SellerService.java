@@ -86,4 +86,10 @@ public class SellerService {
 		for (Seller seller : this.listSeller()) if (seller.getUser() == userId) return seller;
 		return null;
 	}
+	public Seller getCurrentSeller() 
+	{
+		User current = (new UserService()).getCurrentUser();
+		if (current == null) return null; 
+		return this.findSellerByUserId(current.getId());
+	}
 }

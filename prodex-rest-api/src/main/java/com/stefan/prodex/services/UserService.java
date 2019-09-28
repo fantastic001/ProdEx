@@ -81,4 +81,15 @@ public class UserService {
 		return (User) request.getSession().getAttribute("user");
 	}
 
+	public User getCurrentUser() 
+	{
+		HttpSession session = request.getSession(true);
+		if (session.getAttribute("user") == null) 
+		{
+			return null; // user not logged in
+		}
+		User current = (User) session.getAttribute("user");
+		return current;
+	}
+
 }
