@@ -1,4 +1,5 @@
 package com.stefan.prodex.services;
+import com.stefan.prodex.storage.*;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -14,30 +15,18 @@ import java.util.ArrayList;
  
 @Path("/Comment")
 public class CommentService {
- 
+ 	private final CommentStorage storage = new CommentStorage();
 	@GET
 	@Produces("application/json")
-	public ArrayList<Comment> listtComment() {
- 
- 		ArrayList<Comment> result = new ArrayList<Comment>();
-		result.add(this.getComment(0));
-		result.add(this.getComment(1));
-		result.add(this.getComment(2));
-		result.add(this.getComment(3));
-		return result;
-		//return Response.status(200).entity("{}").build();
+	public ArrayList<Comment> listComment() {
+		 return storage.list();
 	}
  
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
 	public Comment getComment(@PathParam("id") int id) {
-		Comment item = new Comment();
-		item.setId(id);
-		item.setItem(0);
-		item.setUser(0);
-		
-		return item;
+		return storage.get(id);
 	}
 	
 	@POST
@@ -45,7 +34,8 @@ public class CommentService {
 	@Produces("application/json")
 	public Comment createComment(Comment data) 
 	{
-		return data;
+		if (storage.create(data)) return data; 
+		return null;
 	}
 
 	@Path("{id}")
@@ -53,6 +43,7 @@ public class CommentService {
 	@Produces("application/json")
 	public Response deleteComment(@PathParam("id") int id) 
 	{
+		storage.delete(id);
 		return Response.status(200).entity("{'status': 'deleted'}").build();
 	}
 	
@@ -62,6 +53,7 @@ public class CommentService {
 	@Consumes("application/json")
 	public Comment updateComment(@PathParam("id") int id, Comment data) 
 	{
-		return data;
+		if (storage.update(id, data)) return data; 
+		return null;
 	}
 }

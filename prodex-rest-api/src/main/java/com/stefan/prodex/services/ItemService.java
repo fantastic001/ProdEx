@@ -154,4 +154,35 @@ public class ItemService {
 		message.setItem(id);
 		return (new MessageService()).createMessage(message);
 	}
+
+	@Path("{id}/comments")
+	@POST
+	@Produces("application/json")
+	@Consumes("application/json")
+	public Comment commentItem(@PathParam("id") int id, Comment comment) 
+	{
+		User user = (new UserService()).getCurrentUser(request);
+		if (user == null) return null; 
+		CommentService commentService = new CommentService();
+		comment.setItem(id);
+		comment.setUser(user.getId());
+		return commentService.createComment(comment);
+	}
+
+	@Path("{id}/comments")
+	@GET
+	@Produces("application/json")
+	@Consumes("application/json")
+	public ArrayList<Comment> getComments(@PathParam("id") int id) 
+	{
+		CommentService commentService = new CommentService();
+		User user = (new UserService()).getCurrentUser(request);
+		ArrayList<Comment> result = new ArrayList<>();
+		for (Comment comment : commentService.listComment()) 
+		{
+			if (comment.getItem() == id) result.add(comment);
+		}
+		return result;
+	}
+
 }
