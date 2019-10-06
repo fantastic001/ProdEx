@@ -87,7 +87,8 @@ public class SellerService {
 	}
 	private APIStatus createSellerLike(int id, boolean liked) 
 	{
-		Buyer current = (new BuyerService()).getCurrentBuyer(request);
+		AuthManager<APIStatus> auth = new AuthManager<>(request);
+		Buyer current = auth.getCurrentBuyer();
 		if (current == null) return new APIStatus(-1, "not logged as buyer");
 		BuyerSellerLikeService buyerSellerLikeService = new BuyerSellerLikeService();
 		boolean found = false; 

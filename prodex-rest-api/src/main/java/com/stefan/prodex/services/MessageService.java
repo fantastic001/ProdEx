@@ -26,47 +26,31 @@ public class MessageService {
  
 		MessageStorage messageStorage = new MessageStorage();
 		HttpSession session = request.getSession(true);
-		if (session.getAttribute("user") == null) 
-		{
-			return null; // user not logged in
-		}
-		User current = (User) session.getAttribute("user");
+		AuthManager<ArrayList<Message>> auth = new AuthManager<ArrayList<Message>>(request);
+		User current = auth.getCurrentUser();
+		if (current == null) return null;
 
-		// find buyer with id of current user
-		int buyerId = -1; 
-		Buyer currentBuyer = null;
-		BuyerService buyerService = new BuyerService();
-		for (Buyer buyer : buyerService.listBuyer()) 
-		{
-			if (buyer.getUser() == current.getId()) 
-			{
-				buyerId = buyer.getId();
-				currentBuyer = buyer;
-			}
-		}
+		Buyer currentBuyer = auth.getCurrentBuyer();
+		Seller currentSeller = auth.getCurrentSeller();
 		ArrayList<Message> messages = messageStorage.list();
 		ArrayList<Message> result = new ArrayList<>();
-		if (buyerId != -1) 
+		if (currentBuyer != null) 
 		{
 			// buyer is found, getting messages which buyer sent
 			for (Message message : messages) 
 			{
-				if (message.getBuyer() == buyerId) result.add(message);
+				if (message.getBuyer() == currentBuyer.getId()) result.add(message);
 			}
 		}
-		else 
+		else if (currentSeller != null) 
 		{
 			// maybe current user is seller, in that case, give all messages in seller's inbox
-			Seller seller = (new SellerService()).findSellerByUserId(current.getId());
-			if (seller != null) {
-				ArrayList<Item> items = (new SellerService()).listSellerItems(seller.getId());
-				for (Message message : messages) 
-				{
-					boolean found = false; 
-					for (Item item : items) if (message.getItem() == item.getId()) found = true;
-					if (found) result.add(message);
-	
-				}
+			ArrayList<Item> items = (new SellerService()).listSellerItems(currentSeller.getId());
+			for (Message message : messages) 
+			{
+				boolean found = false; 
+				for (Item item : items) if (message.getItem() == item.getId()) found = true;
+				if (found) result.add(message);
 			}
 		}
 		return result;
@@ -87,12 +71,13 @@ public class MessageService {
 	@Produces("application/json")
 	public Conversation getMessageReply(@PathParam("id") int id, Conversation conversation) {
 		conversation.setInitialMessage(id);
-		HttpSession session = request.getSession(true);
-		if (session.getAttribute("user") == null) 
+		AuthManager<Conversation> auth = new AuthManager<>(request);
+		User current = auth.getCurrentUser();
+		if (current == null) 
 		{
 			return null; // user not logged in
 		}
-		User current = (User) session.getAttribute("user");
+
 		conversation.setUser(current.getId());
 		return (new ConversationService().createConversation(conversation));
 	}
@@ -114,14 +99,11 @@ public class MessageService {
 	@Produces("application/json")
 	public Message createMessage(Message data) 
 	{
-		HttpSession session = request.getSession(true);
-		if (session.getAttribute("user") == null) 
-		{
-			return null; // user not logged in
-		}
-		User current = (User) session.getAttribute("user");
+		AuthManager<Message> auth = new AuthManager<>(request);
+		User current = auth.getCurrentUser();
+		if (current == null) return null;
 		// check if current user is buyer because only buyers can send initial messages 
-		Buyer buyer = (new BuyerService()).findBuyerByUserId(current.getId());
+		Buyer buyer = auth.getCurrentBuyer();
 		if (buyer == null) return null;
 		MessageStorage messageStorage = new MessageStorage(); 
 		data.setBuyer(buyer.getId());

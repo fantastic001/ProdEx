@@ -50,25 +50,10 @@ public class OrderService {
 	@Produces("application/json")
 	public Order createOrder(Order data) 
 	{
-		HttpSession session = request.getSession(true);
-		if (session.getAttribute("user") == null) 
-		{
-			return null; // user not logged in
-		}
-		User current = (User) session.getAttribute("user");
-
-		// find buyer with id of current user
-		int buyerId = -1; 
-		BuyerService buyerService = new BuyerService();
-		for (Buyer buyer : buyerService.listBuyer()) 
-		{
-			if (buyer.getUser() == current.getId()) 
-			{
-				buyerId = buyer.getId();
-			}
-		}
-		if (buyerId == -1) return null; // the current user is not registered as buyer
-		data.setBuyer(buyerId); 
+		AuthManager<Order> auth = new AuthManager<>(request);
+		Buyer buyer = auth.getCurrentBuyer();
+		if (buyer == null) return null;
+		data.setBuyer(buyer.getId()); 
 		data.setStatus("PENDING");
 		OrderStorage storage = new OrderStorage();
 		storage.create(data);
