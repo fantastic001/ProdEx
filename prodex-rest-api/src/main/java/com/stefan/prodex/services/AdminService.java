@@ -17,7 +17,7 @@ public class AdminService {
  
 	@GET
 	@Produces("application/json")
-	public ArrayList<Admin> listtAdmin() {
+	public ArrayList<Admin> listAdmin() {
  
  		ArrayList<Admin> result = new ArrayList<Admin>();
 		result.add(this.getAdmin(0));

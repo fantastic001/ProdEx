@@ -175,8 +175,9 @@ public class ItemService {
 	@Consumes("application/json")
 	public ArrayList<Comment> getComments(@PathParam("id") int id) 
 	{
+		AuthManager<ArrayList<Comment>> auth = new  AuthManager<>(request);
 		CommentService commentService = new CommentService();
-		User user = (new UserService()).getCurrentUser(request);
+		User user = auth.getCurrentUser();
 		ArrayList<Comment> result = new ArrayList<>();
 		for (Comment comment : commentService.listComment()) 
 		{

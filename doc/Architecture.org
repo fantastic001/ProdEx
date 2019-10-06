@@ -641,3 +641,8 @@ Send message to seller of given item
 Path: =/Message/{id}/reply=
 
 Method: GET
+
+* Routing
+
+https://appdividend.com/2018/12/28/vue-router-tutorial-with-example-how-to-use-routing-in-vuejs/
+
