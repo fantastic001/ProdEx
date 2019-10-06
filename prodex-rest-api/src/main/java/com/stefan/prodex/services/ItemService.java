@@ -105,44 +105,60 @@ public class ItemService {
 	@Path("{id}/status")
 	@POST
 	@Produces("application/json")
-	public APIStatus updateItemStatus(@PathParam("id") int id) 
+	public APIStatus updateItemStatus(@PathParam("id") final int id) 
 	{
-		Item curr = this.getItem(id);
-		// check if current user is seller of this item
-		SellerService sellerService = new SellerService();
-		Seller seller = sellerService.getSeller(curr.getSeller());
-		UserService userService = new UserService();
-		User logged =  (User) request.getSession().getAttribute("user");
-		if (logged == null) return new APIStatus(-5, "Not logged in");
-		if (! userService.getUser(seller.getUser()).getUsername().equals( logged.getUsername() )) return new APIStatus(-4, "Not allowed");
-		OrderService orderService = new OrderService();
-		ArrayList<Order> orders = orderService.listOrder();
-		Order order = null;
-		int pending = 0, shipping = 0, shipped = 0; 
-		for (Order o : orders) 
-		{
-			if (o.getItem() == id) 
-			{
-				order = o;
-				if (o.getStatus().equals("SHIPPING")) shipping++;
-				if (o.getStatus().equals("SHIPPED")) shipped++;
-				else pending++;
-				break;
-			}
-		}
-		if (order == null) return new APIStatus(-1, "No orders");
-		if (shipping == 0 && shipped == 0) order.setStatus("SHIPPING");
-		else if (shipped == 0) order.setStatus("SHIPPED");
-		if (curr != null) 
-		{
-			curr.setShipped(order.getStatus().equals("SHIPPED"));
-			this.updateItem(id, curr);
-			return new APIStatus(1, "OK");
-		}
-		else
+		AuthManager<APIStatus> auth = new AuthManager<APIStatus>(request);
+		final Item curr = this.getItem(id);
+		if (curr == null) 
 		{
 			return new APIStatus(-2, "No such item");
 		}
+		return auth.auth(this, new AuthListener<APIStatus>() 
+		{
+			public APIStatus onAdmin(Admin a, Object service) 
+			{
+				return new APIStatus(-2, "Administrator cannot change itemm sttate");
+			}
+			public APIStatus onBuyer(Buyer b, Object service) {
+				return new APIStatus(-5, "Buyer not allowed to change item status");
+			}
+			public APIStatus onSeller(Seller s, Object service) {
+				if (s.getId() == curr.getSeller()) 
+				{
+					OrderService orderService = new OrderService();
+					ArrayList<Order> orders = orderService.listOrder();
+					Order order = null;
+					int pending = 0, shipping = 0, shipped = 0; 
+					for (Order o : orders) 
+					{
+						if (o.getItem() == id) 
+						{
+							order = o;
+							if (o.getStatus().equals("SHIPPING")) shipping++;
+							if (o.getStatus().equals("SHIPPED")) shipped++;
+							else pending++;
+							break;
+						}
+					}
+					if (order == null) return new APIStatus(-1, "No orders");
+					if (shipping == 0 && shipped == 0) order.setStatus("SHIPPING");
+					else if (shipped == 0) order.setStatus("SHIPPED");
+					curr.setShipped(order.getStatus().equals("SHIPPED"));
+					((ItemService) service).updateItem(id, curr);
+					return new APIStatus(1, "OK");
+
+								
+				}
+				else 
+				{
+					return new APIStatus(-4, "This seller is not allowed to change other seller's item");
+				}
+			}
+			public APIStatus otherwise(Object service) 
+			{
+				return new APIStatus(-3, "Not logged in");
+			}
+		});
 
 	}
 	

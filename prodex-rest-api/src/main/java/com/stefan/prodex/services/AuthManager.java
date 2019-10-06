@@ -84,14 +84,14 @@ public class AuthManager<T>
 		return (new SellerService()).listSeller().get(0);
 	}
 
-	public T auth(AuthListener<T> listener) 
+	public T auth(Object service, AuthListener<T> listener) 
 	{
 		User user = this.getCurrentUser();
-		if (user == null) return listener.otherwise();
+		if (user == null) return listener.otherwise(service);
 		Buyer b = this.getCurrentBuyer();
-		if (b != null) return listener.onBuyer(b);
+		if (b != null) return listener.onBuyer(b, service);
 		Seller s = this.getCurrentSeller();
-		if (s != null) return listener.onSeller(s);
+		if (s != null) return listener.onSeller(s, service);
 		Admin a = null;
 		AdminService adminService = new AdminService(); 
 		if (!this.ENABLE_TESTING) {
@@ -99,12 +99,12 @@ public class AuthManager<T>
 			{
 				if (item.getUser() == user.getId()) a = item; 
 			}
-			if (a != null) return listener.onAdmin(a); 
+			if (a != null) return listener.onAdmin(a, service); 
 		}
 		else 
 		{
-			return listener.onAdmin(adminService.listAdmin().get(0));
+			return listener.onAdmin(adminService.listAdmin().get(0), service);
 		}
-		return listener.otherwise(); 
+		return listener.otherwise(service); 
 	}
 }
