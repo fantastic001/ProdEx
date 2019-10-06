@@ -23,7 +23,7 @@ public class UserService {
 
 	@GET
 	@Produces("application/json")
-	public ArrayList<User> listtUser() {
+	public ArrayList<User> listUser() {
 		UserStorage storage = new UserStorage();
 		return storage.list();
 		//return Response.status(200).entity("{}").build();

@@ -23,6 +23,10 @@ import java.util.Date;
 
 public class AuthManager<T> 
 {
+	public static boolean ENABLE_TESTING = false; 
+	public static boolean LOGIN_SELLER = false;
+	public static boolean LOGIN_ADMIN = false;
+	public static boolean LOGIN_BUYER = false;
 	private HttpServletRequest request;
 
 	public AuthManager(HttpServletRequest request) 
@@ -32,15 +36,52 @@ public class AuthManager<T>
 
 	public User getCurrentUser() 
 	{
-		return (new UserService()).getCurrentUser(request); 
+		if (!this.ENABLE_TESTING) return (new UserService()).getCurrentUser(request); 
+		// here we will  find user based on testing params 
+		if (this.LOGIN_BUYER) 
+		{
+			BuyerService service = new BuyerService();
+			Buyer x = service.listBuyer().get(0);
+			UserService userService = new UserService();
+			for (User user : userService.listUser()) 
+			{
+				if (user.getId() == x.getUser()) return user;
+			}
+			return null;
+		}
+		if (this.LOGIN_SELLER) 
+		{
+			SellerService service = new SellerService();
+			Seller x = service.listSeller().get(0);
+			UserService userService = new UserService();
+			for (User user : userService.listUser()) 
+			{
+				if (user.getId() == x.getUser()) return user;
+			}
+			return null;
+		}
+		if (this.LOGIN_ADMIN) 
+		{
+			AdminService service = new AdminService();
+			Admin x = service.listAdmin().get(0);
+			UserService userService = new UserService();
+			for (User user : userService.listUser()) 
+			{
+				if (user.getId() == x.getUser()) return user;
+			}
+			return null;
+		}
+		return null;
 	}
 	public Buyer getCurrentBuyer() 
 	{
-		return (new BuyerService()).getCurrentBuyer(request); 
+		if (!this.ENABLE_TESTING) return (new BuyerService()).getCurrentBuyer(request); 
+		return (new BuyerService()).listBuyer().get(0);
 	}
 	public Seller getCurrentSeller() 
 	{
-		return (new SellerService()).getCurrentSeller(request); 
+		if (!this.ENABLE_TESTING) return (new SellerService()).getCurrentSeller(request); 
+		return (new SellerService()).listSeller().get(0);
 	}
 
 	public T auth(AuthListener<T> listener) 
@@ -53,11 +94,17 @@ public class AuthManager<T>
 		if (s != null) return listener.onSeller(s);
 		Admin a = null;
 		AdminService adminService = new AdminService(); 
-		for (Admin item : adminService.listAdmin()) 
-		{
-			if (item.getUser() == user.getId()) a = item; 
+		if (!this.ENABLE_TESTING) {
+			for (Admin item : adminService.listAdmin()) 
+			{
+				if (item.getUser() == user.getId()) a = item; 
+			}
+			if (a != null) return listener.onAdmin(a); 
 		}
-		if (a != null) return listener.onAdmin(a); 
+		else 
+		{
+			return listener.onAdmin(adminService.listAdmin().get(0));
+		}
 		return listener.otherwise(); 
 	}
 }
