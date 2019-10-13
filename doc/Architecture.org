@@ -646,3 +646,11 @@ Method: GET
 
 https://appdividend.com/2018/12/28/vue-router-tutorial-with-example-how-to-use-routing-in-vuejs/
 
+** Redirecting programmatically
+
+Use: 
+
+#+BEGIN_SRC js
+  this.$router.push('/home');
+#+END_SRC
+

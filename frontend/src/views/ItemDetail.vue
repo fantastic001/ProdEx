@@ -22,7 +22,6 @@ import WidgetItemNew from "../widgets/Item/WidgetItemNew.vue"
 
 export default {
     name: "ItemDetail",
-    props: ["item"],
     data: function () {
             return {
 		data: {}
@@ -30,12 +29,12 @@ export default {
 	},
     mounted: function () 
     {
-    	ItemService.get(this.item).then(response => this.data = response.data)
+    	ItemService.get($route.params.id).then(response => this.data = response.data)
     },
     methods: {
         itemDelete: function (event) 
         {
-            ItemService.delete(this.item).then(response => 
+            ItemService.delete($route.params.id).then(response => 
             {
                 if (response.status < 400) 
                 {
@@ -68,23 +67,23 @@ export default {
 <template>
     <div class="Item-detail"> 
         <button v-on:click="itemDelete">Delete</button>
-        <WidgetItemSingle :item="this.item" />
+        <WidgetItemSingle :item="$route.params.id" />
 
         
-        <WidgetSellerMulti :filter="x => x.item == this.item"/>
+        <WidgetSellerMulti :filter="x => x.item == $route.params.id"/>
         
         
-        <WidgetOrderMulti :filter="x => x.item == this.item"/>
+        <WidgetOrderMulti :filter="x => x.item == $route.params.id"/>
         
         
-        <WidgetBuyerFavoriteItemMulti :filter="x => x.item == this.item"/>
+        <WidgetBuyerFavoriteItemMulti :filter="x => x.item == $route.params.id"/>
         
         
-        <WidgetCommentMulti :filter="x => x.item == this.item"/>
-	<WidgetCommentNew :item="this.item" />
+        <WidgetCommentMulti :filter="x => x.item == $route.params.id"/>
+	<WidgetCommentNew :item="$route.params.id" />
         
         
-        <WidgetItemReportMulti :filter="x => x.item == this.item"/>
+        <WidgetItemReportMulti :filter="x => x.item == $route.params.id"/>
         
         
     </div>

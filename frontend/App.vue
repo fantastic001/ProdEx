@@ -28,18 +28,12 @@ export default {
 
 
 <template>
-  <div>
-    <ItemDetail item="0" />
-    <WidgetCategoryMulti />
-    <AdminDetail admin="0" />
-    <BuyerDetail buyer="0" />
-    <SellerDetail seller="0" />
-    <WidgetUserMulti />
-    <WidgetUserNew />
-
-    <WidgetLoginNew />
-    <p>Items</p>
-    <WidgetItemMulti />
- </div>
-
+  <div id="app">
+    <nav>
+        <router-link to='/'>Home</router-link>
+        <router-link to='/items/0'>Item 1</router-link>
+        <router-link to='/items/1'>Item 2</router-link>
+    </nav>
+    <router-view />
+  </div>
 </template>

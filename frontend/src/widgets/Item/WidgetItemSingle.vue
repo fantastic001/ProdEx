@@ -47,7 +47,7 @@ export default {
 
 <template>
     <div class="widget-item-single"> 
-    <span class="badge badge-pill badge-info">Item: {{data.id}} </span>
+    <span class="badge badge-pill badge-info">Item: {{this.item}} </span>
 
     <div class="card" style="width: 18rem;">
       <img class="card-img-top" alt="Item image" :src="data.image" />
