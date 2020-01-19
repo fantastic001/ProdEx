@@ -22,6 +22,7 @@ import WidgetItemNew from "../widgets/Item/WidgetItemNew.vue"
 
 export default {
     name: "ItemDetail",
+    props: ["id"],
     data: function () {
             return {
 		data: {}
@@ -29,7 +30,7 @@ export default {
 	},
     mounted: function () 
     {
-    	ItemService.get($route.params.id).then(response => this.data = response.data)
+    	ItemService.get(this.id).then(response => this.data = response.data)
     },
     methods: {
         itemDelete: function (event) 
@@ -62,28 +63,29 @@ export default {
         "WidgetItemMulti": WidgetItemMulti
     }
 }
-</script>>
+</script>
 
 <template>
     <div class="Item-detail"> 
         <button v-on:click="itemDelete">Delete</button>
+	<p>Item ID: {{this.id}}</p>
         <WidgetItemSingle :item="$route.params.id" />
 
         
-        <WidgetSellerMulti :filter="x => x.item == $route.params.id"/>
+        <WidgetSellerMulti :filter="x => x.item == this.id"/>
         
         
-        <WidgetOrderMulti :filter="x => x.item == $route.params.id"/>
+        <WidgetOrderMulti :filter="x => x.item == this.id"/>
         
         
-        <WidgetBuyerFavoriteItemMulti :filter="x => x.item == $route.params.id"/>
+        <WidgetBuyerFavoriteItemMulti :filter="x => x.item == this.id"/>
         
         
-        <WidgetCommentMulti :filter="x => x.item == $route.params.id"/>
-	<WidgetCommentNew :item="$route.params.id" />
+        <WidgetCommentMulti :filter="x => x.item == this.id"/>
+	<WidgetCommentNew :item="this.id" />
         
         
-        <WidgetItemReportMulti :filter="x => x.item == $route.params.id"/>
+        <WidgetItemReportMulti :filter="x => x.item == this.id"/>
         
         
     </div>

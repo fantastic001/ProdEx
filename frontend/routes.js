@@ -3,7 +3,7 @@ import ItemDetail from './src/views/ItemDetail.vue';
 
 const routes = [
     { path: '/', component: Home },
-    { path: '/items/:id', component: ItemDetail}
+    { path: '/items/:id', component: ItemDetail, props: true}
 ];
 
 

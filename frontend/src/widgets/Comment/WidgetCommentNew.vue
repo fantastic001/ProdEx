@@ -12,6 +12,7 @@ export default {
     methods: {
     	create: function() 
 	{
+		this.data.item = this.item;
 		CommentService.create(this.data).then(response => this.data = {user: 0, item: this.item, body: ""});
 	}
     }
