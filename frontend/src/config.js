@@ -1,1 +1,1 @@
-export const API_URL = "http://localhost/prodex-rest-api";
+export const API_URL = "http://racrepublic.cf:301/prodex-rest-api";
