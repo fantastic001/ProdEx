@@ -27,5 +27,4 @@ docker run \
 	--name prodex_api \
 	-v "$BACKEND_DIR/":/usr/src/mymaven/ \
 	-w /usr/src/mymaven \
-	--publish 9000:8080 \
 	tomcat:8-jdk11-adoptopenjdk-hotspot
