@@ -19,6 +19,15 @@ docker run \
 	maven mvn clean install
 
 
+DATA_DIR="$BACKEND_DIR/data"
+
+
+if [ -d /tmp/prodex_data ]; then 
+	rm -rf /tmp/prodex_data
+fi
+
+cp -r "$DATA_DIR" /tmp/prodex_data
+
 docker run \
 	--hostname api.prodex \
 	-it --rm \
@@ -26,5 +35,6 @@ docker run \
 	-v "$BACKEND_DIR/target/prodex-rest-api.war":/usr/local/tomcat/webapps/prodex-rest-api.war \
 	--name prodex_api \
 	-v "$BACKEND_DIR/":/usr/src/mymaven/ \
+	-v /tmp/prodex_data:/usr/local/tomcat/temp/ \
 	-w /usr/src/mymaven \
 	tomcat:8-jdk11-adoptopenjdk-hotspot

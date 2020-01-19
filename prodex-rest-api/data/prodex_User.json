@@ -1,0 +1,35 @@
+[
+	{
+		"id": 0,
+		"username": "buyer@prodex.com",
+		"password": "9b38b8f5877f2395b4361c1f68c059078ee9c0c8b0cbb22c97d2906e011e40a3",
+		"firstname": "Pera",
+		"lastname": "Peric",
+		"phone": "+381654561",
+		"city": 0,
+		"email": "buyer@prodex.com",
+		"registrationDate": "2019-12-12"
+	},
+	{
+		"id": 1,
+		"username": "seller",
+		"password": "9b38b8f5877f2395b4361c1f68c059078ee9c0c8b0cbb22c97d2906e011e40a3",
+		"firstname": "Pera",
+		"lastname": "Peric",
+		"phone": "+381654561",
+		"city": 0,
+		"email": "seller@prodex.com",
+		"registrationDate": "2019-12-12"
+	},
+	{
+		"id": 2,
+		"username": "admin",
+		"password": "9b38b8f5877f2395b4361c1f68c059078ee9c0c8b0cbb22c97d2906e011e40a3",
+		"firstname": "Pera",
+		"lastname": "Peric",
+		"phone": "+381654561",
+		"city": 0,
+		"email": "admin@prodex.com",
+		"registrationDate": "2019-12-12"
+	}
+]
