@@ -1,15 +1,5 @@
 <script>
 
-import WidgetUserMulti from "./src/widgets/User/WidgetUserMulti.vue";
-import WidgetItemMulti from "./src/widgets/Item/WidgetItemMulti.vue";
-import WidgetUserNew from "./src/widgets/User/WidgetUserNew.vue";
-import WidgetLoginNew from "./src/widgets/Auth/WidgetLoginNew.vue";
-import AdminDetail from "./src/views/AdminDetail.vue";
-import BuyerDetail from "./src/views/BuyerDetail.vue";
-import ItemDetail from "./src/views/ItemDetail.vue";
-import SellerDetail from "./src/views/SellerDetail.vue";
-import WidgetCategoryMulti from "./src/widgets/Category/WidgetCategoryMulti.vue";
-import UserService from "./src/widgets/User/service";
 export default {
   name: "App",
   data: function () {
@@ -21,15 +11,6 @@ export default {
 	}
   },
   components: {
-    "WidgetUserMulti": WidgetUserMulti,
-    "WidgetUserNew": WidgetUserNew,
-    "AdminDetail": AdminDetail,
-    "BuyerDetail": BuyerDetail,
-    "ItemDetail": ItemDetail,
-    "SellerDetail": SellerDetail,
-    "WidgetLoginNew": WidgetLoginNew,
-    "WidgetItemMulti": WidgetItemMulti,
-    "WidgetCategoryMulti": WidgetCategoryMulti,
   },
   methods:{
 	  logOut: function() 
@@ -62,13 +43,6 @@ export default {
         <router-link v-if='data.role == "NOT_LOGGED"' to='/login'>Login</router-link>
         <router-link v-if='data.role == "NOT_LOGGED"' to='/register'>Registration</router-link>
 
-        <router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/regreq'>Registration Requests</router-link>
-        <router-link v-if="data.role != 'NOT_LOGGED'" to='/profile'>My Profile</router-link>
-        <router-link v-if="data.role != 'NOT_LOGGED'" to='/updateUser'>Update profile</router-link>
-        <router-link v-if="data.role == 'ADMINISTRATOR'" to='/clinic-new'>Create Clinic</router-link>
-        <router-link v-if="data.role != 'NOT_LOGGED'" to='/clinics'>Show all clinics</router-link>
-        <router-link v-if="data.role == 'CLINIC_ADMINISTRATOR'" to='/createCare'>Add new care time</router-link>
-        <router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/reports'>My Clinic Reports</router-link>
         <router-link v-if="data.role != 'NOT_LOGGED'" to='/logout'>Log out</router-link>
 	</div>
 	

@@ -1,5 +1,7 @@
 <script>
 import LoginService from "./service";
+import CheckRoleService from "../CheckRole/service";
+//import router from '../../../router';
 
 export default {
     name: "WidgetLoginNew",
@@ -8,7 +10,6 @@ export default {
             data: {
 	    	userName: null,
 		password: null,
-	    	success: false
 	    },
 
         };
@@ -17,9 +18,26 @@ export default {
     	submit: function() 
 	{
 		LoginService.login(this.data).then(response => {
-			if (response.data.code == 0) this.data.success = true;
-			else this.data.success = false;
+			console.log(response)
+			if (response.status == 200) {
+				CheckRoleService.get().then(response => {
+					this.data.success = true;
+					localStorage.setItem("user", this.data.userName);
+					this.$store.commit("login", {user: this.data.userName, role: response.data.message});
+					this.$router.push("/");
 
+				});
+
+			}
+			else {
+				this.data.success = false;
+				localStorage.setItem("user", null);
+				alert("Error while logging in. Access forbidden or wrong credentials");
+			}
+
+
+		}).catch(error => {
+				alert("Error while logging in. Access forbidden or wrong credentials");
 		});
 	}
     }
@@ -27,11 +45,12 @@ export default {
 </script>
 
 <template>
+
     <div class="widget-login-new"> 
-        <div class="success-box" v-if="success">Login succeded</div>
-	<div v-if="!success"> 
+
+		<h2> Login</h2>
 		<p>
-		<input type="email" class="form-control" placeholder="Username" v-model="data.userName" />
+		<input type="text" class="form-control" placeholder="Username" v-model="data.userName" />
 		</p>
 		
 		<p>
@@ -40,16 +59,22 @@ export default {
 		
 
 		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Submit</button>
-	</div>
+		&nbsp;
+		&nbsp;
+		<a href="/frontend/#/register">If you dont have account, click here to register</a>
     </div>
 
 </template>
 
 <style scoped> 
 
+
+
 .widget-login-new {
+	position: relative;
+    top:20%;
+    left:40%;
 	padding: 10px; 
-	background-color: #ffcccc; 
 	margin: 10px;
 	text-align: center;
 	width: 20%;
@@ -57,8 +82,7 @@ export default {
 
 .success-box 
 {
-	backgrund-color: #dfd;
-	color: #0f0;
+	
 	padding: 5px;
 }
 

@@ -1,17 +1,15 @@
 import { API_URL } from "./../../config";
 import axios from "axios"
 
-export default class LoginService 
+export default class CheckRoleService 
 {
     constructor(self) 
     {
         this.self = self;
     }
 
-
-    static login(x)
+    static get() 
     {
-        return axios.post(API_URL + "/Auth", x);
+        return axios.get(API_URL + "/Auth/");
     }
-
 }

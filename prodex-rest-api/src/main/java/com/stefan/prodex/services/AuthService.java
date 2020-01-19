@@ -23,6 +23,7 @@ import java.util.Date;
 
 @Path("/Auth")
 public class AuthService {
+	
 	@Context private HttpServletRequest request;
 	@POST
 	@Consumes("application/json")
@@ -51,6 +52,18 @@ public class AuthService {
 			}
 		}
 		return new APIStatus(2, "User does not exist");
+	}
+	
+	@GET
+	@Produces("application/json")
+	public APIStatus role() 
+	{
+		AuthManager manager = new AuthManager(request);
+		User me = manager.getCurrentUser();
+		if (me == null) return new APIStatus(0, "NOT_LOGGED");
+		else if (manager.getCurrentBuyer() != null) return new APIStatus(1, "BUYER");
+		else if (manager.getCurrentSeller() != null) return new APIStatus(2, "SELLER");
+		else return new APIStatus(3, "ADMIN");
 	}
 
 }
