@@ -19,7 +19,7 @@ export default {
 	{
 		LoginService.login(this.data).then(response => {
 			console.log(response)
-			if (response.status == 200) {
+			if (response.data.code == 0) {
 				CheckRoleService.get().then(response => {
 					this.data.success = true;
 					localStorage.setItem("user", this.data.userName);
