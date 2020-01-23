@@ -1,5 +1,7 @@
 <script>
 import UserService from "./service";
+import BuyerService from "../Buyer/service";
+import SellerService from "../Seller/service";
 
 export default {
     name: "WidgetUserNew",
@@ -10,13 +12,30 @@ export default {
 		password: null,
 		email: null
 	    },
-	    success: false
+	    success: false,
+
         };
     },
     methods: {
     	submit: function() 
 	{
-		UserService.create(this.data).then(response => this.success = true);
+		UserService.create(this.data).then(response => {
+			this.success = true
+			this.user = response.data.id;
+		});
+	},
+
+    	submitBuyer: function() 
+	{
+		BuyerService.create({id:0, user:this.user}).then(response => {
+			this.$router.push("/");
+		});
+	},
+    	submitSeller: function() 
+	{
+		SellerService.create({id: 0, user:this.user}).then(response => {
+			this.$router.push("/");
+		});
 	}
     }
 }
@@ -24,8 +43,8 @@ export default {
 
 <template>
     <div class="widget-user-new"> 
-        <div v-if="success">Creation successful</div>
-	<div v-if="!success"> 
+        <div v-if="this.success">Creation successful</div>
+	<div v-if="!this.success"> 
 		<p>
 		<label>Username</label>
 		<input type="text" v-model="data.username" />
@@ -33,7 +52,7 @@ export default {
 		
 		<p>
 		<label>Password</label>
-		<input type="text" v-model="data.password" />
+		<input type="password" v-model="data.password" />
 		</p>
 		
 		<p>
@@ -57,6 +76,11 @@ export default {
 		</p>
 
 		<p><button v-on:click="submit">Submit</button></p>
+	</div>
+	<div v-if="this.success">
+		<p>Select your type (user ID: {{ user }})</p>
+		<p><button v-on:click="submitBuyer">Register as a buyer</button></p>
+		<p><button v-on:click="submitSeller">Register as a seller</button></p>
 	</div>
     </div>
 
