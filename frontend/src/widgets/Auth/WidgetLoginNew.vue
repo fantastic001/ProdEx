@@ -21,7 +21,6 @@ export default {
 			console.log(response)
 			if (response.data.code == 0) {
 				CheckRoleService.get().then(response => {
-					this.data.success = true;
 					localStorage.setItem("user", this.data.userName);
 					this.$store.commit("login", {user: this.data.userName, role: response.data.message});
 					this.$router.push("/");
@@ -30,7 +29,6 @@ export default {
 
 			}
 			else {
-				this.data.success = false;
 				localStorage.setItem("user", null);
 				alert("Error while logging in. Access forbidden or wrong credentials");
 			}
