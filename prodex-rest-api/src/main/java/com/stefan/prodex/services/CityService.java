@@ -11,31 +11,24 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
+import com.stefan.prodex.storage.*;
  
 @Path("/City")
 public class CityService {
- 
+	private final CityStorage storage = new CityStorage();
+
 	@GET
 	@Produces("application/json")
 	public ArrayList<City> listtCity() {
  
- 		ArrayList<City> result = new ArrayList<City>();
-		result.add(this.getCity(0));
-		result.add(this.getCity(1));
-		result.add(this.getCity(2));
-		result.add(this.getCity(3));
-		return result;
-		//return Response.status(200).entity("{}").build();
+ 		return storage.list();
 	}
  
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
 	public City getCity(@PathParam("id") int id) {
-		City item = new City();
-		item.setId(id);
-		
-		return item;
+		return storage.get(id);
 	}
 	
 	@POST
@@ -43,7 +36,8 @@ public class CityService {
 	@Produces("application/json")
 	public City createCity(City data) 
 	{
-		return data;
+		if (storage.create(data)) return data;
+		return null;
 	}
 
 	@Path("{id}")
@@ -51,7 +45,11 @@ public class CityService {
 	@Produces("application/json")
 	public Response deleteCity(@PathParam("id") int id) 
 	{
-		return Response.status(200).entity("{'status': 'deleted'}").build();
+		if(storage.delete(id)) 
+		{
+			return Response.status(200).entity("{'status': 'deleted'}").build();
+		}
+		return Response.status(400).entity("{'status': 'error'}").build();
 	}
 	
 	@Path("{id}")
@@ -60,6 +58,7 @@ public class CityService {
 	@Consumes("application/json")
 	public City updateCity(@PathParam("id") int id, City data) 
 	{
-		return data;
+		if(storage.update(id, data)) return data;
+		else return null;
 	}
 }

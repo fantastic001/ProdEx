@@ -3,6 +3,7 @@ package com.stefan.prodex.services;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import com.stefan.prodex.storage.*;
 
 public class Hasher 
 {

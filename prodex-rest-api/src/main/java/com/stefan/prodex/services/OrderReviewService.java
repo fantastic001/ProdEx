@@ -11,34 +11,24 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
+import com.stefan.prodex.storage.*;
  
 @Path("/OrderReview")
 public class OrderReviewService {
  
+ 	private final OrderReviewStorage storage = new OrderReviewStorage();
 	@GET
 	@Produces("application/json")
 	public ArrayList<OrderReview> listtOrderReview() {
+ 		return storage.list();
  
- 		ArrayList<OrderReview> result = new ArrayList<OrderReview>();
-		result.add(this.getOrderReview(0));
-		result.add(this.getOrderReview(1));
-		result.add(this.getOrderReview(2));
-		result.add(this.getOrderReview(3));
-		return result;
-		//return Response.status(200).entity("{}").build();
 	}
  
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
 	public OrderReview getOrderReview(@PathParam("id") int id) {
-		OrderReview item = new OrderReview();
-		item.setId(id);
-		item.setType(0);
-		item.setBuyer(0);
-		item.setOrder(0);
-		
-		return item;
+		return storage.get(id);
 	}
 	
 	@POST
@@ -46,7 +36,8 @@ public class OrderReviewService {
 	@Produces("application/json")
 	public OrderReview createOrderReview(OrderReview data) 
 	{
-		return data;
+		if (storage.create(data)) return data;
+		return null;
 	}
 
 	@Path("{id}")
@@ -54,7 +45,11 @@ public class OrderReviewService {
 	@Produces("application/json")
 	public Response deleteOrderReview(@PathParam("id") int id) 
 	{
-		return Response.status(200).entity("{'status': 'deleted'}").build();
+		if(storage.delete(id)) 
+		{
+			return Response.status(200).entity("{'status': 'deleted'}").build();
+		}
+		return Response.status(400).entity("{'status': 'error'}").build();
 	}
 	
 	@Path("{id}")
@@ -63,6 +58,7 @@ public class OrderReviewService {
 	@Consumes("application/json")
 	public OrderReview updateOrderReview(@PathParam("id") int id, OrderReview data) 
 	{
-		return data;
+		if(storage.update(id, data)) return data;
+		else return null;
 	}
 }

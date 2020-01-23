@@ -11,33 +11,24 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
+import com.stefan.prodex.storage.*;
  
 @Path("/ToAdminMessage")
 public class ToAdminMessageService {
  
+ 	private final ToAdminMessageStorage storage = new ToAdminMessageStorage();
 	@GET
 	@Produces("application/json")
 	public ArrayList<ToAdminMessage> listtToAdminMessage() {
  
- 		ArrayList<ToAdminMessage> result = new ArrayList<ToAdminMessage>();
-		result.add(this.getToAdminMessage(0));
-		result.add(this.getToAdminMessage(1));
-		result.add(this.getToAdminMessage(2));
-		result.add(this.getToAdminMessage(3));
-		return result;
-		//return Response.status(200).entity("{}").build();
+ 		return storage.list();
 	}
  
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
 	public ToAdminMessage getToAdminMessage(@PathParam("id") int id) {
-		ToAdminMessage item = new ToAdminMessage();
-		item.setId(id);
-		item.setSeller(0);
-		item.setAdmin(0);
-		
-		return item;
+		return storage.get(id);
 	}
 	
 	@POST
@@ -45,7 +36,8 @@ public class ToAdminMessageService {
 	@Produces("application/json")
 	public ToAdminMessage createToAdminMessage(ToAdminMessage data) 
 	{
-		return data;
+		if (storage.create(data)) return data;
+		return null;
 	}
 
 	@Path("{id}")
@@ -53,7 +45,11 @@ public class ToAdminMessageService {
 	@Produces("application/json")
 	public Response deleteToAdminMessage(@PathParam("id") int id) 
 	{
-		return Response.status(200).entity("{'status': 'deleted'}").build();
+		if(storage.delete(id)) 
+		{
+			return Response.status(200).entity("{'status': 'deleted'}").build();
+		}
+		return Response.status(400).entity("{'status': 'error'}").build();
 	}
 	
 	@Path("{id}")
@@ -62,6 +58,7 @@ public class ToAdminMessageService {
 	@Consumes("application/json")
 	public ToAdminMessage updateToAdminMessage(@PathParam("id") int id, ToAdminMessage data) 
 	{
-		return data;
+		if(storage.update(id, data)) return data;
+		else return null;
 	}
 }

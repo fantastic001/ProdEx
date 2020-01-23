@@ -21,10 +21,11 @@ import java.util.Date;
 public class UserService {
 	@Context private HttpServletRequest request;
 
+	private final UserStorage storage = new UserStorage();
 	@GET
 	@Produces("application/json")
 	public ArrayList<User> listUser() {
-		UserStorage storage = new UserStorage();
+
 		return storage.list();
 		//return Response.status(200).entity("{}").build();
 	}
@@ -33,13 +34,7 @@ public class UserService {
 	@GET
 	@Produces("application/json")
 	public User getUser(@PathParam("id") int id) {
-		User item = new User();
-		item.setId(id);
-		item.setCity(0);
-		item.setFirstname("User");
-		item.setEmail("someuser@example.com");
-		
-		return item;
+		return storage.get(id);
 	}
 	
 	@POST
@@ -62,7 +57,11 @@ public class UserService {
 	@Produces("application/json")
 	public Response deleteUser(@PathParam("id") int id) 
 	{
-		return Response.status(200).entity("{'status': 'deleted'}").build();
+		if(storage.delete(id)) 
+		{
+			return Response.status(200).entity("{'status': 'deleted'}").build();
+		}
+		return Response.status(400).entity("{'status': 'error'}").build();
 	}
 	
 	@Path("{id}")

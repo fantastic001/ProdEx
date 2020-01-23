@@ -16,36 +16,26 @@ import javax.servlet.http.*;
 import javax.ws.rs.core.*;
 
 import com.stefan.prodex.storage.ItemStorage;
+import com.stefan.prodex.storage.*;
  
 @Path("/Item")
 public class ItemService {
+	private final ItemStorage storage = new ItemStorage();
 	
 	@Context private HttpServletRequest request;
  
 	@GET
 	@Produces("application/json")
 	public ArrayList<Item> listItem() {
+ 		return storage.list();
  
- 		ArrayList<Item> result = new ArrayList<Item>();
-		result.add(this.getItem(0));
-		result.add(this.getItem(1));
-		result.add(this.getItem(2));
-		result.add(this.getItem(3));
-		return result;
-		//return Response.status(200).entity("{}").build();
 	}
  
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
 	public Item getItem(@PathParam("id") int id) {
-		Item item = new Item();
-		item.setId(id);
-		item.setSeller(0);
-		item.setCity(0);
-		item.setCategory(0);
-		
-		return item;
+		return storage.get(id);
 	}
 	
 	@POST
@@ -53,7 +43,8 @@ public class ItemService {
 	@Produces("application/json")
 	public Item createItem(Item data) 
 	{
-		return data;
+		if (storage.create(data)) return data;
+		return null;
 	}
 
 	@Path("{id}")

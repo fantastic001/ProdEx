@@ -11,33 +11,24 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
+import com.stefan.prodex.storage.*;
  
 @Path("/FromAdminMessage")
 public class FromAdminMessageService {
  
+ 	private final FromAdminMessageStorage storage = new FromAdminMessageStorage();
 	@GET
 	@Produces("application/json")
 	public ArrayList<FromAdminMessage> listtFromAdminMessage() {
+ 		return storage.list();
  
- 		ArrayList<FromAdminMessage> result = new ArrayList<FromAdminMessage>();
-		result.add(this.getFromAdminMessage(0));
-		result.add(this.getFromAdminMessage(1));
-		result.add(this.getFromAdminMessage(2));
-		result.add(this.getFromAdminMessage(3));
-		return result;
-		//return Response.status(200).entity("{}").build();
 	}
  
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
 	public FromAdminMessage getFromAdminMessage(@PathParam("id") int id) {
-		FromAdminMessage item = new FromAdminMessage();
-		item.setId(id);
-		item.setAdmin(0);
-		item.setUser(0);
-		
-		return item;
+		return storage.get(id);
 	}
 	
 	@POST
@@ -45,7 +36,8 @@ public class FromAdminMessageService {
 	@Produces("application/json")
 	public FromAdminMessage createFromAdminMessage(FromAdminMessage data) 
 	{
-		return data;
+		if (storage.create(data)) return data;
+		return null;
 	}
 
 	@Path("{id}")
@@ -53,7 +45,11 @@ public class FromAdminMessageService {
 	@Produces("application/json")
 	public Response deleteFromAdminMessage(@PathParam("id") int id) 
 	{
-		return Response.status(200).entity("{'status': 'deleted'}").build();
+		if(storage.delete(id)) 
+		{
+			return Response.status(200).entity("{'status': 'deleted'}").build();
+		}
+		return Response.status(400).entity("{'status': 'error'}").build();
 	}
 	
 	@Path("{id}")
@@ -62,6 +58,7 @@ public class FromAdminMessageService {
 	@Consumes("application/json")
 	public FromAdminMessage updateFromAdminMessage(@PathParam("id") int id, FromAdminMessage data) 
 	{
-		return data;
+		if(storage.update(id, data)) return data;
+		else return null;
 	}
 }

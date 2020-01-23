@@ -14,34 +14,26 @@ import java.util.ArrayList;
 import javax.servlet.http.*;
 
 import javax.ws.rs.core.*;
+import com.stefan.prodex.storage.*;
 
 @Path("/Buyer")
 public class BuyerService {
 	
 	@Context private HttpServletRequest reequest;
+	private final BuyerStorage storage = new BuyerStorage();
 
 	@GET
 	@Produces("application/json")
 	public ArrayList<Buyer> listBuyer() {
  
- 		ArrayList<Buyer> result = new ArrayList<Buyer>();
-		result.add(this.getBuyer(0));
-		result.add(this.getBuyer(1));
-		result.add(this.getBuyer(2));
-		result.add(this.getBuyer(3));
-		return result;
-		//return Response.status(200).entity("{}").build();
+ 		return storage.list();
 	}
  
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
 	public Buyer getBuyer(@PathParam("id") int id) {
-		Buyer item = new Buyer();
-		item.setId(id);
-		item.setUser(0);
-		
-		return item;
+		return storage.get(id);
 	}
 	
 	@POST
@@ -49,7 +41,8 @@ public class BuyerService {
 	@Produces("application/json")
 	public Buyer createBuyer(Buyer data) 
 	{
-		return data;
+		if (storage.create(data)) return data;
+		return null;
 	}
 
 	@Path("{id}")
@@ -57,7 +50,11 @@ public class BuyerService {
 	@Produces("application/json")
 	public Response deleteBuyer(@PathParam("id") int id) 
 	{
-		return Response.status(200).entity("{'status': 'deleted'}").build();
+		if(storage.delete(id)) 
+		{
+			return Response.status(200).entity("{'status': 'deleted'}").build();
+		}
+		return Response.status(400).entity("{'status': 'error'}").build();
 	}
 	
 	@Path("{id}")
@@ -66,7 +63,8 @@ public class BuyerService {
 	@Consumes("application/json")
 	public Buyer updateBuyer(@PathParam("id") int id, Buyer data) 
 	{
-		return data;
+		if(storage.update(id, data)) return data;
+		else return null;
 	}
 
 	public Buyer findBuyerByUserId(int id) 

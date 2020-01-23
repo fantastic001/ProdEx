@@ -14,35 +14,25 @@ import com.stefan.prodex.data.*;
 import java.util.ArrayList;
 import javax.servlet.http.*;
 import javax.ws.rs.core.*;
+import com.stefan.prodex.storage.*;
  
 @Path("/Order")
 public class OrderService {
+	private final OrderStorage storage = new OrderStorage();
  
 	@Context private HttpServletRequest request;
 	@GET
 	@Produces("application/json")
 	public ArrayList<Order> listOrder() {
+ 		return storage.list();
  
- 		ArrayList<Order> result = new ArrayList<Order>();
-		result.add(this.getOrder(0));
-		result.add(this.getOrder(1));
-		result.add(this.getOrder(2));
-		result.add(this.getOrder(3));
-		return result;
-		//return Response.status(200).entity("{}").build();
 	}
  
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
 	public Order getOrder(@PathParam("id") int id) {
-		Order item = new Order();
-		item.setId(id);
-		item.setBuyer(0);
-		item.setItem(0);
-		item.setStatus("SHIPPING");
-		
-		return item;
+		return storage.get(id);
 	}
 	
 	@POST
@@ -65,7 +55,11 @@ public class OrderService {
 	@Produces("application/json")
 	public Response deleteOrder(@PathParam("id") int id) 
 	{
-		return Response.status(200).entity("{'status': 'deleted'}").build();
+		if(storage.delete(id)) 
+		{
+			return Response.status(200).entity("{'status': 'deleted'}").build();
+		}
+		return Response.status(400).entity("{'status': 'error'}").build();
 	}
 	
 	@Path("{id}")
@@ -74,6 +68,7 @@ public class OrderService {
 	@Consumes("application/json")
 	public Order updateOrder(@PathParam("id") int id, Order data) 
 	{
-		return data;
+		if(storage.update(id, data)) return data;
+		else return null;
 	}
 }

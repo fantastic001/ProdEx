@@ -20,6 +20,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import java.util.Date;
+import com.stefan.prodex.storage.*;
 
 @Path("/Auth")
 public class AuthService {

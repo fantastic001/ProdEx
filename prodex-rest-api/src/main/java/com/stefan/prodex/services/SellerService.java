@@ -14,9 +14,11 @@ import java.util.ArrayList;
 
 import javax.servlet.http.*;
 import javax.ws.rs.core.*;
+import com.stefan.prodex.storage.*;
  
 @Path("/Seller")
 public class SellerService {
+	private final SellerStorage storage = new SellerStorage();
 	
 	@Context private HttpServletRequest request; 
 
@@ -24,24 +26,14 @@ public class SellerService {
 	@Produces("application/json")
 	public ArrayList<Seller> listSeller() {
  
- 		ArrayList<Seller> result = new ArrayList<Seller>();
-		result.add(this.getSeller(0));
-		result.add(this.getSeller(1));
-		result.add(this.getSeller(2));
-		result.add(this.getSeller(3));
-		return result;
-		//return Response.status(200).entity("{}").build();
+ 		return storage.list();
 	}
  
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
 	public Seller getSeller(@PathParam("id") int id) {
-		Seller item = new Seller();
-		item.setId(id);
-		item.setUser(0);
-		
-		return item;
+		return storage.get(id);
 	}
 	
 	@POST
@@ -49,7 +41,8 @@ public class SellerService {
 	@Produces("application/json")
 	public Seller createSeller(Seller data) 
 	{
-		return data;
+		if (storage.create(data)) return data;
+		return null;
 	}
 
 	@Path("{id}")
@@ -57,7 +50,11 @@ public class SellerService {
 	@Produces("application/json")
 	public Response deleteSeller(@PathParam("id") int id) 
 	{
-		return Response.status(200).entity("{'status': 'deleted'}").build();
+		if(storage.delete(id)) 
+		{
+			return Response.status(200).entity("{'status': 'deleted'}").build();
+		}
+		return Response.status(400).entity("{'status': 'error'}").build();
 	}
 	
 	@Path("{id}")

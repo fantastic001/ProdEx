@@ -11,33 +11,24 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
+import com.stefan.prodex.storage.*;
  
 @Path("/SellerReport")
 public class SellerReportService {
+	private final SellerReportStorage storage = new SellerReportStorage();
  
 	@GET
 	@Produces("application/json")
 	public ArrayList<SellerReport> listtSellerReport() {
+ 		return storage.list();
  
- 		ArrayList<SellerReport> result = new ArrayList<SellerReport>();
-		result.add(this.getSellerReport(0));
-		result.add(this.getSellerReport(1));
-		result.add(this.getSellerReport(2));
-		result.add(this.getSellerReport(3));
-		return result;
-		//return Response.status(200).entity("{}").build();
 	}
  
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
 	public SellerReport getSellerReport(@PathParam("id") int id) {
-		SellerReport item = new SellerReport();
-		item.setId(id);
-		item.setSeller(0);
-		item.setBuyer(0);
-		
-		return item;
+		return storage.get(id);
 	}
 	
 	@POST
@@ -45,7 +36,8 @@ public class SellerReportService {
 	@Produces("application/json")
 	public SellerReport createSellerReport(SellerReport data) 
 	{
-		return data;
+		if (storage.create(data)) return data;
+		return null;
 	}
 
 	@Path("{id}")
@@ -53,7 +45,11 @@ public class SellerReportService {
 	@Produces("application/json")
 	public Response deleteSellerReport(@PathParam("id") int id) 
 	{
-		return Response.status(200).entity("{'status': 'deleted'}").build();
+		if(storage.delete(id)) 
+		{
+			return Response.status(200).entity("{'status': 'deleted'}").build();
+		}
+		return Response.status(400).entity("{'status': 'error'}").build();
 	}
 	
 	@Path("{id}")
@@ -62,6 +58,7 @@ public class SellerReportService {
 	@Consumes("application/json")
 	public SellerReport updateSellerReport(@PathParam("id") int id, SellerReport data) 
 	{
-		return data;
+		if(storage.update(id, data)) return data;
+		else return null;
 	}
 }

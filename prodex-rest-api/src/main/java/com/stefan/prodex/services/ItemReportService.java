@@ -11,33 +11,24 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
+import com.stefan.prodex.storage.*;
  
 @Path("/ItemReport")
 public class ItemReportService {
+	private final ItemReportStorage storage = new ItemReportStorage();
  
 	@GET
 	@Produces("application/json")
 	public ArrayList<ItemReport> listtItemReport() {
+ 		return storage.list();
  
- 		ArrayList<ItemReport> result = new ArrayList<ItemReport>();
-		result.add(this.getItemReport(0));
-		result.add(this.getItemReport(1));
-		result.add(this.getItemReport(2));
-		result.add(this.getItemReport(3));
-		return result;
-		//return Response.status(200).entity("{}").build();
 	}
  
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
 	public ItemReport getItemReport(@PathParam("id") int id) {
-		ItemReport item = new ItemReport();
-		item.setId(id);
-		item.setItem(0);
-		item.setBuyer(0);
-		
-		return item;
+		return storage.get(id);
 	}
 	
 	@POST
@@ -45,7 +36,8 @@ public class ItemReportService {
 	@Produces("application/json")
 	public ItemReport createItemReport(ItemReport data) 
 	{
-		return data;
+		if (storage.create(data)) return data;
+		return null;
 	}
 
 	@Path("{id}")
@@ -53,7 +45,11 @@ public class ItemReportService {
 	@Produces("application/json")
 	public Response deleteItemReport(@PathParam("id") int id) 
 	{
-		return Response.status(200).entity("{'status': 'deleted'}").build();
+		if(storage.delete(id)) 
+		{
+			return Response.status(200).entity("{'status': 'deleted'}").build();
+		}
+		return Response.status(400).entity("{'status': 'error'}").build();
 	}
 	
 	@Path("{id}")
@@ -62,6 +58,7 @@ public class ItemReportService {
 	@Consumes("application/json")
 	public ItemReport updateItemReport(@PathParam("id") int id, ItemReport data) 
 	{
-		return data;
+		if(storage.update(id, data)) return data;
+		else return null;
 	}
 }

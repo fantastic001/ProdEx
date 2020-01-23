@@ -11,32 +11,24 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
+import com.stefan.prodex.storage.*;
  
 @Path("/Admin")
 public class AdminService {
  
+ 	private final AdminStorage storage = new AdminStorage();
 	@GET
 	@Produces("application/json")
 	public ArrayList<Admin> listAdmin() {
  
- 		ArrayList<Admin> result = new ArrayList<Admin>();
-		result.add(this.getAdmin(0));
-		result.add(this.getAdmin(1));
-		result.add(this.getAdmin(2));
-		result.add(this.getAdmin(3));
-		return result;
-		//return Response.status(200).entity("{}").build();
+ 		return storage.list();
 	}
  
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
 	public Admin getAdmin(@PathParam("id") int id) {
-		Admin item = new Admin();
-		item.setId(id);
-		item.setUser(0);
-		
-		return item;
+		return storage.get(id);
 	}
 	
 	@POST
@@ -44,7 +36,8 @@ public class AdminService {
 	@Produces("application/json")
 	public Admin createAdmin(Admin data) 
 	{
-		return data;
+		if (storage.create(data)) return data;
+		return null;
 	}
 
 	@Path("{id}")
@@ -52,7 +45,11 @@ public class AdminService {
 	@Produces("application/json")
 	public Response deleteAdmin(@PathParam("id") int id) 
 	{
-		return Response.status(200).entity("{'status': 'deleted'}").build();
+		if(storage.delete(id)) 
+		{
+			return Response.status(200).entity("{'status': 'deleted'}").build();
+		}
+		return Response.status(400).entity("{'status': 'error'}").build();
 	}
 	
 	@Path("{id}")
@@ -61,6 +58,7 @@ public class AdminService {
 	@Consumes("application/json")
 	public Admin updateAdmin(@PathParam("id") int id, Admin data) 
 	{
-		return data;
+		if(storage.update(id, data)) return data;
+		else return null;
 	}
 }

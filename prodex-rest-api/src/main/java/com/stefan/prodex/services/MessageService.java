@@ -20,6 +20,7 @@ import javax.ws.rs.core.*;
 public class MessageService {
 	@Context private HttpServletRequest request;
  
+ 	private final MessageStorage storage = new MessageStorage();
 	@GET
 	@Produces("application/json")
 	public ArrayList<Message> listtMessage() {
@@ -125,6 +126,7 @@ public class MessageService {
 	@Consumes("application/json")
 	public Message updateMessage(@PathParam("id") int id, Message data) 
 	{
-		return null;
+		if(storage.update(id, data)) return data;
+		else return null;
 	}
 }

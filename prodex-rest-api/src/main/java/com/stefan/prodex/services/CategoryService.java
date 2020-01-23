@@ -11,31 +11,24 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
+import com.stefan.prodex.storage.*;
  
 @Path("/Category")
 public class CategoryService {
  
+ 	private final CategoryStorage storage = new CategoryStorage();
 	@GET
 	@Produces("application/json")
 	public ArrayList<Category> listtCategory() {
  
- 		ArrayList<Category> result = new ArrayList<Category>();
-		result.add(this.getCategory(0));
-		result.add(this.getCategory(1));
-		result.add(this.getCategory(2));
-		result.add(this.getCategory(3));
-		return result;
-		//return Response.status(200).entity("{}").build();
+ 		return storage.list();
 	}
  
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
 	public Category getCategory(@PathParam("id") int id) {
-		Category item = new Category();
-		item.setId(id);
-		
-		return item;
+		return storage.get(id);
 	}
 	
 	@POST
@@ -43,7 +36,8 @@ public class CategoryService {
 	@Produces("application/json")
 	public Category createCategory(Category data) 
 	{
-		return data;
+		if (storage.create(data)) return data;
+		return null;
 	}
 
 	@Path("{id}")
@@ -51,7 +45,11 @@ public class CategoryService {
 	@Produces("application/json")
 	public Response deleteCategory(@PathParam("id") int id) 
 	{
-		return Response.status(200).entity("{'status': 'deleted'}").build();
+		if(storage.delete(id)) 
+		{
+			return Response.status(200).entity("{'status': 'deleted'}").build();
+		}
+		return Response.status(400).entity("{'status': 'error'}").build();
 	}
 	
 	@Path("{id}")
@@ -60,6 +58,7 @@ public class CategoryService {
 	@Consumes("application/json")
 	public Category updateCategory(@PathParam("id") int id, Category data) 
 	{
-		return data;
+		if(storage.update(id, data)) return data;
+		else return null;
 	}
 }

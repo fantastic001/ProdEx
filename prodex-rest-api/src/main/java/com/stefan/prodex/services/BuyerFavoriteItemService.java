@@ -11,33 +11,24 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response;
 import com.stefan.prodex.data.*;
 import java.util.ArrayList;
+import com.stefan.prodex.storage.*;
  
 @Path("/BuyerFavoriteItem")
 public class BuyerFavoriteItemService {
  
+ 	private final BuyerFavoriteItemStorage storage = new BuyerFavoriteItemStorage();
 	@GET
 	@Produces("application/json")
 	public ArrayList<BuyerFavoriteItem> listtBuyerFavoriteItem() {
  
- 		ArrayList<BuyerFavoriteItem> result = new ArrayList<BuyerFavoriteItem>();
-		result.add(this.getBuyerFavoriteItem(0));
-		result.add(this.getBuyerFavoriteItem(1));
-		result.add(this.getBuyerFavoriteItem(2));
-		result.add(this.getBuyerFavoriteItem(3));
-		return result;
-		//return Response.status(200).entity("{}").build();
+ 		return storage.list();
 	}
  
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
 	public BuyerFavoriteItem getBuyerFavoriteItem(@PathParam("id") int id) {
-		BuyerFavoriteItem item = new BuyerFavoriteItem();
-		item.setId(id);
-		item.setBuyer(0);
-		item.setItem(0);
-		
-		return item;
+		return storage.get(id);
 	}
 	
 	@POST
@@ -45,7 +36,8 @@ public class BuyerFavoriteItemService {
 	@Produces("application/json")
 	public BuyerFavoriteItem createBuyerFavoriteItem(BuyerFavoriteItem data) 
 	{
-		return data;
+		if (storage.create(data)) return data;
+		return null;
 	}
 
 	@Path("{id}")
@@ -53,7 +45,11 @@ public class BuyerFavoriteItemService {
 	@Produces("application/json")
 	public Response deleteBuyerFavoriteItem(@PathParam("id") int id) 
 	{
-		return Response.status(200).entity("{'status': 'deleted'}").build();
+		if(storage.delete(id)) 
+		{
+			return Response.status(200).entity("{'status': 'deleted'}").build();
+		}
+		return Response.status(400).entity("{'status': 'error'}").build();
 	}
 	
 	@Path("{id}")
@@ -62,6 +58,7 @@ public class BuyerFavoriteItemService {
 	@Consumes("application/json")
 	public BuyerFavoriteItem updateBuyerFavoriteItem(@PathParam("id") int id, BuyerFavoriteItem data) 
 	{
-		return data;
+		if(storage.update(id, data)) return data;
+		else return null;
 	}
 }

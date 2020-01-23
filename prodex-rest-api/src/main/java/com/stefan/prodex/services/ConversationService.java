@@ -15,6 +15,7 @@ import java.util.ArrayList;
  
 @Path("/Conversation")
 public class ConversationService {
+	private final ConversationStorage storage = new ConversationStorage();
  
 	@GET
 	@Produces("application/json")
@@ -26,12 +27,7 @@ public class ConversationService {
 	@GET
 	@Produces("application/json")
 	public Conversation getConversation(@PathParam("id") int id) {
-		Conversation item = new Conversation();
-		item.setId(id);
-		item.setUser(0);
-		item.setInitialMessage(0);
-		
-		return item;
+		return storage.get(id);
 	}
 	
 	@POST
@@ -39,7 +35,8 @@ public class ConversationService {
 	@Produces("application/json")
 	public Conversation createConversation(Conversation data) 
 	{
-		return data;
+		if (storage.create(data)) return data;
+		return null;
 	}
 
 	@Path("{id}")
@@ -47,7 +44,11 @@ public class ConversationService {
 	@Produces("application/json")
 	public Response deleteConversation(@PathParam("id") int id) 
 	{
-		return Response.status(200).entity("{'status': 'deleted'}").build();
+		if(storage.delete(id)) 
+		{
+			return Response.status(200).entity("{'status': 'deleted'}").build();
+		}
+		return Response.status(400).entity("{'status': 'error'}").build();
 	}
 	
 	@Path("{id}")
@@ -56,6 +57,7 @@ public class ConversationService {
 	@Consumes("application/json")
 	public Conversation updateConversation(@PathParam("id") int id, Conversation data) 
 	{
-		return data;
+		if(storage.update(id, data)) return data;
+		else return null;
 	}
 }
