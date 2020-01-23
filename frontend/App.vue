@@ -17,6 +17,8 @@ export default {
 		{
 			UserService.logOut().then(response => {
 				window.location.href = "/frontend/";
+				loocalStorage.setItem("user", "");
+				loocalStorage.setItem("role", "");
 			});
 		}
   },

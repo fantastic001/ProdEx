@@ -22,6 +22,7 @@ export default {
 			if (response.data.code == 0) {
 				CheckRoleService.get().then(response => {
 					localStorage.setItem("user", this.data.userName);
+					localStorage.setItem("role", response.data.message);
 					this.$store.commit("login", {user: this.data.userName, role: response.data.message});
 					this.$router.push("/");
 

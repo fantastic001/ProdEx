@@ -19,11 +19,13 @@ export default {
     name: "Home",
     data: function () {
             return {
-		data: {}
+		data: {},
+		role: ""
 	    };
 	},
     mounted: function () 
     {
+    	this.role = localStorage.getItem("role");
     },
     methods: {
     },
@@ -31,10 +33,12 @@ export default {
         
     }
 }
-</script>>
+</script>
 
 <template>
-<p>This is home</p>
+<div>
+<p>This is home for role {{ role }}</p>
+</div>
 </template>
 
 <style scoped> 
