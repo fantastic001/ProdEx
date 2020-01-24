@@ -17,7 +17,10 @@ export default {
     {
 	this.role = localStorage.getItem("role");
         ItemService.get(this.item).then(response => this.data = response.data);
-        ItemService.getStatus(this.item).then(response => this.status = response.data.code);
+        ItemService.getStatus(this.item).then(response => {
+		this.status = response.data.code;
+		console.log(response);
+		});
     },
     methods: 
     {
@@ -39,6 +42,7 @@ export default {
 	updateStatus: function() 
 	{
 		ItemService.updateStatus(this.item).then(response => {
+			console.log(response);
         		ItemService.getStatus(this.item).then(response => this.status = response.data.code);
 		});
 

@@ -87,6 +87,9 @@ public class ItemService {
 				else pending++;
 			}
 		}
+		System.out.println("Ordered: " + ordered);
+		System.out.println("Shipping: "+ shipping);
+		System.out.println("Shipped: "+ shipped);
 		if (!ordered) return new APIStatus(-1, "Not ordered");
 		if (shipping == 0 && shipped == 0) return new APIStatus(0, "PENDING");
 		else if (shipped == 0) return new APIStatus(1, "SHIPPING");
@@ -111,6 +114,13 @@ public class ItemService {
 				return new APIStatus(-2, "Administrator cannot change itemm sttate");
 			}
 			public APIStatus onBuyer(Buyer b, Object service) {
+				OrderService orderService = new OrderService();
+				for (Order order : orderService.listOrder()) {
+					if (order.getBuyer() == b.getId() && order.getItem() == curr.getId() && order.getStatus().equals("SHIPPING")) {
+						order.setStatus("SHIPPED");
+						orderService.updateOrder(order.getId(), order);
+					}
+				}
 				return new APIStatus(-5, "Buyer not allowed to change item status");
 			}
 			public APIStatus onSeller(Seller s, Object service) {
@@ -136,6 +146,7 @@ public class ItemService {
 					else if (shipped == 0) order.setStatus("SHIPPED");
 					curr.setShipped(order.getStatus().equals("SHIPPED"));
 					((ItemService) service).updateItem(id, curr);
+					(new OrderService()).updateOrder(order.getId(), order);
 					return new APIStatus(1, "OK");
 
 								
