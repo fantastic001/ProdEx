@@ -9,11 +9,13 @@ export default {
         return {
             data: {},
 	    status: 1,
+	    role: "",
 	    ordered: false
         }
     },
     mounted: function () 
     {
+	this.role = localStorage.getItem("role");
         ItemService.get(this.item).then(response => this.data = response.data);
         ItemService.getStatus(this.item).then(response => this.status = response.data.code);
     },
@@ -66,9 +68,9 @@ export default {
 
     <div class="card-body">
       <button class="btn btn-danger" @click="deleteItem" v-if="this.status == 0 || this.status == -1">Delete</button>
-      <button class="btn btn-primary" @click="orderItem" v-if="this.status == -1">Order</button>
-      <button class="btn btn-primary" @click="updateStatus" v-if="this.status == 0">Ship</button>
-      <button class="btn btn-primary" @click="updateStatus" v-if="this.status == 1">Confirm shipped</button>
+      <button v-if="this.role == 'BUYER' && this.status == -1" class="btn btn-primary" @click="orderItem">Order</button>
+      <button class="btn btn-primary" @click="updateStatus" v-if="this.role == 'SELLER' && this.status == 0">Ship</button>
+      <button class="btn btn-primary" @click="updateStatus" v-if="this.role == 'BUYER' && this.status == 1">Confirm shipped</button>
     </div>
     </div>
     </div>

@@ -1,0 +1,31 @@
+[
+{
+	"id": 1,
+
+	"name": "Item",
+
+	"description": "This is description",
+
+	"image": null,
+
+	"seller": 1,
+
+	"price": 1500,
+
+	"likes": 0,
+
+	"dislikes": 0,
+
+	"dueDate": "2020-02-05",
+
+	"creationDate": "2020-01-01",
+
+	"city": null,
+
+	"active": true,
+
+	"shipped": false,
+
+	"category": null
+}
+]

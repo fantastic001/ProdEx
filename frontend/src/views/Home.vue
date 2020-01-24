@@ -12,7 +12,7 @@ import AdminService from "../widgets/Admin/service"
 import WidgetAdminSingle from "../widgets/Admin/WidgetAdminSingle.vue"
 import WidgetAdminSingleEdit from "../widgets/Admin/WidgetAdminSingleEdit.vue"
 import WidgetAdminMulti from "../widgets/Admin/WidgetAdminMulti.vue"
-import WidgetAdminNew from "../widgets/Admin/WidgetAdminNew.vue"
+import WidgetItemMulti from "../widgets/Item/WidgetItemMulti.vue";
 
 
 export default {
@@ -30,6 +30,7 @@ export default {
     methods: {
     },
     components: {
+    	WidgetItemMulti
         
     }
 }
@@ -38,6 +39,7 @@ export default {
 <template>
 <div>
 <p>This is home for role {{ role }}</p>
+<WidgetItemMulti />
 </div>
 </template>
 
