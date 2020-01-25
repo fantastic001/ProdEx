@@ -12,8 +12,7 @@ import WidgetCategoryNew from "../widgets/Category/WidgetCategoryNew.vue"
 
 
 export default {
-    name: "CategoryDetail",
-    props: ["category"],
+    name: "CategoryList",
     data: function () {
             return {
 		data: {},
@@ -23,18 +22,6 @@ export default {
     mounted: function () 
     {
     	CategoryService.get(this.category).then(response => this.data = response.data)
-    },
-    methods: {
-        itemDelete: function (event) 
-        {
-            CategoryService.delete(this.category).then(response => 
-            {
-                if (response.status < 400) 
-                {
-                    alert("Category item is deleted");
-                }
-            })
-        }
     },
     components: {
         
@@ -50,11 +37,10 @@ export default {
 
 <template>
     <div class="Category-detail"> 
-        <button v-if="this.role == 'ADMIN'" v-on:click="itemDelete">Delete</button>
-        <WidgetCategorySingle :category="this.category" />
+	<WidgetCategoryNew v-if="this.role == 'ADMIN'"/>
+        <WidgetCategoryMulti />
 
         
-        <WidgetItemMulti :filter="x => x.category == this.category"/>
         
     </div>
 

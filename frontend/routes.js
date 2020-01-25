@@ -6,6 +6,9 @@ import AdminDetail from './src/views/AdminDetail.vue';
 import SellerDetail from './src/views/SellerDetail.vue';
 import BuyerDetail from './src/views/BuyerDetail.vue';
 import Registration from  "./src/views/Registration.vue";
+import CategoryDetail from  "./src/views/CategoryDetail.vue";
+import CategoryList from  "./src/views/CategoryList.vue";
+
 const routes = [
     { path: '/', component: Home },
     { path: '/login', component: Login },
@@ -14,7 +17,9 @@ const routes = [
     { path: '/items/:id', component: ItemDetail, props: true},
     { path: '/buyer', component: BuyerDetail},
     { path: '/seller', component: SellerDetail},
+    { path: '/categories/:category', component: CategoryDetail, props: true},
     { path: '/admin', component: AdminDetail},
+    { path: '/categoryList', component: CategoryList},
 ];
 
 

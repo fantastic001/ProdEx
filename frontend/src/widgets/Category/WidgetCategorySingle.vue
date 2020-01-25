@@ -22,7 +22,7 @@ export default {
            <div class="card-body">
                <h5 class="card-title">{{ data.name }}</h5>
                <p class="card-text">{{ data.description }}</p>
-               <a href="#" class="card-link">See all items in category</a>
+               <router-link :to='"/categories/" + this.data.id' class="card-link">See all items in category</router-link>
            </div>
         </div>
     </div>
