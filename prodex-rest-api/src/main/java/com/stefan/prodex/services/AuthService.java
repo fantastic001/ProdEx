@@ -67,4 +67,23 @@ public class AuthService {
 		else return new APIStatus(3, "ADMIN");
 	}
 
+	@Path("info")
+	@GET
+	@Produces("application/json")
+	public AuthInfo getInfo() 
+	{
+		AuthInfo info = new AuthInfo();
+		AuthManager manager = new AuthManager(request);
+		if (manager.getCurrentUser() == null) info.setUser(-1);
+		else info.setUser(manager.getCurrentUser().getId());
+		if (manager.getCurrentBuyer() == null) info.setBuyer(-1);
+		else info.setBuyer(manager.getCurrentBuyer().getId());
+		if (manager.getCurrentSeller() == null) info.setSeller(-1);
+		else info.setSeller(manager.getCurrentSeller().getId());
+		if (manager.getCurrentAdmin() == null) info.setAdmin(-1);
+		else info.setAdmin(manager.getCurrentAdmin().getId());
+
+		return info;
+	}
+
 }

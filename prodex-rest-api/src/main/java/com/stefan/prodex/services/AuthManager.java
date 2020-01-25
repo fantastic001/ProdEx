@@ -83,6 +83,23 @@ public class AuthManager<T>
 		if (!this.ENABLE_TESTING) return (new SellerService()).getCurrentSeller(request); 
 		return (new SellerService()).listSeller().get(0);
 	}
+	public Admin getCurrentAdmin() {
+		User user = (new UserService()).getCurrentUser(request);
+		if (user == null) return null; 
+		Admin a = null;
+		AdminService adminService = new AdminService(); 
+		if (!this.ENABLE_TESTING) {
+			for (Admin item : adminService.listAdmin()) 
+			{
+				if (item.getUser() == user.getId()) a = item; 
+			}
+			return a;
+		}
+		else 
+		{
+			return adminService.listAdmin().get(0);
+		}
+	}
 
 	public T auth(Object service, AuthListener<T> listener) 
 	{
@@ -92,19 +109,8 @@ public class AuthManager<T>
 		if (b != null) return listener.onBuyer(b, service);
 		Seller s = this.getCurrentSeller();
 		if (s != null) return listener.onSeller(s, service);
-		Admin a = null;
-		AdminService adminService = new AdminService(); 
-		if (!this.ENABLE_TESTING) {
-			for (Admin item : adminService.listAdmin()) 
-			{
-				if (item.getUser() == user.getId()) a = item; 
-			}
-			if (a != null) return listener.onAdmin(a, service); 
-		}
-		else 
-		{
-			return listener.onAdmin(adminService.listAdmin().get(0), service);
-		}
+		Admin a = getCurrentAdmin();
+		if (a != null) return listener.onAdmin(a, service);
 		return listener.otherwise(service); 
 	}
 }

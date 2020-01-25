@@ -25,6 +25,14 @@ export default {
 					localStorage.setItem("role", response.data.message);
 					this.$store.commit("login", {user: this.data.userName, role: response.data.message});
 					this.$router.push("/");
+					LoginService.info().then(response => {
+						console.log("AUTHORIZATION INFO:");
+						console.log(response);
+						localStorage.setItem("user_id", response.data.user);
+						localStorage.setItem("buyer_id", response.data.buyer);
+						localStorage.setItem("seller_id", response.data.seller);
+						localStorage.setItem("admin_id", response.data.admin);
+					});
 
 				});
 
