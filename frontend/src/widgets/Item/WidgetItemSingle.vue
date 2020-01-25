@@ -9,13 +9,13 @@ export default {
         return {
             data: {},
 	    status: 1,
-	    role: "",
-	    ordered: false
+	    role: localStorage.getItem("role"),
+	    seller: localStorage.getItem("seller_id"),
+	    ordered: false,
         }
     },
     mounted: function () 
     {
-	this.role = localStorage.getItem("role");
         ItemService.get(this.item).then(response => this.data = response.data);
         ItemService.getStatus(this.item).then(response => {
 		this.status = response.data.code;
@@ -58,7 +58,7 @@ export default {
     <div class="card" style="width: 18rem;">
       <img class="card-img-top" alt="Item image" :src="data.image" />
       <div class="card-body">
-        <h5 class="card-title">{{data.name }}</h5>
+        <h5 class="card-title"><router-link :to='"/items/" + this.data.id'>{{ data.name}}</router-link></h5>
         <p class="card-text item-description">{{ data.description }}</p>
       </div>
 
@@ -71,7 +71,7 @@ export default {
 
 
     <div class="card-body">
-      <button class="btn btn-danger" @click="deleteItem" v-if="this.status == 0 || this.status == -1">Delete</button>
+      <button class="btn btn-danger" @click="deleteItem" v-if="this.seller == this.data.seller && this.role == 'SELLER' && (this.status == 0 || this.status == -1)">Delete</button>
       <button v-if="this.role == 'BUYER' && this.status == -1" class="btn btn-primary" @click="orderItem">Order</button>
       <button class="btn btn-primary" @click="updateStatus" v-if="this.role == 'SELLER' && this.status == 0">Ship</button>
       <button class="btn btn-primary" @click="updateStatus" v-if="this.role == 'BUYER' && this.status == 1">Confirm shipped</button>

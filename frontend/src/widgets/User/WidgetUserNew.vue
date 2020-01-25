@@ -20,6 +20,8 @@ export default {
     	submit: function() 
 	{
 		UserService.create(this.data).then(response => {
+			console.log("User created: ");
+			console.log(response.data);
 			this.success = true
 			this.user = response.data.id;
 		});
@@ -27,12 +29,14 @@ export default {
 
     	submitBuyer: function() 
 	{
+		console.log(this.user);
 		BuyerService.create({id:0, user:this.user}).then(response => {
 			this.$router.push("/");
 		});
 	},
     	submitSeller: function() 
 	{
+		console.log(this.user);
 		SellerService.create({id: 0, user:this.user}).then(response => {
 			this.$router.push("/");
 		});

@@ -7,14 +7,19 @@ export default {
     props: ["seller"],
     data: function () {
         return {
-            data: {},
+            data: {
+		user: null
+	    },
 	    likes: 0,
 	    dislikes: 0
         }
     },
-    mounted: function () 
+    created: function () 
     {
-        SellerService.get(this.seller).then(response => this.data = response.data);
+        SellerService.get(this.seller).then(response => {
+		this.data = response.data;
+		this.$forceUpdate();
+	});
 
 	SellerService.getLikeCount(this.seller).then(response => this.likes = response.data);
 	SellerService.getDislikeCount(this.seller).then(response => this.dislikes = response.data);
@@ -47,7 +52,7 @@ export default {
 
 <template>
     <div class="widget-seller-single">
-    <WidgetUserSingle :user="this.data.user" />
+    <WidgetUserSingle v-if="this.data.user != null" :user="this.data.user" />
 
     <button @click="likeSeller" type="button" class="btn btn-primary">
        Like<span class="badge badge-light">{{likes}}</span>

@@ -28,12 +28,7 @@ export default {
 
 <template>
     <div class="WidgetBuyerFavoriteItemSingle"> 
-      <WidgetBuyerFavoriteItemSingle
-      	v-for="item in items.filter(filter)"
-      	:id="item.id"
-      	:key="item.id"
-        :buyerfavoriteitem="item.id"
-          />
+    	Favorites: {{ items.count() }}
     </div>
 
 </template>

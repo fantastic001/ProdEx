@@ -46,9 +46,6 @@ public class UserService {
 		data.setRegistrationDate(new Date());
 		UserStorage userStorage = new UserStorage();
 		userStorage.create(data);
-		Buyer buyer = new Buyer(0, data.getId());
-		BuyerStorage buyerStorage = new BuyerStorage();
-		buyerStorage.create(buyer);
 		return data;
 	}
 
