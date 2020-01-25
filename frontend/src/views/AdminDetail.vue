@@ -17,26 +17,20 @@ import WidgetAdminNew from "../widgets/Admin/WidgetAdminNew.vue"
 
 export default {
     name: "AdminDetail",
-    props: ["admin"],
     data: function () {
             return {
-		data: {}
+		data: {},
+		admin: localStorage.getItem("admin_id")
 	    };
 	},
     mounted: function () 
     {
     	AdminService.get(this.admin).then(response => this.data = response.data)
+
     },
     methods: {
         itemDelete: function (event) 
         {
-            AdminService.delete(this.admin).then(response => 
-            {
-                if (response.status < 400) 
-                {
-                    alert("Admin item is deleted");
-                }
-            })
         }
     },
     components: {
@@ -53,15 +47,11 @@ export default {
         "WidgetAdminMulti": WidgetAdminMulti
     }
 }
-</script>>
+</script>
 
 <template>
     <div class="Admin-detail"> 
-        <button v-on:click="itemDelete">Delete</button>
         <WidgetAdminSingle :admin="this.admin" />
-
-        
-        <WidgetUserMulti :filter="x => x.admin == this.admin"/>
         
         
         <WidgetFromAdminMessageMulti :filter="x => x.admin == this.admin"/>

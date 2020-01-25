@@ -27,10 +27,10 @@ import WidgetBuyerNew from "../widgets/Buyer/WidgetBuyerNew.vue"
 
 export default {
     name: "BuyerDetail",
-    props: ["buyer"],
     data: function () {
             return {
-		data: {}
+		data: {},
+		buyer: localStorage.getItem("buyer_id")
 	    };
 	},
     mounted: function () 
@@ -73,15 +73,11 @@ export default {
         "WidgetBuyerMulti": WidgetBuyerMulti
     }
 }
-</script>>
+</script>
 
 <template>
     <div class="Buyer-detail"> 
-        <button v-on:click="itemDelete">Delete</button>
         <WidgetBuyerSingle :buyer="this.buyer" />
-
-        
-        <WidgetUserMulti :filter="x => x.buyer == this.buyer"/>
         
         
         <WidgetOrderMulti :filter="x => x.buyer == this.buyer"/>

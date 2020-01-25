@@ -47,7 +47,7 @@ export default {
 
 <template>
     <div class="widget-seller-single">
-    <WidgetUserSingle :user="this.user" />
+    <WidgetUserSingle :user="this.data.user" />
 
     <button @click="likeSeller" type="button" class="btn btn-primary">
        Like<span class="badge badge-light">{{likes}}</span>

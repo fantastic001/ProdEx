@@ -21,10 +21,10 @@ import WidgetSellerNew from "../widgets/Seller/WidgetSellerNew.vue"
 
 export default {
     name: "SellerDetail",
-    props: ["seller"],
     data: function () {
             return {
-		data: {}
+		data: {},
+		seller: localStorage.getItem("seller_id")
 	    };
 	},
     mounted: function () 
@@ -61,15 +61,11 @@ export default {
         "WidgetSellerMulti": WidgetSellerMulti
     }
 }
-</script>>
+</script>
 
 <template>
     <div class="Seller-detail"> 
-        <button v-on:click="itemDelete">Delete</button>
         <WidgetSellerSingle :seller="this.seller" />
-
-        
-        <WidgetUserMulti :filter="x => x.seller == this.seller"/>
         
         <p>non-shipped</p>
         <WidgetItemMulti :filter="x => x.seller == this.seller && !x.shipped"/>
