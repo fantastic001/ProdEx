@@ -25,7 +25,8 @@ export default {
     props: ["id"],
     data: function () {
             return {
-		data: {}
+		data: {},
+		role: localStorage.getItem("role")
 	    };
 	},
     mounted: function () 
@@ -85,7 +86,7 @@ export default {
         
         
         <WidgetCommentMulti ref="comments" :filter="x => x.item == this.id"/>
-	<WidgetCommentNew @submit="reloadComments" :item="this.id" />
+	<WidgetCommentNew v-if="this.role == 'BUYER' || this.role == 'ADMIN' || this.role == 'SELLER'" @submit="reloadComments" :item="this.id" />
         
         
         <WidgetItemReportMulti :filter="x => x.item == this.id"/>
