@@ -8,6 +8,8 @@ export default {
     data: function () {
             return {
 		data: {},
+		search: "",
+
 	    };
 	},
     mounted: function () 
@@ -23,7 +25,8 @@ export default {
 
 <template>
     <div class="user-list"> 
-        <WidgetUserMulti />
+    	<input v-model="search" placeholder="Search users..." />	
+        <WidgetUserMulti :search="search" />
     </div>
 
 </template>

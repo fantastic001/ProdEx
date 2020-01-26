@@ -9,12 +9,21 @@ export default {
         filter: {
             type: Function,
             default: (x => true)
-        }
+        },
+	search: {
+		type: String
+	}
     },
     data: function () {
         return {
             items: []
         }
+    },
+    watch: {
+	search: function(criteria, oldCriteria) {
+		console.log("Searching for " + criteria);
+        	UserService.list().then(response => this.items = response.data.filter(user => this.search.split(' ').filter(x => x != '').filter(x => ((user.firstname + ' ' + user.lastname)).includes(x)).length > 0));
+	}
     },
     mounted: function () 
     {
