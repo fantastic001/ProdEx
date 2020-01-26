@@ -17,6 +17,10 @@ export default class UserService
     {
         return axios.get(API_URL + "/User/" + id);
     }
+    static type(id) 
+    {
+        return axios.get(API_URL + "/User/" + id + "/type");
+    }
 
     static create(x)
     {

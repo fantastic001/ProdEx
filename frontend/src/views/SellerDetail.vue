@@ -21,10 +21,10 @@ import WidgetSellerNew from "../widgets/Seller/WidgetSellerNew.vue"
 
 export default {
     name: "SellerDetail",
+    props: ["seller"],
     data: function () {
             return {
 		data: {},
-		seller: localStorage.getItem("seller_id")
 	    };
 	},
     mounted: function () 

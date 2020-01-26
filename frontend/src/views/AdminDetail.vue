@@ -17,10 +17,10 @@ import WidgetAdminNew from "../widgets/Admin/WidgetAdminNew.vue"
 
 export default {
     name: "AdminDetail",
+    props: ["admin"],
     data: function () {
             return {
 		data: {},
-		admin: localStorage.getItem("admin_id")
 	    };
 	},
     mounted: function () 

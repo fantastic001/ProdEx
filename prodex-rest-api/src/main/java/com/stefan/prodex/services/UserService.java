@@ -37,6 +37,32 @@ public class UserService {
 		return storage.get(id);
 	}
 	
+	@Path("{id}/type")
+	@GET
+	@Produces("application/json")
+	public APIStatus getUserType(@PathParam("id") int id) {
+		User user = storage.get(id);
+		BuyerService buyerService = new BuyerService();
+		SellerService sellerService = new SellerService();
+		AdminService adminService = new AdminService();
+		for (Buyer buyer : buyerService.listBuyer()) 
+		{
+			if (buyer.getUser() == user.getId()) 
+			{
+				return new APIStatus(buyer.getId(), "BUYER");
+			}
+		}
+		for (Seller seller : sellerService.listSeller()) 
+		{
+			if (seller.getUser() == user.getId()) return new APIStatus(seller.getId(), "SELLER");
+		}
+		for (Admin admin : adminService.listAdmin()) 
+		{
+			if (admin.getUser() == user.getId()) return new APIStatus(admin.getId(), "ADMIN");
+		}
+		return null; 
+	}
+	
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")

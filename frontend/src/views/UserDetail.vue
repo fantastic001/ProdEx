@@ -7,23 +7,28 @@ import WidgetFromAdminMessageMulti from "../widgets/FromAdminMessage/WidgetFromA
 
 
 import UserService from "../widgets/User/service"
-import WidgetUserSingle from "../widgets/User/WidgetUserSingle.vue"
-import WidgetUserSingleEdit from "../widgets/User/WidgetUserSingleEdit.vue"
-import WidgetUserMulti from "../widgets/User/WidgetUserMulti.vue"
-import WidgetUserNew from "../widgets/User/WidgetUserNew.vue"
+
+import AdminDetail from "./AdminDetail.vue";
+import BuyerDetail from "./BuyerDetail.vue";
+import SellerDetail from "./SellerDetail.vue";
 
 
 export default {
     name: "UserDetail",
-    props: ["user"],
+    props: ["id"],
     data: function () {
             return {
-		data: {}
+		data: {},
+		type: "",
+		foreign_key: 0
 	    };
 	},
     mounted: function () 
     {
-    	UserService.get(this.user).then(response => this.data = response.data)
+    	UserService.type(this.id).then(response => {
+		this.type = response.data.message;
+		this.foreign_key = response.data.code;
+	})
     },
     methods: {
         itemDelete: function (event) 
@@ -38,24 +43,20 @@ export default {
         }
     },
     components: {
-        
-        "WidgetConversationMulti": WidgetConversationMulti,
-        
-        "WidgetFromAdminMessageMulti": WidgetFromAdminMessageMulti,
-        
-        "WidgetUserSingle": WidgetUserSingle,
-        "WidgetUserNew": WidgetUserNew,
-        "WidgetUserSingleEdit": WidgetUserSingleEdit,
-        "WidgetUserMulti": WidgetUserMulti
+        AdminDetail,
+	BuyerDetail,
+	SellerDetail
     }
 }
-</script>>
+</script>
 
 <template>
     <div class="User-detail"> 
         <button v-on:click="itemDelete">Delete</button>
-        <WidgetUserSingle :user="this.user" />
 
+	<BuyerDetail v-if="this.type == 'BUYER'" :buyer="this.foreign_key" />
+	<AdminDetail v-if="this.type == 'ADMIN'" :admin="this.foreign_key" />
+	<SellerDetail v-if="this.type == 'SELLER'" :seller="this.foreign_key" />
         
         <WidgetConversationMulti :filter="x => x.user == this.user"/>
         

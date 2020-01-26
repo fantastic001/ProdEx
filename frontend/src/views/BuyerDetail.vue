@@ -27,10 +27,10 @@ import WidgetBuyerNew from "../widgets/Buyer/WidgetBuyerNew.vue"
 
 export default {
     name: "BuyerDetail",
+    props: ["buyer"],
     data: function () {
             return {
 		data: {},
-		buyer: localStorage.getItem("buyer_id")
 	    };
 	},
     mounted: function () 
