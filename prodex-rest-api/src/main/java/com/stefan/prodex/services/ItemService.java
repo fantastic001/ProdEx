@@ -52,10 +52,22 @@ public class ItemService {
 	@Produces("application/json")
 	public Response deleteItem(@PathParam("id") int id) 
 	{
+		Item item = this.getItem(id);
 		if (this.getItemStatus(id).getCode() > 0) 
 			return Response.status(403).entity("{'status': 'error'}").build();
 		ItemStorage storage = new ItemStorage();
 		storage.delete(id);
+		ToAdminMessageService toAdminMessageService = new ToAdminMessageService();
+		for (Admin a : (new AdminService()).listAdmin()) 
+		{
+			ToAdminMessage msg = new ToAdminMessage();
+			msg.setSeller(item.getSeller());
+			msg.setAdmin(a.getId());
+			msg.setTitle("Item deletion: " + item.getName());
+			msg.setBody("Seller with id " + item.getSeller() + " has deleted item with id: " + item.getId());
+			toAdminMessageService.createToAdminMessage(msg);
+		}
+
 		return Response.status(200).entity("{'status': 'deleted'}").build();
 	}
 	
@@ -184,6 +196,16 @@ public class ItemService {
 		CommentService commentService = new CommentService();
 		comment.setItem(id);
 		comment.setUser(user.getId());
+		AuthManager manager = new AuthManager(request);
+		if (manager.getCurrentBuyer() != null) {
+			Message msg = new Message();
+			msg.setItem(id);
+			msg.setBuyer(manager.getCurrentBuyer().getId());
+			msg.setUnread(true);
+			msg.setTitle("Message from buyer " + manager.getCurrentBuyer());
+			msg.setBody("New comment from buyer on item " + this.getItem(id).getName() + " : " + comment.getBody());
+			(new MessageService()).createMessage(msg);
+		}
 		return commentService.createComment(comment);
 	}
 
