@@ -42,7 +42,10 @@ export default {
                     alert("Item item is deleted");
                 }
             })
-        }
+        },
+	reloadComments: function () {
+		this.$refs.comments.reload();
+	}
     },
     components: {
         
@@ -81,8 +84,8 @@ export default {
         <WidgetBuyerFavoriteItemMulti :filter="x => x.item == this.id"/>
         
         
-        <WidgetCommentMulti :filter="x => x.item == this.id"/>
-	<WidgetCommentNew :item="this.id" />
+        <WidgetCommentMulti ref="comments" :filter="x => x.item == this.id"/>
+	<WidgetCommentNew @submit="reloadComments" :item="this.id" />
         
         
         <WidgetItemReportMulti :filter="x => x.item == this.id"/>

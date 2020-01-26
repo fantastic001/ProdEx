@@ -13,7 +13,10 @@ export default {
     	create: function() 
 	{
 		this.data.item = this.item;
-		CommentService.create(this.data).then(response => this.data = {user: 0, item: this.item, body: ""});
+		CommentService.create(this.data).then(response => {
+			this.data = {user: 0, item: this.item, body: ""}
+			this.$emit("submit");
+		});
 	}
     }
 }

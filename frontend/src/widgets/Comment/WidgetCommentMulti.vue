@@ -20,6 +20,12 @@ export default {
     {
         CommentService.list().then(response => this.items = response.data);
     },
+    methods: {
+	reload: function() 
+	{
+        	CommentService.list().then(response => this.items = response.data);
+	}
+    },
     components: {
     	"WidgetCommentSingle": WidgetCommentSingle
     }
