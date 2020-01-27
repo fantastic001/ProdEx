@@ -13,7 +13,7 @@ import WidgetAdminSingle from "../widgets/Admin/WidgetAdminSingle.vue"
 import WidgetAdminSingleEdit from "../widgets/Admin/WidgetAdminSingleEdit.vue"
 import WidgetAdminMulti from "../widgets/Admin/WidgetAdminMulti.vue"
 import WidgetAdminNew from "../widgets/Admin/WidgetAdminNew.vue"
-
+import WidgetToAdminMessageNew from "../widgets/ToAdminMessage/WidgetToAdminMessageNew.vue";
 
 export default {
     name: "AdminDetail",
@@ -21,7 +21,8 @@ export default {
     data: function () {
             return {
 		data: {},
-	    };
+		role: localStorage.getItem("role")
+	    }
 	},
     mounted: function () 
     {
@@ -34,17 +35,13 @@ export default {
         }
     },
     components: {
-        
-        "WidgetUserMulti": WidgetUserMulti,
-        
-        "WidgetFromAdminMessageMulti": WidgetFromAdminMessageMulti,
-        
-        "WidgetToAdminMessageMulti": WidgetToAdminMessageMulti,
-        
-        "WidgetAdminSingle": WidgetAdminSingle,
-        "WidgetAdminNew": WidgetAdminNew,
-        "WidgetAdminSingleEdit": WidgetAdminSingleEdit,
-        "WidgetAdminMulti": WidgetAdminMulti
+        WidgetAdminSingle,
+        WidgetAdminNew,
+        WidgetAdminSingleEdit,
+        WidgetAdminMulti,
+	WidgetToAdminMessageNew,
+	WidgetToAdminMessageMulti,
+	WidgetFromAdminMessageMulti
     }
 }
 </script>
@@ -54,11 +51,9 @@ export default {
         <WidgetAdminSingle :admin="this.admin" />
         
         
-        <WidgetFromAdminMessageMulti :filter="x => x.admin == this.admin"/>
+        <WidgetToAdminMessageMulti v-if="this.role == 'ADMIN'" :filter="x => x.admin == this.admin"/>
         
-        
-        <WidgetToAdminMessageMulti :filter="x => x.admin == this.admin"/>
-        
+	<WidgetToAdminMessageNew v-if="this.role == 'SELLER'" :admin="this.admin"/>
         
     </div>
 

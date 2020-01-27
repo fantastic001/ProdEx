@@ -78,9 +78,6 @@ export default {
         <WidgetBuyerSellerLikeMulti :filter="x => x.seller == this.seller"/>
         
         
-        <WidgetToAdminMessageMulti :filter="x => x.seller == this.seller"/>
-        
-        
         <WidgetSellerReportMulti :filter="x => x.seller == this.seller"/>
         
         

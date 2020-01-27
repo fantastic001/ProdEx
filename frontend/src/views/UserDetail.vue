@@ -12,6 +12,8 @@ import AdminDetail from "./AdminDetail.vue";
 import BuyerDetail from "./BuyerDetail.vue";
 import SellerDetail from "./SellerDetail.vue";
 
+import AdminSendMessage from "../widgets/FromAdminMessage/WidgetFromAdminMessageNew.vue"
+import AdminMessages from "../widgets/FromAdminMessage/WidgetFromAdminMessageMulti.vue";
 
 export default {
     name: "UserDetail",
@@ -19,8 +21,9 @@ export default {
     data: function () {
             return {
 		data: {},
-		type: "",
-		foreign_key: 0
+		type: null,
+		foreign_key: 0,
+		role: localStorage.getItem("role"),
 	    };
 	},
     mounted: function () 
@@ -45,24 +48,22 @@ export default {
     components: {
         AdminDetail,
 	BuyerDetail,
-	SellerDetail
+	SellerDetail,
+	AdminSendMessage,
+	AdminMessages
     }
 }
 </script>
 
 <template>
     <div class="User-detail"> 
-        <button v-on:click="itemDelete">Delete</button>
 
 	<BuyerDetail v-if="this.type == 'BUYER'" :buyer="this.foreign_key" />
 	<AdminDetail v-if="this.type == 'ADMIN'" :admin="this.foreign_key" />
 	<SellerDetail v-if="this.type == 'SELLER'" :seller="this.foreign_key" />
         
-        <WidgetConversationMulti :filter="x => x.user == this.user"/>
-        
-        
-        <WidgetFromAdminMessageMulti :filter="x => x.user == this.user"/>
-        
+        <AdminSendMessage :user="this.id" v-if="this.role == 'ADMIN'" />
+	<AdminMessages :filter="x => x.user == this.id" />
         
     </div>
 

@@ -33,8 +33,6 @@ export default {
     <h5 class="card-title">{{ data.title }}</h5>
     <h6 class="card-subtitle mb-2 text-muted">From Administrator</h6>
     <p class="card-text">{{ data.body }}</p>
-    <a href="#" class="card-link">Reply</a>
-    <a href="#" class="card-link">Not for me</a>
   </div>
 </div>
 

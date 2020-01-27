@@ -1,28 +1,33 @@
 <script>
 import ToAdminMessageService from "./service";
-import WidgetSellerSingle from "../Seller/WidgetSellerSingle.vue";
+import Seller from "../Seller/WidgetSellerSingle.vue";
+
 export default {
     name: "WidgetToAdminMessageSingle",
     props: ["toadminmessage"],
     data: function () {
         return {
-            data: {}
+            data: {
+		seller: null
+	    },
+	    role: localStorage.getItem("role"),
+	    admin_id: localStorage.getItem("admin_id")
         }
     },
     mounted: function () 
     {
         ToAdminMessageService.get(this.toadminmessage).then(response => this.data = response.data);
     },
-    component: 
+    components: 
     {
-        "WidgetSellerSingle": WidgetSellerSingle
+        Seller,
     }
 }
 </script>
 
 <template>
     <div class="widget-toadminmessage-single"> 
-    <WidgetSellerSingle :seller="this.seller" />
+    <Seller v-if="this.data.seller != null" :seller="this.data.seller" />
     <h1>{{ data.title }}</h1>
     <div class="message-body">{{ data.body }}</div>
     </div>
@@ -31,6 +36,9 @@ export default {
 
 <style scoped> 
 
-
+.widget-toadminmessage-single {
+	background-color: #eeffff;
+	padding: 10px;
+}
 
 </style>
