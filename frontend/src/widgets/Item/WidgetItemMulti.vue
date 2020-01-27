@@ -20,6 +20,11 @@ export default {
     {
         ItemService.list().then(response => this.items = response.data);
     },
+    methods: {
+	reload: function() {
+        	ItemService.list().then(response => this.items = response.data);
+	}
+    },
     components: {
     	"WidgetItemSingle": WidgetItemSingle
     }

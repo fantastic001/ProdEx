@@ -28,6 +28,11 @@ export default {
     	this.role = localStorage.getItem("role");
     },
     methods: {
+    	filter: function(item) {
+		console.log("filtering item: ");
+		console.log(item);
+		return true;
+	}
     },
     components: {
     	WidgetItemMulti
@@ -38,8 +43,7 @@ export default {
 
 <template>
 <div>
-<p>This is home for role {{ role }}</p>
-<WidgetItemMulti />
+<WidgetItemMulti :filter="this.filter" ref="items"/>
 </div>
 </template>
 
