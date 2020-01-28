@@ -8,7 +8,9 @@ export default {
     props: ["order"],
     data: function () {
         return {
-            data: {}
+            data: {
+		item:null
+	    }
         }
     },
     mounted: function () 
@@ -24,8 +26,7 @@ export default {
 
 <template>
     <div class="widget-order-single"> 
-    <WidgetBuyerSingle :buyer="this.buyer" />
-    <WidgetItemSingle :item="this.item" />
+    <WidgetItemSingle v-if="this.data.item != null" :item="this.data.item" />
     </div>
 
 </template>

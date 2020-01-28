@@ -31,6 +31,7 @@ export default {
     data: function () {
             return {
 		data: {},
+		tab: 0
 	    };
 	},
     mounted: function () 
@@ -79,26 +80,27 @@ export default {
     <div class="Buyer-detail"> 
         <WidgetBuyerSingle :buyer="this.buyer" />
         
+	<ul class="nav nav-pills">
+	  <li><a @click.prevent="tab = 0;" href="#">Shipped orders </a></li>
+	  <li><a @click.prevent="tab = 1;" href="#">Shipping orders </a></li>
+	  <li><a @click.prevent="tab = 2;" href="#">Order Reviews </a></li>
+	  <li><a @click.prevent="tab = 3;" href="#">Item reports </a></li>
+	  <li><a @click.prevent="tab = 4;" href="#">Seller reports </a></li>
+	  <li><a href="#">...</a></li>
+	</ul>
+
         
-        <WidgetOrderMulti :filter="x => x.buyer == this.buyer"/>
+        <WidgetOrderMulti v-if="this.tab == 0" :filter="x => x.buyer == this.buyer && x.status == 'SHIPPED'"/>
         
+        <WidgetOrderMulti v-if="this.tab == 1" :filter="x => x.buyer == this.buyer && x.status == 'SHIPPING'"/>
         
-        <WidgetOrderReviewMulti :filter="x => x.buyer == this.buyer"/>
-        
-        
-        <WidgetBuyerFavoriteItemMulti :filter="x => x.buyer == this.buyer"/>
-        
-        
-        <WidgetBuyerSellerLikeMulti :filter="x => x.buyer == this.buyer"/>
-        
-        
-        <WidgetMessageMulti :filter="x => x.buyer == this.buyer"/>
-        
-        
-        <WidgetItemReportMulti :filter="x => x.buyer == this.buyer"/>
+	<WidgetOrderReviewMulti v-if="this.tab == 2" :filter="x => x.buyer == this.buyer"/>
         
         
-        <WidgetSellerReportMulti :filter="x => x.buyer == this.buyer"/>
+        <WidgetItemReportMulti v-if="this.tab == 3" :filter="x => x.buyer == this.buyer"/>
+        
+        
+        <WidgetSellerReportMulti v-if="this.tab == 4" :filter="x => x.buyer == this.buyer"/>
         
         
     </div>
@@ -107,6 +109,8 @@ export default {
 
 <style scoped> 
 
-
+.nav li {
+	padding: 10px;
+}
 
 </style>
