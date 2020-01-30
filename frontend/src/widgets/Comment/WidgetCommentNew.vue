@@ -12,6 +12,7 @@ export default {
         };
     },
     mounted: function() {
+	if (localStorage.getItem("role") != "BUYER") this.enabled = true;
 	OrderService.list().then(response => {
 		this.orders = response.data;
 		if (this.orders.filter(
