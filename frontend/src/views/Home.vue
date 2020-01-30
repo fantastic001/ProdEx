@@ -20,7 +20,14 @@ export default {
     data: function () {
             return {
 		data: {},
-		role: ""
+		role: "",
+		search: false,
+		search_data: {
+			name_contains: "",
+			description_contains: "",
+			min_price: 0,
+			max_price: 100000
+		}
 	    };
 	},
     mounted: function () 
@@ -29,9 +36,13 @@ export default {
     },
     methods: {
     	filter: function(item) {
-		console.log("filtering item: ");
-		console.log(item);
-		return true;
+		return item.name.includes(this.search_data.name_contains) && 
+			item.description.includes(this.search_data.description_contains) &&
+			item.price >= this.search_data.min_price && 
+			item.price <= this.search_data.max_price;
+	},
+	submit_search: function() {
+		this.$refs.items.reload();
 	}
     },
     components: {
@@ -43,12 +54,50 @@ export default {
 
 <template>
 <div>
+
+<button class="search-toggle btn btn-primary" @click="search = !search">Advanced Search</button>
+<div v-if="this.search" class="search-part">
+
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Name contains</span>
+  </div>
+  <input type="text" v-model="search_data.name_contains" class="form-control" placeholder="" aria-label="name" aria-describedby="basic-addon1">
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Description contains</span>
+  </div>
+  <input type="text" v-model="search_data.description_contains" class="form-control" placeholder="" aria-label="desc" aria-describedby="basic-addon1">
+</div>
+
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Price range</span>
+  </div>
+  <input type="number" aria-label="More than" class="form-control" v-model="search_data.min_price" />
+  <input type="number" aria-label="Less than" class="form-control" v-model="search_data.max_price" />
+</div>
+<button class="btn btn-primary" @click="submit_search">Search</button>
+</div>
+
+
 <WidgetItemMulti :filter="this.filter" ref="items"/>
 </div>
 </template>
 
 <style scoped> 
 
+.search-toggle {
+	margin: 10px;
+}
 
+.search-part {
+	background-color: #ddd;
+	padding: 10px;
+	margin: 10px;
+}
 
 </style>
