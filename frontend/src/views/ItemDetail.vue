@@ -79,9 +79,6 @@ export default {
         <WidgetSellerMulti :filter="x => x.item == this.id"/>
         
         
-        <WidgetOrderMulti :filter="x => x.item == this.id"/>
-        
-        
         <WidgetBuyerFavoriteItemMulti :filter="x => x.item == this.id"/>
         
         
