@@ -5,8 +5,8 @@ export default {
   data: function () {
 	return {
 		data: {
-			user: {},
-			role: "NOT_LOGGED"
+			user: localStorage.getItem("user"),
+			role: localStorage.getItem("role")
 		}
 	}
   },
