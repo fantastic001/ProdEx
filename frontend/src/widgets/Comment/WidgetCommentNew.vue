@@ -1,13 +1,25 @@
 <script>
 import CommentService from "./service";
+import OrderService from "../Order/service";
 
 export default {
     name: "WidgetCommentNew",
     props: ["item"],
     data: function () {
         return {
-            data: {}
+            data: {},
+	    enabled: false
         };
+    },
+    mounted: function() {
+	OrderService.list().then(response => {
+		this.orders = response.data;
+		if (this.orders.filter(
+			x => x.item == this.item && localStorage.getItem("role") == "BUYER" && localStorage.getItem("buyer_id") == x.buyer && x.status == "SHIPPED"
+		).length > 0) {
+			this.enabled = true;
+		}
+	});
     },
     methods: {
     	create: function() 
@@ -24,7 +36,7 @@ export default {
 
 <template>
     <div class="widget-comment-new"> 
-        <div class="input-group mb-3">
+        <div v-if="this.enabled" class="input-group mb-3">
   		<input v-model="data.body" type="text" class="form-control" placeholder="Write a comment..." />
   		<div class="input-group-append">
     		<button @click="create" class="btn btn-outline-secondary" type="button">Send</button>
