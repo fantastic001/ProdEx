@@ -34,7 +34,7 @@ export default {
 <template>
     <div class="WidgetItemSingle"> 
       <WidgetItemSingle
-      	v-for="item in items.filter(filter)"
+      	v-for="item in items.sort(x => x.likes - x.dislikes).filter(filter)"
       	:id="item.id"
       	:key="item.id"
         :item="item.id"
