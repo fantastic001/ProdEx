@@ -11,6 +11,7 @@ import WidgetCommentMulti from "../widgets/Comment/WidgetCommentMulti.vue"
 import WidgetCommentNew from "../widgets/Comment/WidgetCommentNew.vue"
 
 import WidgetItemReportMulti from "../widgets/ItemReport/WidgetItemReportMulti.vue"
+import WidgetItemReportNew from "../widgets/ItemReport/WidgetItemReportNew.vue"
 
 
 import ItemService from "../widgets/Item/service"
@@ -20,12 +21,14 @@ import WidgetItemMulti from "../widgets/Item/WidgetItemMulti.vue"
 import WidgetItemNew from "../widgets/Item/WidgetItemNew.vue"
 
 
+
 export default {
     name: "ItemDetail",
     props: ["id"],
     data: function () {
             return {
 		data: {},
+		report: false,
 		role: localStorage.getItem("role")
 	    };
 	},
@@ -64,20 +67,21 @@ export default {
         "WidgetItemSingle": WidgetItemSingle,
         "WidgetItemNew": WidgetItemNew,
         "WidgetItemSingleEdit": WidgetItemSingleEdit,
-        "WidgetItemMulti": WidgetItemMulti
+        "WidgetItemMulti": WidgetItemMulti,
+	WidgetItemReportNew
     }
 }
 </script>
 
 <template>
     <div class="Item-detail"> 
-        <button v-on:click="itemDelete">Delete</button>
 	<p>Item ID: {{this.id}}</p>
         <WidgetItemSingle :item="$route.params.id" />
 
         
         <WidgetSellerMulti :filter="x => x.item == this.id"/>
-        
+	<button @click="report = !report" v-if="this.role == 'BUYER'" class="btn btn-primary">Report this item</button>
+        <WidgetItemReportNew v-if="this.report" />
         
         <WidgetBuyerFavoriteItemMulti :filter="x => x.item == this.id"/>
         

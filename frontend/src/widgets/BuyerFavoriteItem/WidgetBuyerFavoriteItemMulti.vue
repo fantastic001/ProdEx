@@ -28,7 +28,7 @@ export default {
 
 <template>
     <div class="WidgetBuyerFavoriteItemSingle"> 
-    	Favorites: {{ items.count() }}
+    	Favorites: {{ items.length }}
     </div>
 
 </template>

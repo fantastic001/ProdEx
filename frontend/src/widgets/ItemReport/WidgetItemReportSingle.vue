@@ -6,7 +6,9 @@ export default {
     props: ["itemreport"],
     data: function () {
         return {
-            data: {}
+            data: {
+		buyer: null
+	    }
         }
     },
     mounted: function () 
@@ -21,7 +23,7 @@ export default {
 
 <template>
     <div class="widget-itemreport-single"> 
-        <WidgetBuyerSingle :buyer="this.data.buyer" />
+        <WidgetBuyerSingle v-if="this.data.buyer != null" :buyer="data.buyer" />
         <h1>{{ data.title }}</h1>
 	<div class="report-body">{{ data.body}}</div>
     </div>
@@ -30,6 +32,10 @@ export default {
 
 <style scoped> 
 
-
+.widget-itemreport-single {
+	background-color: #faa;
+	padding: 15px;
+	margin: 10px;
+}
 
 </style>

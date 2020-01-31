@@ -65,8 +65,6 @@ export default {
     
      <ul class="list-group list-group-flush">
         <li class="list-group-item">Price: {{ data.price}}</li>
-        <li class="list-group-item">Due date: {{ data.dueDate}}</li>
-        <li class="list-group-item">Created: {{ data.creationDate}}</li>
      </ul>
 
 
