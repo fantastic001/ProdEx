@@ -41,7 +41,7 @@ export default {
 <input type="text" class="form-control" v-model="data.description" placeholder="Item description" />
 <input type="number" class="form-control" v-model="data.price" placeholder="Price" />
 <input type="date" class="form-control" v-model="data.dueDate" placeholder="Item due date" />
-<button @click="submit">Create</button>
+<button class="btn btn-primary" @click="submit">Create</button>
 
 
 </div>

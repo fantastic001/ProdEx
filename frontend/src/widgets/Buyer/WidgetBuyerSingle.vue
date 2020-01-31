@@ -27,8 +27,6 @@ export default {
             <h5 class="card-title">{{ data.firstname }} {{ data.lastname }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ data.email }}</h6>
             <p class="card-text">{{ data.phone }} - joined on {{data.registrationDate }}</p>
-            <a href="#" class="card-link">See orders</a>
-            <a href="#" class="card-link">More</a>
         </div>
     </div>
     </div>

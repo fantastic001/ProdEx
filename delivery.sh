@@ -78,3 +78,7 @@ mv src.zip $DELIVERY/code
 
 echo "Packing up delivery..."
 zip delivery.zip -r $DELIVERY 
+
+echo "Remove temporary files"
+rm -rf delivery/
+

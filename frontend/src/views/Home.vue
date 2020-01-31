@@ -58,7 +58,7 @@ export default {
 <template>
 <div>
 
-<button v-if="this.role == 'SELLER'" @click="create = !create">Create item</button>
+<button class="btn btn-primary" v-if="this.role == 'SELLER'" @click="create = !create">Create item</button>
 
 <WidgetItemNew v-if="this.create" />
 
