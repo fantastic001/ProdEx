@@ -14,6 +14,7 @@ import WidgetAdminSingleEdit from "../widgets/Admin/WidgetAdminSingleEdit.vue"
 import WidgetAdminMulti from "../widgets/Admin/WidgetAdminMulti.vue"
 import WidgetItemMulti from "../widgets/Item/WidgetItemMulti.vue";
 
+import WidgetItemNew from "../widgets/Item/WidgetItemNew.vue";
 
 export default {
     name: "Home",
@@ -22,6 +23,7 @@ export default {
 		data: {},
 		role: "",
 		search: false,
+		create: false,
 		search_data: {
 			name_contains: "",
 			description_contains: "",
@@ -46,7 +48,8 @@ export default {
 	}
     },
     components: {
-    	WidgetItemMulti
+    	WidgetItemMulti,
+	WidgetItemNew
         
     }
 }
@@ -54,6 +57,11 @@ export default {
 
 <template>
 <div>
+
+<button v-if="this.role == 'SELLER'" @click="create = !create">Create item</button>
+
+<WidgetItemNew v-if="this.create" />
+
 
 <button class="search-toggle btn btn-primary" @click="search = !search">Advanced Search</button>
 <div v-if="this.search" class="search-part">
