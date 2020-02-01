@@ -67,12 +67,8 @@ export default {
     <div class="Seller-detail"> 
         <WidgetSellerSingle :seller="this.seller" />
         
-        <p>non-shipped</p>
-        <WidgetItemMulti :filter="x => x.seller == this.seller && !x.shipped"/>
-        
-
-	<p>Shipped</p>
-	<WidgetItemMulti :filter="x => x.seller == this.seller && x.shipped"/>
+        <p>Items posted</p>
+        <WidgetItemMulti :filter="x => x.seller == this.seller" />
         
         
         <WidgetBuyerSellerLikeMulti :filter="x => x.seller == this.seller"/>
